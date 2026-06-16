@@ -1,0 +1,38 @@
+# --- Node / Next.js (/app) ---
+node_modules/
+.next/
+out/
+.vercel/
+*.tsbuildinfo
+next-env.d.ts
+
+# --- Env / local secrets ---
+.env
+.env.*
+!.env.example
+
+# --- Lambda build artifacts (/lambda) ---
+lambda/**/node_modules/
+lambda/**/*.zip
+
+# --- Terraform (/infra) ---
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+!*.tfvars.example
+override.tf
+override.tf.json
+*_override.tf
+.terraform.lock.hcl
+
+# --- Graphify ---
+graphify-out/
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
