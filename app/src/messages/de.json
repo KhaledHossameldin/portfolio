@@ -1,0 +1,179 @@
+{
+  "nav": {
+    "work": "Arbeiten",
+    "about": "Über mich",
+    "stack": "Stack",
+    "contact": "Kontakt",
+    "cta": "Kontakt aufnehmen"
+  },
+  "status": "Verfügbar — remote oder vor Ort",
+  "hero": {
+    "eyebrow": "Senior Software-Entwickler",
+    "line1": "Von Anfang bis Ende —",
+    "line2": "Infrastruktur inklusive.",
+    "lead": "Über fünf Jahre quer durch Flutter und Mobile, Frontend, Backend und die DevOps, die das alles betreibt. Diese Seite liefert sich selbst aus — mit demselben Terraform und OIDC-CI/CD, von dem sie spricht.",
+    "ctaPrimary": "Kontakt aufnehmen",
+    "ctaSecondary": "Ausgewählte Arbeiten",
+    "panelLabel": "Status",
+    "panel": [
+      { "k": "Standort", "v": "6th of October City, EG" },
+      { "k": "Umzug", "v": "Bereit — Deutschland zuerst" },
+      { "k": "Bandbreite", "v": "Mobile · Front · Back · DevOps" },
+      { "k": "Diese Seite", "v": "Next.js · S3/CF · OIDC-CI/CD" }
+    ]
+  },
+  "work": {
+    "eyebrow": "Ausgewählte Arbeiten",
+    "title": "Einige, an denen ich gern gemessen werde.",
+    "note": "Eine längere Liste existiert. Sie gibt es, gnädigerweise, auf Anfrage."
+  },
+  "projects": [
+    {
+      "id": "tmms",
+      "tag": "Mobile · DevOps",
+      "title": "TMMS",
+      "subtitle": "Tenant- & Mall-Management, durchgängig",
+      "blurb": "Eine mandantenfähige Plattform für den Betrieb von Malls — samt der AWS-Infrastruktur darunter. Ich habe sowohl den Flutter-Client als auch die Cloud gebaut.",
+      "stack": ["Flutter", "AWS EKS", "Terraform", "ArgoCD", "Temporal", "RDS Postgres"],
+      "action": "case",
+      "badge": null,
+      "top": "arrow"
+    },
+    {
+      "id": "atriom",
+      "tag": "Mobile · Flutter",
+      "title": "Atriom",
+      "subtitle": "Eine banking-klare App für Mall-Mieter",
+      "blurb": "Salden, Rechnungszahlung, monatliche Umsatzmeldungen und Wartungstickets — fünf Kern-Workflows in einer ruhigen App mit vier Tabs.",
+      "stack": ["Flutter", "Dart", "Hell / Dunkel"],
+      "action": "none",
+      "badge": "NDA · auf Anfrage",
+      "top": "badge"
+    },
+    {
+      "id": "telephony",
+      "tag": "Open Source · Mobile",
+      "title": "telephony_sms",
+      "subtitle": "Ein quelloffenes Flutter-Plugin",
+      "blurb": "SMS und Telefonie für Flutter über Android-Plattformkanäle. Auf pub.dev veröffentlicht und im echten Einsatz.",
+      "stack": ["Flutter", "Dart", "Plattformkanäle", "pub.dev"],
+      "action": "external",
+      "href": "https://pub.dev/packages/telephony_sms",
+      "badge": null,
+      "top": "arrow"
+    },
+    {
+      "id": "dendru",
+      "tag": "Gründer · Studio",
+      "title": "Dendru",
+      "subtitle": "Ein Studio, das ganze Systeme baut",
+      "blurb": "Mein Software-Studio — Backend, Frontend, Mobile und Cloud unter einem Dach. Roadmap und Verträge stehen; erste Kunden folgen.",
+      "stack": ["Studio", "Full-stack", "Cloud"],
+      "action": "none",
+      "badge": "In Arbeit",
+      "top": "badge"
+    }
+  ],
+  "also": {
+    "eyebrow": "Open Source & Publikationen",
+    "items": [
+      {
+        "title": "Genetischer-Algorithmus-Modell zum Goldenen Schnitt",
+        "meta": "Peer-reviewed · Springer",
+        "year": "2022",
+        "role": "Autor",
+        "href": "#"
+      },
+      {
+        "title": "Diese Seite",
+        "meta": "Next.js · Terraform IaC · OIDC-CI/CD",
+        "year": "2026",
+        "role": "Beweis, der sich selbst betreibt",
+        "href": "https://github.com/KhaledHossameldin"
+      }
+    ]
+  },
+  "stack": {
+    "eyebrow": "Stack & Werkzeuge",
+    "title": "Die Bandbreite, ehrlich beschriftet.",
+    "note": "Keine Buzzword-Wand — nur Dinge, die ich im Review verteidigen würde.",
+    "groups": [
+      { "label": "Mobile", "items": ["Flutter", "Dart", "Swift", "Kotlin", "Plattformkanäle"] },
+      { "label": "Frontend", "items": ["TypeScript", "React", "Next.js", "Vite", "CSS"] },
+      { "label": "Backend", "items": ["Node", "REST", "PostgreSQL", "Temporal", "Redis"] },
+      { "label": "DevOps · Cloud", "items": ["AWS", "Kubernetes", "Terraform", "ArgoCD", "GH Actions"] }
+    ]
+  },
+  "about": {
+    "eyebrow": "Über mich",
+    "title": "Mir gefällt der Teil, an dem es funktioniert.",
+    "body1": "Ich bin Khaled — ein Senior-Entwickler, der dieses Handwerk wirklich mag und nicht so tut, als wäre es anders. Über fünf Jahre bewege ich mich zwischen einem Flutter-Screen, einem Backend-Service und dem Terraform, das beides zu den Menschen bringt.",
+    "body2": "Mich interessiert die unglamouröse Mitte: die Fehlermeldung, die Ihre Zeit respektiert, die Migration, die niemanden um drei Uhr morgens weckt, die Pipeline, die das Ausliefern zur Nebensache macht. Ernst bei der Arbeit, locker bei mir selbst.",
+    "facts": [
+      { "k": "Bandbreite", "v": "Mobile · Frontend · Backend · DevOps" },
+      { "k": "Erfahrung", "v": "5+ Jahre, Senior" },
+      { "k": "Sprachen", "v": "Englisch · Deutsch (B2) · Arabisch" },
+      { "k": "Standort", "v": "6th of October City, Ägypten" },
+      { "k": "Offen für", "v": "Remote · Umzug — Deutschland zuerst" }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Kontakt",
+    "title": "Lassen Sie uns etwas Beständiges bauen.",
+    "lead": "Ob Einstellen, Bauen oder nur Tastatur-Layouts vergleichen — ich lese alles und antworte innerhalb eines Tages.",
+    "nameLabel": "Name",
+    "namePh": "Jana Personalerin",
+    "emailLabel": "E-Mail",
+    "emailPh": "jana@firma.de",
+    "msgLabel": "Nachricht",
+    "msgPh": "Erzählen Sie von der Rolle oder dem Problem…",
+    "send": "Nachricht senden",
+    "sending": "Wird gesendet…",
+    "sent": "Gesendet. Bis bald.",
+    "errorMsg": "Konnte nicht gesendet werden — bitte nutzen Sie einen direkten Link unten.",
+    "orReach": "Oder direkt erreichen",
+    "within": "↵ innerhalb eines Tages"
+  },
+  "case": {
+    "eyebrow": "Fallstudie",
+    "title": "TMMS",
+    "subtitle": "Tenant- & Mall-Management, durchgängig.",
+    "back": "Zurück zu den Arbeiten",
+    "roleLabel": "Rolle",
+    "roleVal": "Flutter-Entwickler + DevOps-Engineer",
+    "yearLabel": "Jahr",
+    "yearVal": "2024",
+    "clientLabel": "Kunde",
+    "clientVal": "Gewerbeimmobilien-Betreiber (NDA)",
+    "stackLabel": "Stack",
+    "stack": ["Flutter", "Dart", "AWS EKS", "Terraform", "Terragrunt", "ArgoCD", "RDS Postgres (Multi-AZ)", "Temporal", "Docker"],
+    "metrics": [
+      { "n": "3", "l": "Deployment-Szenarien kalkuliert" },
+      { "n": "Multi-AZ", "l": "Postgres-Ausfallsicherheit" },
+      { "n": "1", "l": "Plattform · viele Malls" }
+    ],
+    "problemLabel": "Das Problem",
+    "problemBody": "Ein Gewerbeimmobilien-Betreiber führte ein Portfolio von Malls mit Tabellen und unverbundenen Werkzeugen. Mieter-Onboarding, Mietverträge, Rechnungen, monatliche Umsatzmeldungen und Wartungsanfragen lagen jeweils woanders. Gewünscht war eine mandantenfähige Plattform, die sich pro Mall aufsetzen lässt — und eine Infrastruktur, die ein kleines Team tatsächlich betreiben kann.",
+    "builtLabel": "Was ich gebaut habe",
+    "appLabel": "Die App",
+    "appBody": "Ein Flutter-Client für den täglichen Gebrauch der Mieter: Kontostände, Rechnungszahlung, monatliche Umsatzmeldungen und Wartungstickets — fünf Kern-Workflows in einer ruhigen App mit vier Tabs, hell und dunkel.",
+    "cloudLabel": "Die Cloud",
+    "cloudBody": "Die Infrastruktur darunter: ein AWS-EKS-Cluster, vollständig in Terraform und Terragrunt beschrieben, GitOps-Auslieferung über ArgoCD, RDS Postgres im Multi-AZ-Betrieb für Ausfallsicherheit und Temporal für die Workflows mit Fristen — Abrechnungszyklen, Meldefenster, Ticket-SLAs.",
+    "outcomeLabel": "Ergebnis",
+    "outcomeBody": "Ein vollständiges Infrastruktur-Design und ein Kostenmodell über drei Deployment-Szenarien hinweg — einzelne Mall, geteilt über mehrere Malls und isoliert für Enterprise — sodass sich Kosten gegen Isolation abwägen lassen. Releases wurden zu GitOps-Nebensachen, und die Datenbank war kein Single Point of Failure mehr.",
+    "noteLabel": "Eine Anmerkung zu den Zahlen",
+    "noteBody": "Kunde und Kennzahlen unterliegen einer NDA und sind hier anonymisiert. Ich gehe die Architektur und die Abwägungen gern in einem Gespräch durch.",
+    "backAll": "Den Rest der Arbeiten ansehen"
+  },
+  "footer": {
+    "headline": "Immer noch da? Reden wir.",
+    "links": [
+      { "label": "E-Mail", "href": "mailto:khaled@khaledhossameldin.com" },
+      { "label": "GitHub", "href": "https://github.com/KhaledHossameldin" },
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/khaled-hossameldin/" },
+      { "label": "Lebenslauf (PDF)", "href": "#" }
+    ],
+    "colophon": "© 2026 Khaled",
+    "signoff": "Gebaut mit Terraform und einer unangemessenen Menge Weißraum."
+  }
+}
