@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { Button } from "./ui/Button";
 import { LangToggle, ThemeToggle } from "./Toggles";
 
@@ -26,7 +26,12 @@ const navIdx = {
 export function Nav() {
   const t = useTranslations("nav");
   const locale = useLocale();
-  const home = `/${locale}`;
+  const pathname = usePathname();
+  // On the home page, link to plain hashes so the browser smooth-scrolls in
+  // place (no route change, no jump to top). Elsewhere (e.g. the case study),
+  // route back to the localized home and then to the section.
+  const onHome = pathname === "/";
+  const sectionHref = (id: string) => (onHome ? `#${id}` : `/${locale}#${id}`);
 
   return (
     <header
@@ -68,19 +73,19 @@ export function Nav() {
           marginLeft: "var(--space-3)",
         }}
       >
-        <a href={`${home}#work`} style={navLink}>
+        <a href={sectionHref("work")} style={navLink}>
           <span style={navIdx}>01</span>
           {t("work")}
         </a>
-        <a href={`${home}#about`} style={navLink}>
+        <a href={sectionHref("about")} style={navLink}>
           <span style={navIdx}>02</span>
           {t("about")}
         </a>
-        <a href={`${home}#stack`} style={navLink}>
+        <a href={sectionHref("stack")} style={navLink}>
           <span style={navIdx}>03</span>
           {t("stack")}
         </a>
-        <a href={`${home}#contact`} style={navLink}>
+        <a href={sectionHref("contact")} style={navLink}>
           <span style={navIdx}>04</span>
           {t("contact")}
         </a>
@@ -97,7 +102,7 @@ export function Nav() {
       >
         <LangToggle />
         <ThemeToggle />
-        <Button variant="primary" size="sm" href={`${home}#contact`}>
+        <Button variant="primary" size="sm" href={sectionHref("contact")}>
           {t("cta")}
         </Button>
       </div>

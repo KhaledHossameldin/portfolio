@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Button } from "../ui/Button";
 import { StatusDot } from "../ui/StatusDot";
 import { ArrowUpRight } from "../ui/icons";
@@ -18,8 +18,6 @@ const eyebrow = {
 export function Hero() {
   const t = useTranslations("hero");
   const tStatus = useTranslations();
-  const locale = useLocale();
-  const home = `/${locale}`;
   const panel = t.raw("panel") as PanelRow[];
 
   return (
@@ -98,12 +96,12 @@ export function Hero() {
           <Button
             variant="primary"
             size="lg"
-            href={`${home}#contact`}
+            href="#contact"
             iconRight={<ArrowUpRight />}
           >
             {t("ctaPrimary")}
           </Button>
-          <Button variant="secondary" size="lg" href={`${home}#work`}>
+          <Button variant="secondary" size="lg" href="#work">
             {t("ctaSecondary")}
           </Button>
         </div>

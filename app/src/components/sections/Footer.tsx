@@ -1,6 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
+import { usePathname } from "@/i18n/navigation";
 import { LangToggle, ThemeToggle } from "../Toggles";
 
 type FooterLink = { label: string; href: string };
@@ -8,7 +9,10 @@ type FooterLink = { label: string; href: string };
 export function Footer() {
   const t = useTranslations("footer");
   const locale = useLocale();
+  const pathname = usePathname();
   const links = t.raw("links") as FooterLink[];
+  // Smooth-scroll in place when already home; otherwise route to the home anchor.
+  const contactHref = pathname === "/" ? "#contact" : `/${locale}#contact`;
 
   return (
     <footer style={{ borderTop: "1px solid var(--border)", marginTop: "var(--space-9)", background: "var(--bg)" }}>
@@ -19,7 +23,7 @@ export function Footer() {
           padding: "var(--space-9) var(--gutter) var(--space-6)",
         }}
       >
-        <a href={`/${locale}#contact`} style={{ textDecoration: "none", color: "inherit" }}>
+        <a href={contactHref} style={{ textDecoration: "none", color: "inherit" }}>
           <h2
             style={{
               font: "var(--type-h2)",
