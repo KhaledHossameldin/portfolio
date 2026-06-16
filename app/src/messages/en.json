@@ -1,0 +1,179 @@
+{
+  "nav": {
+    "work": "Work",
+    "about": "About",
+    "stack": "Stack",
+    "contact": "Contact",
+    "cta": "Get in touch"
+  },
+  "status": "Available — remote or relocation",
+  "hero": {
+    "eyebrow": "Senior Software Engineer",
+    "line1": "End to end —",
+    "line2": "infrastructure included.",
+    "lead": "Five-plus years across Flutter and mobile, frontend, backend, and the DevOps that runs them. This very site ships itself — same Terraform and OIDC CI/CD it talks about.",
+    "ctaPrimary": "Get in touch",
+    "ctaSecondary": "See selected work",
+    "panelLabel": "Status",
+    "panel": [
+      { "k": "Based", "v": "6th of October City, EG" },
+      { "k": "Relocation", "v": "Ready — Germany first" },
+      { "k": "Range", "v": "Mobile · Front · Back · DevOps" },
+      { "k": "This site", "v": "Next.js · S3/CF · OIDC CI/CD" }
+    ]
+  },
+  "work": {
+    "eyebrow": "Selected work",
+    "title": "A few I’m happy to be judged by.",
+    "note": "A longer list exists. It is, mercifully, on request."
+  },
+  "projects": [
+    {
+      "id": "tmms",
+      "tag": "Mobile · DevOps",
+      "title": "TMMS",
+      "subtitle": "Tenant & mall management, end to end",
+      "blurb": "A multi-tenant platform for running malls — and the AWS infrastructure beneath it. I built both the Flutter client and the cloud.",
+      "stack": ["Flutter", "AWS EKS", "Terraform", "ArgoCD", "Temporal", "RDS Postgres"],
+      "action": "case",
+      "badge": null,
+      "top": "arrow"
+    },
+    {
+      "id": "atriom",
+      "tag": "Mobile · Flutter",
+      "title": "Atriom",
+      "subtitle": "A banking-clean app for mall tenants",
+      "blurb": "Balances, invoice payment, monthly sales declarations and maintenance tickets — five core workflows in one calm, four-tab app.",
+      "stack": ["Flutter", "Dart", "Light / Dark"],
+      "action": "none",
+      "badge": "NDA · on request",
+      "top": "badge"
+    },
+    {
+      "id": "telephony",
+      "tag": "Open source · Mobile",
+      "title": "telephony_sms",
+      "subtitle": "An open-source Flutter plugin",
+      "blurb": "SMS and telephony for Flutter over Android platform channels. Published on pub.dev and used in the wild.",
+      "stack": ["Flutter", "Dart", "Platform channels", "pub.dev"],
+      "action": "external",
+      "href": "https://pub.dev/packages/telephony_sms",
+      "badge": null,
+      "top": "arrow"
+    },
+    {
+      "id": "dendru",
+      "tag": "Founder · Studio",
+      "title": "Dendru",
+      "subtitle": "A studio that builds whole systems",
+      "blurb": "My software studio — backend, frontend, mobile and cloud under one roof. Roadmap and contracts set; first clients next.",
+      "stack": ["Studio", "Full-stack", "Cloud"],
+      "action": "none",
+      "badge": "Building",
+      "top": "badge"
+    }
+  ],
+  "also": {
+    "eyebrow": "Open source & writing",
+    "items": [
+      {
+        "title": "Genetic Algorithm Golden-Ratio Design Model",
+        "meta": "Peer-reviewed paper · Springer",
+        "year": "2022",
+        "role": "Author",
+        "href": "#"
+      },
+      {
+        "title": "This portfolio",
+        "meta": "Next.js · Terraform IaC · OIDC CI/CD",
+        "year": "2026",
+        "role": "Proof that runs itself",
+        "href": "https://github.com/KhaledHossameldin"
+      }
+    ]
+  },
+  "stack": {
+    "eyebrow": "Stack & tooling",
+    "title": "The range, honestly labelled.",
+    "note": "Not a buzzword wall — only things I’d defend in review.",
+    "groups": [
+      { "label": "Mobile", "items": ["Flutter", "Dart", "Swift", "Kotlin", "Platform channels"] },
+      { "label": "Frontend", "items": ["TypeScript", "React", "Next.js", "Vite", "CSS"] },
+      { "label": "Backend", "items": ["Node", "REST", "PostgreSQL", "Temporal", "Redis"] },
+      { "label": "DevOps · Cloud", "items": ["AWS", "Kubernetes", "Terraform", "ArgoCD", "GH Actions"] }
+    ]
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "I like the part where it works.",
+    "body1": "I’m Khaled — a senior engineer who’s genuinely fond of this craft and won’t pretend otherwise. Five-plus years moving between a Flutter screen, a backend service, and the Terraform that puts them in front of people.",
+    "body2": "I care about the unglamorous middle: the error message that respects your time, the migration that doesn’t wake anyone at 3 a.m., the pipeline that makes shipping a non-event. Serious about the work, light about myself.",
+    "facts": [
+      { "k": "Range", "v": "Mobile · Frontend · Backend · DevOps" },
+      { "k": "Experience", "v": "5+ years, senior" },
+      { "k": "Languages", "v": "English · German (B2) · Arabic" },
+      { "k": "Based", "v": "6th of October City, Egypt" },
+      { "k": "Open to", "v": "Remote · relocation — Germany first" }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let’s make something that lasts.",
+    "lead": "Hiring, building, or just comparing keyboard layouts — I read everything and reply within a day.",
+    "nameLabel": "Name",
+    "namePh": "Jane Recruiter",
+    "emailLabel": "E-mail",
+    "emailPh": "jane@company.com",
+    "msgLabel": "Message",
+    "msgPh": "Tell me about the role or the problem…",
+    "send": "Send message",
+    "sending": "Sending…",
+    "sent": "Sent. Talk soon.",
+    "errorMsg": "Couldn’t send — please use a direct link below.",
+    "orReach": "Or reach me directly",
+    "within": "↵ within a day"
+  },
+  "case": {
+    "eyebrow": "Case study",
+    "title": "TMMS",
+    "subtitle": "Tenant & mall management, end to end.",
+    "back": "Back to work",
+    "roleLabel": "Role",
+    "roleVal": "Flutter developer + DevOps engineer",
+    "yearLabel": "Year",
+    "yearVal": "2024",
+    "clientLabel": "Client",
+    "clientVal": "Commercial real-estate operator (NDA)",
+    "stackLabel": "Stack",
+    "stack": ["Flutter", "Dart", "AWS EKS", "Terraform", "Terragrunt", "ArgoCD", "RDS Postgres (Multi-AZ)", "Temporal", "Docker"],
+    "metrics": [
+      { "n": "3", "l": "deployment scenarios costed" },
+      { "n": "Multi-AZ", "l": "Postgres durability" },
+      { "n": "1", "l": "platform · many malls" }
+    ],
+    "problemLabel": "The problem",
+    "problemBody": "A commercial real-estate operator ran a portfolio of malls on spreadsheets and disconnected tools. Tenant onboarding, leases, invoices, monthly sales declarations and maintenance requests each lived somewhere different. They wanted one multi-tenant platform that could be stood up per mall — and infrastructure a small team could actually operate.",
+    "builtLabel": "What I built",
+    "appLabel": "The app",
+    "appBody": "A Flutter client tenants use daily: account balances, invoice payment, monthly sales declarations and maintenance tickets — five core workflows in one composed, four-tab app, light and dark.",
+    "cloudLabel": "The cloud",
+    "cloudBody": "The infrastructure under it: an AWS EKS cluster described entirely in Terraform and Terragrunt, GitOps delivery through ArgoCD, RDS Postgres in Multi-AZ for durability, and Temporal running the workflows that have deadlines — billing cycles, declaration windows, ticket SLAs.",
+    "outcomeLabel": "Outcome",
+    "outcomeBody": "A full infrastructure design and a cost model across three deployment scenarios — single mall, shared multi-mall and isolated enterprise — so spend could be traded against isolation. Releases became GitOps non-events, and the database stopped being a single point of failure.",
+    "noteLabel": "A note on the numbers",
+    "noteBody": "Client and figures are under NDA, anonymised here. I’m happy to walk through the architecture and the trade-offs in a call.",
+    "backAll": "See the rest of the work"
+  },
+  "footer": {
+    "headline": "Still here? Let’s talk.",
+    "links": [
+      { "label": "Email", "href": "mailto:khaled@khaledhossameldin.com" },
+      { "label": "GitHub", "href": "https://github.com/KhaledHossameldin" },
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/khaled-hossameldin/" },
+      { "label": "CV (PDF)", "href": "#" }
+    ],
+    "colophon": "© 2026 Khaled",
+    "signoff": "Built with Terraform and an unreasonable amount of whitespace."
+  }
+}

@@ -1,0 +1,224 @@
+"use client";
+
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { Button } from "../ui/Button";
+import { Input, Textarea } from "../ui/Input";
+import { StatusDot } from "../ui/StatusDot";
+import { ArrowUpRight, Github, Linkedin, Mail } from "../ui/icons";
+
+type Status = "idle" | "sending" | "sent" | "error";
+
+const directLink = {
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "var(--space-3)",
+  fontFamily: "var(--font-mono)",
+  fontSize: "var(--text-sm)",
+  color: "var(--text)",
+  textDecoration: "none",
+} as const;
+
+export function Contact() {
+  const t = useTranslations("contact");
+  const [status, setStatus] = useState<Status>("idle");
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    // Honeypot: real users leave `_hp` empty. If filled, treat as a quiet success.
+    if (data.get("_hp")) {
+      setStatus("sent");
+      form.reset();
+      return;
+    }
+
+    const endpoint = process.env.NEXT_PUBLIC_CONTACT_API_URL;
+    setStatus("sending");
+
+    // The real endpoint is provisioned by DevOps later (§10). Until it is wired,
+    // surface a graceful error that points to the direct links below.
+    if (!endpoint) {
+      setStatus("error");
+      return;
+    }
+
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          message: data.get("message"),
+          _hp: data.get("_hp"),
+        }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      setStatus("sent");
+      form.reset();
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  return (
+    <section
+      id="contact"
+      style={{
+        maxWidth: "var(--container)",
+        margin: "0 auto",
+        padding: "var(--space-10) var(--gutter)",
+      }}
+    >
+      <span
+        style={{
+          fontFamily: "var(--font-mono)",
+          fontSize: "var(--text-2xs)",
+          letterSpacing: "var(--tracking-label)",
+          textTransform: "uppercase",
+          color: "var(--accent)",
+        }}
+      >
+        — {t("eyebrow")}
+      </span>
+      <div
+        className="kp-col2"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "var(--space-9)",
+          marginTop: "var(--space-5)",
+          alignItems: "start",
+        }}
+      >
+        <div>
+          <h2
+            style={{
+              font: "var(--type-h2)",
+              letterSpacing: "var(--tracking-display)",
+              margin: "0 0 var(--space-5)",
+              maxWidth: "16ch",
+            }}
+          >
+            {t("title")}
+          </h2>
+          <p
+            style={{
+              font: "var(--type-lead)",
+              color: "var(--text-muted)",
+              margin: "0 0 var(--space-7)",
+              maxWidth: "40ch",
+            }}
+          >
+            {t("lead")}
+          </p>
+          <div style={{ borderTop: "1px solid var(--border)", paddingTop: "var(--space-5)" }}>
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: "var(--text-2xs)",
+                letterSpacing: "var(--tracking-label)",
+                textTransform: "uppercase",
+                color: "var(--text-faint)",
+                marginBottom: "var(--space-4)",
+              }}
+            >
+              {t("orReach")}
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)" }}>
+              <a href="mailto:khaled@khaledhossameldin.com" style={directLink}>
+                <Mail />
+                khaled@khaledhossameldin.com
+              </a>
+              <a
+                href="https://github.com/KhaledHossameldin"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={directLink}
+              >
+                <Github />
+                github.com/KhaledHossameldin
+              </a>
+              <a
+                href="https://www.linkedin.com/in/khaled-hossameldin/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={directLink}
+              >
+                <Linkedin />
+                linkedin.com/in/khaled-hossameldin
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <form
+          onSubmit={onSubmit}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "var(--space-4)",
+            background: "var(--surface-card)",
+            border: "1px solid var(--border)",
+            borderRadius: "var(--radius-lg)",
+            padding: "var(--space-7)",
+            boxShadow: "var(--shadow-sm)",
+          }}
+        >
+          <Input
+            name="name"
+            label={t("nameLabel")}
+            placeholder={t("namePh")}
+            autoComplete="name"
+            required
+          />
+          <Input
+            name="email"
+            type="email"
+            label={t("emailLabel")}
+            placeholder={t("emailPh")}
+            autoComplete="email"
+            required
+          />
+          <Textarea name="message" label={t("msgLabel")} placeholder={t("msgPh")} rows={4} required />
+
+          {/* Honeypot — visually hidden, off the tab order. Bots fill it; humans don't. */}
+          <div aria-hidden style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+            <label>
+              Leave this field empty
+              <input type="text" name="_hp" tabIndex={-1} autoComplete="off" />
+            </label>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "var(--space-4)",
+              marginTop: "var(--space-2)",
+            }}
+          >
+            {status === "sent" ? (
+              <StatusDot tone="available" label={t("sent")} />
+            ) : status === "error" ? (
+              <span style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-2xs)", color: "var(--red-500)" }}>
+                {t("errorMsg")}
+              </span>
+            ) : (
+              <span style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-2xs)", color: "var(--text-faint)" }}>
+                {t("within")}
+              </span>
+            )}
+            <Button variant="primary" type="submit" disabled={status === "sending"} iconRight={<ArrowUpRight />}>
+              {status === "sending" ? t("sending") : t("send")}
+            </Button>
+          </div>
+        </form>
+      </div>
+    </section>
+  );
+}

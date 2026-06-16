@@ -662,9 +662,9 @@ Rule: if it isn't committed and isn't in this file, it didn't happen. Chat memor
 - [ ] Per-project design system generated, validated, and locked in Claude Design ("Published" left OFF)
 
 **Phase 3 — Design screens + handoff**
-- [ ] Core web screens generated (light/dark, EN/DE-aware)
-- [ ] Handoff bundle exported to Claude Code
-- [ ] DESIGN_SYSTEM.md written + committed
+- [x] Core web screens generated (light/dark, EN/DE-aware)
+- [x] Handoff bundle exported to Claude Code
+- [x] DESIGN_SYSTEM.md written + committed
 
 **Phase 4 — Infra skeleton**
 - [ ] AWS account ready; SES sender identity verified
@@ -676,10 +676,10 @@ Rule: if it isn't committed and isn't in this file, it didn't happen. Chat memor
 - [ ] deploy.yml written, actions SHA-pinned; contact API URL published in §10
 
 **Phase 5 — Web build**
-- [ ] next.config export + app/[locale] tree + next-intl (en/de) wired
-- [ ] Screens implemented from bundle (light/dark), faithful to DESIGN_SYSTEM.md
+- [x] next.config export + app/[locale] tree + next-intl (en/de) wired
+- [x] Screens implemented from bundle (light/dark), faithful to DESIGN_SYSTEM.md
 - [ ] Motion layer (Lenis/GSAP/Framer) with prefers-reduced-motion fallbacks
-- [ ] Contact form wired to NEXT_PUBLIC_CONTACT_API_URL + direct links present
+- [x] Contact form wired to NEXT_PUBLIC_CONTACT_API_URL + direct links present (UI only; endpoint pending DevOps §10)
 
 **Phase 6 — Integration**
 - [ ] CI deploys export to CloudFront on push to main
@@ -711,6 +711,11 @@ Rule: if it isn't committed and isn't in this file, it didn't happen. Chat memor
 | 2026-06-14 | Custom domain not yet chosen — placeholder until confirmed. | CC bootstrap | ASSUMED |
 | 2026-06-14 | www is canonical (CNAME → CloudFront); apex redirects to www via GoDaddy forwarding (GoDaddy has no apex ALIAS). | CC bootstrap | ASSUMED |
 | 2026-06-14 | Contact-form anti-spam for v1 = hidden honeypot + server-side validation, no captcha. | CC bootstrap | ASSUMED |
+| 2026-06-16 | Implemented the Claude Design handoff bundle into /app: Next.js App Router static export, locale routing via [locale] (/en default, /de) using next-intl + generateStaticParams, NO middleware. Theme = client state (data-theme + localStorage, pre-paint script, useSyncExternalStore); locale = route. DS tokens + primitives + all 7 sections + TMMS case study built; DESIGN_SYSTEM.md committed. Build + lint clean; static export verified (en/de + case routes, dark/light). | CC | CONFIRMED |
+| 2026-06-16 | Scaffold installed Next.js 16.2.9 + React 19 + Tailwind v4 (create-next-app@latest), NOT Next.js 14 as §2 states. Built on the installed toolchain; binding architecture (App Router, static export, no middleware) is unchanged. §2 row should be reconciled — see §11. | CC | CONFIRMED |
+| 2026-06-16 | next.config `trailingSlash: true` so the static export emits directory-style routes (out/en/index.html), matching the CloudFront `default_root_object = "en/index.html"` with no rewrite function. | CC | CONFIRMED |
+| 2026-06-16 | Accent locked to burnt orange (#F2552C dark / #DC4419 light). The prototype's blue/green/brass were preview-only and were not carried into code. | CC | CONFIRMED |
+| 2026-06-16 | Added a static root route (`app/page.tsx`) that client-side detects the browser language (German locales → /de, else → /en; no-JS → /en). Required restructuring layouts: root `app/layout.tsx` now owns `<html>/<body>`/fonts/theme; `[locale]/layout.tsx` is nested and corrects `<html lang>` per locale. Nav/Hero/Footer section links use pure `#hash` on the home page (smooth in-place scroll, no jump-to-top) and `/{locale}#hash` from sub-pages. | CC | CONFIRMED |
 
 Never edit a past entry. Supersede with a new dated entry.
 
@@ -723,6 +728,11 @@ Never edit a past entry. Supersede with a new dated entry.
 - [ ] Decide whether to enforce the Lighthouse >=90 gate automatically in CI (Lighthouse CI) or verify manually for v1.
 - [ ] Confirm the contact-form recipient address and the SES sender (from) address.
 - [ ] Confirm the scope of the DE locale at launch: full translation, or a subset of sections, for v1.
+- [ ] §2 says "Next.js 14" but the scaffold installed **Next.js 16.2.9 / React 19 / Tailwind v4**. Confirm pinning to 16 (and update §2) or deliberately downgrade. Note `app/AGENTS.md` flags the framework as breaking-changed vs training data — read `node_modules/next/dist/docs` before further Next work.
+- [ ] Contact form is UI-only: it reads `NEXT_PUBLIC_CONTACT_API_URL` and shows a graceful error + direct links until DevOps publishes the endpoint (Phase 4 step 7). Wire the real URL then (Phase 5 deliverable 4).
+- [ ] Motion layer (Lenis smooth-scroll + GSAP ScrollTrigger + Framer Motion) is NOT yet built — composition leaves room for it; it is the remaining Phase 5 item.
+- [ ] Content placeholders to fill before launch: `telephony_sms` download count, Springer paper DOI link, CV (PDF) link, any shareable TMMS metric. DE copy is realistic native placeholder — refine when final wording exists.
+- [ ] **DevOps (infra) — needed for the new root locale redirect to work in prod.** The app now emits `out/index.html` (a JS locale detector). For CloudFront to serve it at `/`, change `infra/cloudfront.tf` `default_root_object` from `"en/index.html"` to `"index.html"`. Separately, S3 + OAC does **not** resolve directory indexes, so `/en/`, `/de/`, `/en/work/tmms/` (trailingSlash output) won't map to their `index.html` without help — add a CloudFront Function (viewer-request) that appends `index.html` to any path ending in `/`. Both are /infra changes, left to the DevOps role (not edited from the Web task).
 
 ---
 
