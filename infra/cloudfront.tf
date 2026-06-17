@@ -1,70 +1,64 @@
-resource "aws_cloudfront_origin_access_control" "static" {
+resource "aws_cloudfront_origin_access_control" "site" {
   name                              = "khaled-portfolio-oac"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
 }
-
+resource "aws_cloudfront_function" "rewrite" {
+  name    = "khaled-portfolio-rewrite"
+  runtime = "cloudfront-js-2.0"
+  publish = true
+  comment = "Append index.html for directory-style routes"
+  code    = <<-EOT
+    function handler(event) {
+      var req = event.request;
+      var uri = req.uri;
+      if (uri.endsWith('/')) {
+        req.uri = uri + 'index.html';
+      } else if (!uri.includes('.')) {
+        req.uri = uri + '/index.html';
+      }
+      return req;
+    }
+  EOT
+}
+data "aws_cloudfront_cache_policy" "optimized" {
+  name = "Managed-CachingOptimized"
+}
 resource "aws_cloudfront_distribution" "site" {
   enabled             = true
-  is_ipv6_enabled     = true
-  http_version        = "http2and3"
-  default_root_object = "en/index.html"
-  aliases             = ["www.${var.domain_name}"]
-  price_class         = "PriceClass_100"  # US + EU edges only
-
+  default_root_object = "index.html"
+  price_class         = "PriceClass_100"
+  aliases             = var.enable_custom_domain ? ["www.${var.domain_name}"] : []
   origin {
-    domain_name              = aws_s3_bucket.static.bucket_regional_domain_name
-    origin_id                = "s3-static"
-    origin_access_control_id = aws_cloudfront_origin_access_control.static.id
+    domain_name              = aws_s3_bucket.site.bucket_regional_domain_name
+    origin_id                = "s3-site"
+    origin_access_control_id = aws_cloudfront_origin_access_control.site.id
   }
-
   default_cache_behavior {
-    target_origin_id       = "s3-static"
+    target_origin_id       = "s3-site"
     viewer_protocol_policy = "redirect-to-https"
     allowed_methods        = ["GET", "HEAD", "OPTIONS"]
     cached_methods         = ["GET", "HEAD"]
     compress               = true
-
-    # AWS managed CachingOptimized policy.
-    cache_policy_id = "658327ea-f89d-4fab-a63d-7e88639e58f6"
-  }
-
-  # _next/static/** assets are content-hashed; cache aggressively.
-  ordered_cache_behavior {
-    path_pattern           = "/_next/static/*"
-    target_origin_id       = "s3-static"
-    viewer_protocol_policy = "redirect-to-https"
-    allowed_methods        = ["GET", "HEAD"]
-    cached_methods         = ["GET", "HEAD"]
-    compress               = true
-
-    cache_policy_id = "658327ea-f89d-4fab-a63d-7e88639e58f6"
-  }
-
-  custom_error_response {
-    error_code            = 403
-    response_code         = 404
-    response_page_path    = "/en/404.html"
-    error_caching_min_ttl = 10
-  }
-
-  custom_error_response {
-    error_code            = 404
-    response_code         = 404
-    response_page_path    = "/en/404.html"
-    error_caching_min_ttl = 10
-  }
-
-  restrictions {
-    geo_restriction {
-      restriction_type = "none"
+    cache_policy_id        = data.aws_cloudfront_cache_policy.optimized.id
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.rewrite.arn
     }
   }
-
+  custom_error_response {
+    error_code         = 403
+    response_code      = 404
+    response_page_path = "/404.html"
+  }
+  restrictions {
+    geo_restriction { restriction_type = "none" }
+  }
   viewer_certificate {
-    acm_certificate_arn      = aws_acm_certificate_validation.site.certificate_arn
-    ssl_support_method       = "sni-only"
-    minimum_protocol_version = "TLSv1.2_2021"
+    cloudfront_default_certificate = var.enable_custom_domain ? null : true
+    acm_certificate_arn            = var.enable_custom_domain ? aws_acm_certificate_validation.site[0].certificate_arn : null
+    ssl_support_method             = var.enable_custom_domain ? "sni-only" : null
+    minimum_protocol_version       = var.enable_custom_domain ? "TLSv1.2_2021" : null
   }
 }

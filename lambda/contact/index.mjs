@@ -1,107 +1,79 @@
-/**
- * Contact form handler.
- *
- * Env vars (set by Terraform):
- *   SES_FROM_ADDRESS  — verified SES sender
- *   SES_TO_ADDRESS    — recipient (must be SES-verified while in sandbox)
- *   SES_REGION        — AWS region for SES (eu-central-1)
- *   ALLOWED_ORIGIN    — CloudFront origin for CORS (https://www.domain.com)
- *
- * Anti-spam: hidden honeypot field `_hp`. Bots fill it; real users leave it
- * blank. A filled `_hp` returns 200 silently so bots don't retry on 4xx.
- *
- * AWS SDK v3 (@aws-sdk/client-ses) is bundled in the Node 20 Lambda runtime —
- * no node_modules or build step needed.
- */
+import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2";
 
-import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
+const ses = new SESv2Client({});
+const SENDER = process.env.SES_SENDER;
+const RECIPIENT = process.env.SES_RECIPIENT;
+const ALLOWED = (process.env.ALLOWED_ORIGINS || "")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
 
-const ses = new SESClient({ region: process.env.SES_REGION ?? "eu-central-1" });
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN ?? "";
-const FROM = process.env.SES_FROM_ADDRESS;
-const TO = process.env.SES_TO_ADDRESS;
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-const corsHeaders = {
-  "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
-};
-
-function reply(statusCode, body) {
+function cors(origin) {
+  // Echo the origin only when it's on the allowlist; otherwise send no ACAO
+  // header so the browser blocks the response. Never reflect "*".
+  const allow = ALLOWED.includes(origin) ? origin : "";
   return {
-    statusCode,
-    headers: { "Content-Type": "application/json", ...corsHeaders },
+    "Access-Control-Allow-Origin": allow,
+    "Access-Control-Allow-Methods": "POST,OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+    Vary: "Origin",
+  };
+}
+
+function resp(status, body, origin) {
+  return {
+    statusCode: status,
+    headers: { "Content-Type": "application/json", ...cors(origin) },
     body: JSON.stringify(body),
   };
 }
 
-export async function handler(event) {
-  // API Gateway v2 sends OPTIONS for CORS preflight.
-  if (event.requestContext?.http?.method === "OPTIONS") {
-    return { statusCode: 204, headers: corsHeaders, body: "" };
-  }
+export const handler = async (event) => {
+  const origin = event.headers?.origin || event.headers?.Origin || "";
+  const method = event.requestContext?.http?.method;
 
-  // Parse body (API Gateway v2 may base64-encode binary content-types).
-  let body;
+  if (method === "OPTIONS") return resp(204, {}, origin);
+  if (method !== "POST") return resp(405, { error: "method_not_allowed" }, origin);
+
+  let data;
   try {
-    const raw = event.isBase64Encoded
-      ? Buffer.from(event.body ?? "", "base64").toString("utf-8")
-      : (event.body ?? "{}");
-    body = JSON.parse(raw);
+    data = JSON.parse(event.body || "{}");
   } catch {
-    return reply(400, { error: "Invalid JSON." });
+    return resp(400, { error: "invalid_json" }, origin);
   }
 
-  // Honeypot: filled → bot. Return 200 to suppress retries.
-  if (body._hp) {
-    return reply(200, { ok: true });
-  }
+  if (data.company) return resp(200, { ok: true }, origin);
 
-  const name = String(body.name ?? "").trim();
-  const email = String(body.email ?? "").trim();
-  const message = String(body.message ?? "").trim();
+  // Collapse CR/LF in name — it lands in the SES Subject, where a newline would
+  // be header injection.
+  const name = (data.name || "").trim().replace(/[\r\n]+/g, " ");
+  const email = (data.email || "").trim();
+  const message = (data.message || "").trim();
 
-  // Validate required fields.
-  if (!name || name.length < 1 || name.length > 100) {
-    return reply(400, { error: "Name is required (max 100 characters)." });
-  }
-  if (!email || !EMAIL_RE.test(email) || email.length > 254) {
-    return reply(400, { error: "A valid email address is required." });
-  }
-  if (!message || message.length < 10 || message.length > 4000) {
-    return reply(400, { error: "Message must be between 10 and 4000 characters." });
-  }
+  if (!name || name.length > 100) return resp(400, { error: "invalid_name" }, origin);
+  if (!EMAIL_RE.test(email) || email.length > 200) return resp(400, { error: "invalid_email" }, origin);
+  if (!message || message.length > 5000) return resp(400, { error: "invalid_message" }, origin);
 
   try {
     await ses.send(
       new SendEmailCommand({
-        Source: FROM,
-        Destination: { ToAddresses: [TO] },
+        FromEmailAddress: SENDER,
+        Destination: { ToAddresses: [RECIPIENT] },
         ReplyToAddresses: [email],
-        Message: {
-          Subject: {
-            Charset: "UTF-8",
-            Data: `Portfolio contact from ${name}`,
-          },
-          Body: {
-            Text: {
-              Charset: "UTF-8",
-              Data: `From: ${name} <${email}>\n\n${message}`,
-            },
+        Content: {
+          Simple: {
+            Subject: { Data: `Portfolio contact — ${name}` },
+            Body: { Text: { Data: `From: ${name} <${email}>\n\n${message}` } },
           },
         },
-      }),
+      })
     );
-
-    return reply(200, { ok: true });
   } catch (err) {
-    console.error("SES SendEmail failed:", err);
-    return reply(500, {
-      error:
-        "Message could not be sent. Please try the direct contact links instead.",
-    });
+    console.error("SES send failed", err);
+    return resp(502, { error: "send_failed" }, origin);
   }
-}
+
+  return resp(200, { ok: true }, origin);
+};

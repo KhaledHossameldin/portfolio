@@ -1,52 +1,35 @@
 terraform {
-  required_version = ">= 1.7"
-
+  required_version = ">= 1.10"
   required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-    archive = {
-      source  = "hashicorp/archive"
-      version = "~> 2.0"
-    }
+    aws     = { source = "hashicorp/aws", version = "~> 5.70" }
+    tls     = { source = "hashicorp/tls", version = "~> 4.0" }
+    archive = { source = "hashicorp/archive", version = "~> 2.4" }
   }
-
-  # Bootstrap: create this bucket manually (or via aws cli) before `terraform init`.
-  # aws s3api create-bucket --bucket <tfstate-bucket-name> --region eu-central-1 \
-  #   --create-bucket-configuration LocationConstraint=eu-central-1
-  # aws s3api put-bucket-versioning --bucket <tfstate-bucket-name> \
-  #   --versioning-configuration Status=Enabled
   backend "s3" {
-    bucket  = "khaled-portfolio-tfstate"  # update to your state bucket name
-    key     = "portfolio/terraform.tfstate"
-    region  = "eu-central-1"
-    encrypt = true
+    bucket       = "khaled-portfolio-tfstate"
+    key          = "portfolio/prod/terraform.tfstate"
+    region       = "eu-central-1"
+    encrypt      = true
+    use_lockfile = true
   }
 }
-
 provider "aws" {
   region = var.aws_region
-
-  default_tags {
-    tags = {
-      Project   = "khaled-portfolio"
-      ManagedBy = "terraform"
-    }
-  }
+  default_tags { tags = local.tags }
 }
-
-# ACM certificates for CloudFront must live in us-east-1.
 provider "aws" {
   alias  = "us_east_1"
   region = "us-east-1"
-
-  default_tags {
-    tags = {
-      Project   = "khaled-portfolio"
-      ManagedBy = "terraform"
-    }
-  }
+  default_tags { tags = local.tags }
 }
-
-data "aws_caller_identity" "current" {}
+locals {
+  tags = {
+    Project   = "khaled-portfolio"
+    Env       = "prod"
+    ManagedBy = "terraform"
+  }
+  allowed_origins = compact([
+    "https://${aws_cloudfront_distribution.site.domain_name}",
+    var.enable_custom_domain ? "https://www.${var.domain_name}" : "",
+  ])
+}
