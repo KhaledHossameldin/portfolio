@@ -667,12 +667,12 @@ Rule: if it isn't committed and isn't in this file, it didn't happen. Chat memor
 - [x] DESIGN_SYSTEM.md written + committed
 
 **Phase 4 — Infra skeleton**
-- [ ] AWS account ready; SES sender identity verified
+- [x] AWS account ready; SES sender identity verified
 - [x] Terraform source + Lambda handler plan produced (DevOps chat)
 - [x] /infra .tf files + /lambda/contact handler written (Claude Code)
 - [x] terraform init + validate clean
-- [ ] terraform apply; outputs captured
-- [ ] GoDaddy: ACM CNAME placed, cert issued, www CNAME + apex→www set (logged in §10)
+- [x] terraform apply; outputs captured
+- [x] GoDaddy: ACM CNAME placed, cert issued, www CNAME + apex→www set (logged in §10)
 - [x] deploy.yml written, actions SHA-pinned; contact API URL published in §10
 
 **Phase 5 — Web build**
@@ -726,6 +726,8 @@ Rule: if it isn't committed and isn't in this file, it didn't happen. Chat memor
 
 | 2026-06-17 | apex khaledhossameldin.com → www via GoDaddy 301 domain forwarding (forward-only, no masking). Required first disconnecting a stale GoDaddy Websites+Marketing site that was attached to the apex and overriding the forward. Zoho email (MX + SPF/verification TXT on @) untouched. Known residual: typing https://+bare-apex directly has no valid TLS cert (GoDaddy forwarding limitation) — accepted for v1. Route 53 apex-ALIAS (proper apex TLS) consciously deferred as over-scoped for a portfolio; reserved for higher-stakes upcoming projects. | Khaled | CONFIRMED |
 
+| 2026-06-17 | Phase 4 infra complete + verified in prod: ACM cert issued, www alias on CloudFront, site live over HTTPS; CloudFront default_root_object + directory-index rewrite function confirmed working (/en/, /de/, /en/work/tmms/ all load); OIDC deploy.yml ran first deploy. apex khaledhossameldin.com → www via GoDaddy 301 domain forwarding (forward-only, no masking), after disconnecting a stale GoDaddy Websites+Marketing site that was overriding the forward. Zoho email (MX + SPF/verification TXT on @) untouched. Known residual: https://+bare-apex has no valid TLS cert (GoDaddy forwarding limitation) — accepted for v1; Route 53 apex-ALIAS deferred as over-scoped for a portfolio. | Khaled | CONFIRMED |
+
 Never edit a past entry. Supersede with a new dated entry.
 
 ---
@@ -742,10 +744,10 @@ Never edit a past entry. Supersede with a new dated entry.
 - [ ] Motion layer (Lenis smooth-scroll + GSAP ScrollTrigger + Framer Motion) is NOT yet built — composition leaves room for it; it is the remaining Phase 5 item.
 - [ ] Content placeholders to fill before launch: `telephony_sms` download count, Springer paper DOI link, CV (PDF) link, any shareable TMMS metric. DE copy is realistic native placeholder — refine when final wording exists.
 - [ ] Verify the CloudFront 404 export path before launch: `custom_error_response` maps 403→`/en/404.html`, but the app uses `trailingSlash: true` (which would emit `/en/404/index.html`) and a top-level `/404.html` also exists. Confirm which path actually ships in `out/` and point the error response at it.
-- [ ] `deploy.yml` (Phase 4 step 7) not yet written — when authored, pin every third-party GitHub Action to a commit SHA (§2). It assumes the OIDC role `khaled-portfolio-github-deploy` and the `contact_api_url` output feeds `NEXT_PUBLIC_CONTACT_API_URL`.
-- [ ] Confirm the real `github_repo` owner/repo for OIDC trust (tfvars currently `khaled/portfolio`; actual remote is `KhaledHossameldin/portfolio`). Mismatch will make the deploy role un-assumable from Actions.
-- [ ] `terraform apply` still pending: needs AWS creds, the `khaled-portfolio-tfstate` state bucket created, and `terraform.tfvars` filled from `terraform.tfvars.example`. First apply with `enable_custom_domain=false`.
-- [x] RESOLVED 2026-06-16 — root locale redirect prod wiring: `infra/cloudfront.tf` now sets `default_root_object=index.html` and attaches a viewer-request CloudFront Function that appends `index.html` to directory-style routes (`/`, `/en/`, `/en/work/tmms/`).
+- [x] ~~`deploy.yml` (Phase 4 step 7) not yet written.~~ RESOLVED 2026-06-17 — authored, SHA-pinned, and ran the first prod deploy. See §10.
+- [x] ~~Confirm the real `github_repo` owner/repo for OIDC trust.~~ RESOLVED 2026-06-17 — `KhaledHossameldin/portfolio`; deploy role assumed successfully on the first Actions run. See §10.
+- [x] ~~`terraform apply` still pending.~~ RESOLVED 2026-06-17 — applied; outputs captured; infra live in prod. See §10.
+- [x] ~~DevOps (infra) — CloudFront default_root_object + directory-index function for the root locale redirect and trailingSlash routes.~~ RESOLVED 2026-06-17. default_root_object="index.html" + a viewer-request CloudFront Function appending index.html to directory paths were built and applied; verified in prod — /en/, /de/, and /en/work/tmms/ all load. See §10 (2026-06-17).
 - [x] ~~apex khaledhossameldin.com served GoDaddy parked page instead of the site~~ — RESOLVED 2026-06-17. Cause: a connected GoDaddy Websites+Marketing site overrode domain forwarding. Disconnected it; GoDaddy 301 forward (forward-only) now serves apex→www, verified 301→https://www.khaledhossameldin.com. Zoho email intact. See §10 (2026-06-17). Residual https-bare-apex TLS gap accepted for v1.
 
 ---
