@@ -673,7 +673,7 @@ Rule: if it isn't committed and isn't in this file, it didn't happen. Chat memor
 - [x] terraform init + validate clean
 - [ ] terraform apply; outputs captured
 - [ ] GoDaddy: ACM CNAME placed, cert issued, www CNAME + apex→www set (logged in §10)
-- [ ] deploy.yml written, actions SHA-pinned; contact API URL published in §10
+- [x] deploy.yml written, actions SHA-pinned; contact API URL published in §10
 
 **Phase 5 — Web build**
 - [x] next.config export + app/[locale] tree + next-intl (en/de) wired
@@ -721,6 +721,8 @@ Rule: if it isn't committed and isn't in this file, it didn't happen. Chat memor
 | 2026-06-16 | www canonical (CNAME → CloudFront); apex → www via GoDaddy forwarding (no apex ALIAS). Supersedes 2026-06-14 ASSUMED. | Khaled | CONFIRMED |
 | 2026-06-16 | Contact anti-spam v1 = honeypot + server-side validation, no captcha. Supersedes 2026-06-14 ASSUMED. | Khaled | CONFIRMED |
 | 2026-06-16 | Phase 4 infra authored in /infra (provider, s3, cloudfront, acm, contact_lambda, apigw, iam_oidc, variables, outputs, tfvars.example) + /lambda/contact/index.mjs (SESv2, `company` honeypot). ACM cert + CloudFront alias scoped to www.khaledhossameldin.com ONLY; apex is GoDaddy forwarding, NOT a CloudFront alias. Two-phase apply gated on `enable_custom_domain` (first apply false → default CF cert, cert pending; place validation CNAME at GoDaddy; after ISSUED, second apply true → www alias + ACM). CloudFront `default_root_object=index.html` + a viewer-request CloudFront Function append `index.html` for directory routes — this RESOLVES the prior §11 DevOps note. OIDC deploy role scoped to `repo:<github_repo>:ref:refs/heads/main`, least-privilege S3+invalidation. `terraform init -backend=false` + `validate` clean (backend init/apply need AWS creds + state bucket, not run). One spec fix: SSE `rule` block expanded to multi-line (single-line nested block is invalid HCL); semantics identical. | CC | CONFIRMED |
+
+| 2026-06-16 | deploy.yml authored (.github/workflows) — trigger push to main; permissions id-token write + contents read; concurrency deploy-prod cancel-in-progress; steps: checkout → setup Node 20 (npm cache) → npm ci in /app → next build static export (app/out) → OIDC assume-role → `aws s3 sync app/out s3://$bucket --delete` → CloudFront invalidation `/*`. Region eu-central-1. Config entirely via repo Variables (AWS_DEPLOY_ROLE_ARN, S3_BUCKET, CF_DIST_ID, CONTACT_API_URL); build reads NEXT_PUBLIC_CONTACT_API_URL from vars.CONTACT_API_URL; nothing hardcoded. All third-party actions SHA-pinned (§2): actions/checkout v4.3.1 = 34e114876b0b11c390a56381ad16ebd13914f8d5; actions/setup-node v4.4.0 = 49933ea5288caeca8642d1e84afbd3f7d6820020; aws-actions/configure-aws-credentials v4.3.1 = 7474bc4690e29a8392af63c5b98e7449536d5c3a. Workflow not run — human triggers first deploy. | CC | CONFIRMED |
 
 Never edit a past entry. Supersede with a new dated entry.
 
