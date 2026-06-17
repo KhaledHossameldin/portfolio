@@ -1,6 +1,6 @@
 aws_region          = "eu-central-1"
 domain_name         = "khaledhossameldin.com"
-github_repo         = "khaled/portfolio"   # set real owner/repo
+github_repo         = "KhaledHossameldin/portfolio"
 ses_sender_email    = "contact@khaledhossameldin.com"
 ses_recipient_email = "you@example.com"
-enable_custom_domain = false
+enable_custom_domain = false   # first apply false → place ACM CNAME at GoDaddy; flip true after cert ISSUED

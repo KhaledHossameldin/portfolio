@@ -11,7 +11,9 @@ const ALLOWED = (process.env.ALLOWED_ORIGINS || "")
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function cors(origin) {
-  const allow = ALLOWED.includes(origin) ? origin : ALLOWED[0] || "*";
+  // Echo the origin only when it's on the allowlist; otherwise send no ACAO
+  // header so the browser blocks the response. Never reflect "*".
+  const allow = ALLOWED.includes(origin) ? origin : "";
   return {
     "Access-Control-Allow-Origin": allow,
     "Access-Control-Allow-Methods": "POST,OPTIONS",
@@ -44,7 +46,9 @@ export const handler = async (event) => {
 
   if (data.company) return resp(200, { ok: true }, origin);
 
-  const name = (data.name || "").trim();
+  // Collapse CR/LF in name — it lands in the SES Subject, where a newline would
+  // be header injection.
+  const name = (data.name || "").trim().replace(/[\r\n]+/g, " ");
   const email = (data.email || "").trim();
   const message = (data.message || "").trim();
 

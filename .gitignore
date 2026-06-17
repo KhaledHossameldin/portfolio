@@ -30,6 +30,9 @@ override.tf.json
 # --- Graphify ---
 graphify-out/
 
+# --- Claude Code (keep shared launch.json, ignore local state) ---
+.claude/*.local.json
+
 # --- OS / editor ---
 .DS_Store
 Thumbs.db
