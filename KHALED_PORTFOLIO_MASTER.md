@@ -724,6 +724,8 @@ Rule: if it isn't committed and isn't in this file, it didn't happen. Chat memor
 
 | 2026-06-16 | deploy.yml authored (.github/workflows) — trigger push to main; permissions id-token write + contents read; concurrency deploy-prod cancel-in-progress; steps: checkout → setup Node 20 (npm cache) → npm ci in /app → next build static export (app/out) → OIDC assume-role → `aws s3 sync app/out s3://$bucket --delete` → CloudFront invalidation `/*`. Region eu-central-1. Config entirely via repo Variables (AWS_DEPLOY_ROLE_ARN, S3_BUCKET, CF_DIST_ID, CONTACT_API_URL); build reads NEXT_PUBLIC_CONTACT_API_URL from vars.CONTACT_API_URL; nothing hardcoded. All third-party actions SHA-pinned (§2): actions/checkout v4.3.1 = 34e114876b0b11c390a56381ad16ebd13914f8d5; actions/setup-node v4.4.0 = 49933ea5288caeca8642d1e84afbd3f7d6820020; aws-actions/configure-aws-credentials v4.3.1 = 7474bc4690e29a8392af63c5b98e7449536d5c3a. Workflow not run — human triggers first deploy. | CC | CONFIRMED |
 
+| 2026-06-17 | apex khaledhossameldin.com → www via GoDaddy 301 domain forwarding (forward-only, no masking). Required first disconnecting a stale GoDaddy Websites+Marketing site that was attached to the apex and overriding the forward. Zoho email (MX + SPF/verification TXT on @) untouched. Known residual: typing https://+bare-apex directly has no valid TLS cert (GoDaddy forwarding limitation) — accepted for v1. Route 53 apex-ALIAS (proper apex TLS) consciously deferred as over-scoped for a portfolio; reserved for higher-stakes upcoming projects. | Khaled | CONFIRMED |
+
 Never edit a past entry. Supersede with a new dated entry.
 
 ---
@@ -744,6 +746,7 @@ Never edit a past entry. Supersede with a new dated entry.
 - [ ] Confirm the real `github_repo` owner/repo for OIDC trust (tfvars currently `khaled/portfolio`; actual remote is `KhaledHossameldin/portfolio`). Mismatch will make the deploy role un-assumable from Actions.
 - [ ] `terraform apply` still pending: needs AWS creds, the `khaled-portfolio-tfstate` state bucket created, and `terraform.tfvars` filled from `terraform.tfvars.example`. First apply with `enable_custom_domain=false`.
 - [x] RESOLVED 2026-06-16 — root locale redirect prod wiring: `infra/cloudfront.tf` now sets `default_root_object=index.html` and attaches a viewer-request CloudFront Function that appends `index.html` to directory-style routes (`/`, `/en/`, `/en/work/tmms/`).
+- [x] ~~apex khaledhossameldin.com served GoDaddy parked page instead of the site~~ — RESOLVED 2026-06-17. Cause: a connected GoDaddy Websites+Marketing site overrode domain forwarding. Disconnected it; GoDaddy 301 forward (forward-only) now serves apex→www, verified 301→https://www.khaledhossameldin.com. Zoho email intact. See §10 (2026-06-17). Residual https-bare-apex TLS gap accepted for v1.
 
 ---
 
