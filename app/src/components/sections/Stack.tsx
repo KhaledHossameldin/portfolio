@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { Reveal, RevealGroup } from "../motion/Reveal";
 import { Tag } from "../ui/Tag";
 
 type Group = { label: string; items: string[] };
@@ -25,43 +26,45 @@ export function Stack() {
         padding: "var(--space-10) var(--gutter)",
       }}
     >
-      <header
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-end",
-          flexWrap: "wrap",
-          gap: "var(--space-4)",
-          marginBottom: "var(--space-8)",
-        }}
-      >
-        <div>
-          <span style={{ ...eyebrow, color: "var(--accent)" }}>— {t("eyebrow")}</span>
-          <h2
-            style={{
-              font: "var(--type-h2)",
-              letterSpacing: "var(--tracking-display)",
-              margin: "var(--space-4) 0 0",
-              maxWidth: "18ch",
-            }}
-          >
-            {t("title")}
-          </h2>
-        </div>
-        <p
+      <Reveal>
+        <header
           style={{
-            font: "var(--type-small)",
-            color: "var(--text-faint)",
-            fontStyle: "italic",
-            maxWidth: "28ch",
-            margin: 0,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            flexWrap: "wrap",
+            gap: "var(--space-4)",
+            marginBottom: "var(--space-8)",
           }}
         >
-          {t("note")}
-        </p>
-      </header>
+          <div>
+            <span style={{ ...eyebrow, color: "var(--accent)" }}>— {t("eyebrow")}</span>
+            <h2
+              style={{
+                font: "var(--type-h2)",
+                letterSpacing: "var(--tracking-display)",
+                margin: "var(--space-4) 0 0",
+                maxWidth: "18ch",
+              }}
+            >
+              {t("title")}
+            </h2>
+          </div>
+          <p
+            style={{
+              font: "var(--type-small)",
+              color: "var(--text-faint)",
+              fontStyle: "italic",
+              maxWidth: "28ch",
+              margin: 0,
+            }}
+          >
+            {t("note")}
+          </p>
+        </header>
+      </Reveal>
 
-      <div
+      <RevealGroup
         className="kp-stack-grid"
         style={{
           display: "grid",
@@ -70,7 +73,7 @@ export function Stack() {
         }}
       >
         {groups.map((g) => (
-          <div key={g.label} style={{ borderTop: "1px solid var(--border)", paddingTop: "var(--space-4)" }}>
+          <Reveal item key={g.label} style={{ borderTop: "1px solid var(--border)", paddingTop: "var(--space-4)" }}>
             <div
               style={{
                 display: "flex",
@@ -90,9 +93,9 @@ export function Stack() {
                 </Tag>
               ))}
             </div>
-          </div>
+          </Reveal>
         ))}
-      </div>
+      </RevealGroup>
     </section>
   );
 }

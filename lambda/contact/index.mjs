@@ -44,7 +44,10 @@ export const handler = async (event) => {
     return resp(400, { error: "invalid_json" }, origin);
   }
 
-  if (data.company) return resp(200, { ok: true }, origin);
+  // Honeypot: real users leave `hp_token` empty. Name MUST match the form
+  // field (Contact.tsx) and is deliberately not a real field so browser
+  // autofill never trips it. If filled, quiet success — drop silently.
+  if (data.hp_token) return resp(200, { ok: true }, origin);
 
   // Collapse CR/LF in name — it lands in the SES Subject, where a newline would
   // be header injection.

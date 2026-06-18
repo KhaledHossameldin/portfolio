@@ -1,6 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { handleHashClick } from "@/lib/motion/scrollToHash";
+import { Parallax } from "../motion/Parallax";
 import { Button } from "../ui/Button";
 import { StatusDot } from "../ui/StatusDot";
 import { ArrowUpRight } from "../ui/icons";
@@ -98,16 +100,23 @@ export function Hero() {
             size="lg"
             href="#contact"
             iconRight={<ArrowUpRight />}
+            onClick={(e) => handleHashClick(e, "#contact")}
           >
             {t("ctaPrimary")}
           </Button>
-          <Button variant="secondary" size="lg" href="#work">
+          <Button
+            variant="secondary"
+            size="lg"
+            href="#work"
+            onClick={(e) => handleHashClick(e, "#work")}
+          >
             {t("ctaSecondary")}
           </Button>
         </div>
       </div>
 
-      {/* spec panel */}
+      {/* spec panel — subtle scroll parallax (design is image-free) */}
+      <Parallax amount={6}>
       <aside
         data-rise
         style={{
@@ -152,6 +161,7 @@ export function Hero() {
           ))}
         </dl>
       </aside>
+      </Parallax>
     </section>
   );
 }

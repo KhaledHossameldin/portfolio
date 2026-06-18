@@ -45,7 +45,7 @@ type ButtonProps = {
   iconLeft?: ReactNode;
   fullWidth?: boolean;
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
   children?: ReactNode;
   style?: CSSProperties;
 };
@@ -112,6 +112,9 @@ export function Button({
           background: variants[variant].background ?? "",
           borderColor: variants[variant].borderColor ?? "",
           color: variants[variant].color ?? "",
+          // Clear any active-press transform; mouseup may not fire if the
+          // pointer left the element while pressed.
+          transform: "none",
         });
       };
 

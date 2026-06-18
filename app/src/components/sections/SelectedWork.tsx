@@ -1,6 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
+import { Reveal, RevealGroup } from "../motion/Reveal";
 import { Card } from "../ui/Card";
 import { Tag } from "../ui/Tag";
 import { ArrowUpRight } from "../ui/icons";
@@ -51,43 +52,45 @@ export function SelectedWork() {
         padding: "var(--space-10) var(--gutter)",
       }}
     >
-      <header
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-end",
-          flexWrap: "wrap",
-          gap: "var(--space-4)",
-          marginBottom: "var(--space-8)",
-        }}
-      >
-        <div>
-          <span style={{ ...eyebrow, color: "var(--accent)" }}>— {t("eyebrow")}</span>
-          <h2
-            style={{
-              font: "var(--type-h2)",
-              letterSpacing: "var(--tracking-display)",
-              margin: "var(--space-4) 0 0",
-              maxWidth: "20ch",
-            }}
-          >
-            {t("title")}
-          </h2>
-        </div>
-        <p
+      <Reveal>
+        <header
           style={{
-            font: "var(--type-small)",
-            color: "var(--text-faint)",
-            fontStyle: "italic",
-            maxWidth: "28ch",
-            margin: 0,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            flexWrap: "wrap",
+            gap: "var(--space-4)",
+            marginBottom: "var(--space-8)",
           }}
         >
-          {t("note")}
-        </p>
-      </header>
+          <div>
+            <span style={{ ...eyebrow, color: "var(--accent)" }}>— {t("eyebrow")}</span>
+            <h2
+              style={{
+                font: "var(--type-h2)",
+                letterSpacing: "var(--tracking-display)",
+                margin: "var(--space-4) 0 0",
+                maxWidth: "20ch",
+              }}
+            >
+              {t("title")}
+            </h2>
+          </div>
+          <p
+            style={{
+              font: "var(--type-small)",
+              color: "var(--text-faint)",
+              fontStyle: "italic",
+              maxWidth: "28ch",
+              margin: 0,
+            }}
+          >
+            {t("note")}
+          </p>
+        </header>
+      </Reveal>
 
-      <div
+      <RevealGroup
         className="kp-work-grid"
         style={{
           display: "grid",
@@ -106,8 +109,8 @@ export function SelectedWork() {
                 : undefined;
 
           return (
+            <Reveal item key={p.id}>
             <Card
-              key={p.id}
               interactive={interactive}
               href={cardHref}
               external={p.action === "external"}
@@ -186,12 +189,13 @@ export function SelectedWork() {
                 ))}
               </div>
             </Card>
+            </Reveal>
           );
         })}
-      </div>
+      </RevealGroup>
 
       {/* open source & writing */}
-      <div style={{ marginTop: "var(--space-8)" }}>
+      <Reveal style={{ marginTop: "var(--space-8)" }}>
         <span style={{ ...eyebrow, color: "var(--text-faint)" }}>— {tAlso("eyebrow")}</span>
         <div style={{ marginTop: "var(--space-4)" }}>
           {also.map((a) => (
@@ -249,7 +253,7 @@ export function SelectedWork() {
             </a>
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
