@@ -37,17 +37,19 @@ export function CaseStudy() {
     const header = headerRef.current;
     const article = articleRef.current;
     if (reduced || !header || !article) return;
+    // Skip the pin on narrow viewports — a fixed header would eat too much of a
+    // phone screen while the meta/narrative scroll under it.
+    if (!window.matchMedia("(min-width: 900px)").matches) return;
 
     let cancelled = false;
     let cleanup = () => {};
 
     (async () => {
-      const [{ ScrollTrigger }] = await Promise.all([
-        import("gsap/ScrollTrigger"),
+      const [{ gsap }, { ScrollTrigger }] = await Promise.all([
         import("gsap"),
+        import("gsap/ScrollTrigger"),
       ]);
       if (cancelled) return;
-      const { gsap } = await import("gsap");
       gsap.registerPlugin(ScrollTrigger);
 
       const st = ScrollTrigger.create({

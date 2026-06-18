@@ -27,10 +27,12 @@ export function SmoothScrollProvider({
   children: React.ReactNode;
 }) {
   const reduced = useReducedMotion();
-  // Locale change (/en <-> /de) shifts trigger positions because DE copy is
-  // longer; usePathname is locale-aware and re-runs the effect on route change.
   const pathname = usePathname();
 
+  // Init effect — keyed on `reduced` ONLY. Lenis is built once (and rebuilt only
+  // when the motion preference flips), not on every client navigation. It does
+  // not own any ScrollTriggers, so it never kills them — each Parallax/pin owns
+  // and cleans up its own.
   useEffect(() => {
     if (reduced) return;
 
@@ -60,19 +62,24 @@ export function SmoothScrollProvider({
       gsap.ticker.add(tick);
       gsap.ticker.lagSmoothing(0);
 
-      const refresh = () => ScrollTrigger.refresh();
+      // Debounced — resize fires in bursts and refresh() is expensive.
+      let resizeTimer: ReturnType<typeof setTimeout> | undefined;
+      const onResize = () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 150);
+      };
       // Fonts reflow layout — refresh once they're ready, then on resize.
       if (document.fonts?.ready) {
-        document.fonts.ready.then(refresh).catch(() => {});
+        document.fonts.ready.then(() => ScrollTrigger.refresh()).catch(() => {});
       }
-      window.addEventListener("resize", refresh);
+      window.addEventListener("resize", onResize);
 
       scrollToHashOnMount();
 
       cleanupExtra = () => {
+        clearTimeout(resizeTimer);
         gsap.ticker.remove(tick);
-        window.removeEventListener("resize", refresh);
-        ScrollTrigger.getAll().forEach((t) => t.kill());
+        window.removeEventListener("resize", onResize);
       };
     })();
 
@@ -81,6 +88,20 @@ export function SmoothScrollProvider({
       cleanupExtra?.();
       lenis?.destroy();
       setLenis(null);
+    };
+  }, [reduced]);
+
+  // Refresh effect — keyed on `pathname`. Recomputes trigger positions after a
+  // route change (DE copy length, different page) without tearing Lenis down.
+  // Runs after the destination page's child effects have created their triggers.
+  useEffect(() => {
+    if (reduced) return;
+    let cancelled = false;
+    import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
+      if (!cancelled) ScrollTrigger.refresh();
+    });
+    return () => {
+      cancelled = true;
     };
   }, [reduced, pathname]);
 
