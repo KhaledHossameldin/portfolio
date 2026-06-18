@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 // Plain framework pathname (not next-intl's) — this provider mounts in the root
 // layout, above the [locale] segment, so it must not depend on the locale
 // context (the not-found page has none). Full path still changes on /en<->/de.
@@ -28,6 +28,7 @@ export function SmoothScrollProvider({
 }) {
   const reduced = useReducedMotion();
   const pathname = usePathname();
+  const firstRefresh = useRef(true);
 
   // Init effect — keyed on `reduced` ONLY. Lenis is built once (and rebuilt only
   // when the motion preference flips), not on every client navigation. It does
@@ -96,6 +97,12 @@ export function SmoothScrollProvider({
   // Runs after the destination page's child effects have created their triggers.
   useEffect(() => {
     if (reduced) return;
+    // First mount is covered by the init effect's fonts.ready refresh; only
+    // refresh on subsequent route changes.
+    if (firstRefresh.current) {
+      firstRefresh.current = false;
+      return;
+    }
     let cancelled = false;
     import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
       if (!cancelled) ScrollTrigger.refresh();

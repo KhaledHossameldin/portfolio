@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useReducedMotion } from "@/lib/motion/useReducedMotion";
+import { useMediaQuery } from "@/lib/motion/useMediaQuery";
 import { Reveal } from "../motion/Reveal";
 import { Parallax } from "../motion/Parallax";
 import { Tag } from "../ui/Tag";
@@ -26,6 +27,9 @@ export function CaseStudy() {
   const stack = t.raw("stack") as string[];
 
   const reduced = useReducedMotion();
+  // Pin is desktop-only; reactive so crossing the breakpoint adds/removes it
+  // without a reload.
+  const isDesktop = useMediaQuery("(min-width: 900px)");
   const articleRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLElement>(null);
 
@@ -36,10 +40,8 @@ export function CaseStudy() {
   useEffect(() => {
     const header = headerRef.current;
     const article = articleRef.current;
-    if (reduced || !header || !article) return;
-    // Skip the pin on narrow viewports — a fixed header would eat too much of a
-    // phone screen while the meta/narrative scroll under it.
-    if (!window.matchMedia("(min-width: 900px)").matches) return;
+    // Pin is desktop-only — a fixed header would eat too much of a phone screen.
+    if (reduced || !isDesktop || !header || !article) return;
 
     let cancelled = false;
     let cleanup = () => {};
@@ -68,7 +70,7 @@ export function CaseStudy() {
       cancelled = true;
       cleanup();
     };
-  }, [reduced]);
+  }, [reduced, isDesktop]);
 
   return (
     <article
