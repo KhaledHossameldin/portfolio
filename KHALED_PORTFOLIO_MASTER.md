@@ -678,7 +678,7 @@ Rule: if it isn't committed and isn't in this file, it didn't happen. Chat memor
 **Phase 5 — Web build**
 - [x] next.config export + app/[locale] tree + next-intl (en/de) wired
 - [x] Screens implemented from bundle (light/dark), faithful to DESIGN_SYSTEM.md
-- [ ] Motion layer (Lenis/GSAP/Framer) with prefers-reduced-motion fallbacks
+- [x] Motion layer (Lenis/GSAP/Framer) with prefers-reduced-motion fallbacks
 - [x] Contact form wired to NEXT_PUBLIC_CONTACT_API_URL + direct links present (UI only; endpoint pending DevOps §10)
 
 **Phase 6 — Integration**
@@ -728,6 +728,8 @@ Rule: if it isn't committed and isn't in this file, it didn't happen. Chat memor
 
 | 2026-06-17 | Phase 4 infra complete + verified in prod: ACM cert issued, www alias on CloudFront, site live over HTTPS; CloudFront default_root_object + directory-index rewrite function confirmed working (/en/, /de/, /en/work/tmms/ all load); OIDC deploy.yml ran first deploy. apex khaledhossameldin.com → www via GoDaddy 301 domain forwarding (forward-only, no masking), after disconnecting a stale GoDaddy Websites+Marketing site that was overriding the forward. Zoho email (MX + SPF/verification TXT on @) untouched. Known residual: https://+bare-apex has no valid TLS cert (GoDaddy forwarding limitation) — accepted for v1; Route 53 apex-ALIAS deferred as over-scoped for a portfolio. | Khaled | CONFIRMED |
 
+| 2026-06-18 | Phase 5 motion layer built in /app: Lenis smooth scroll + GSAP ScrollTrigger (subtle type parallax on hero spec panel & case metric numbers; pinned TMMS case header) + Framer Motion entrance reveals (sections + work-card stagger). All gated behind a single `useReducedMotion` (useSyncExternalStore on matchMedia, SSR snapshot false, reactive to live toggle): reduced → no Lenis (native scroll), no GSAP tweens, Framer renders final state. Static-export safe: motion is 'use client', gsap+lenis dynamic-imported inside effects (off main bundle; verified separate chunks), nothing at module eval; `ssr:false` avoided (forbidden in Next 16 server components). SmoothScrollProvider mounted in root layout, uses plain `next/navigation` usePathname (the not-found page has no locale context) to refresh ScrollTrigger on route change; refresh also on fonts.ready + resize; full teardown for React 19 strict double-mount. Hash nav routed through scrollToHash (lenis.scrollTo when live, else scrollIntoView; landing hash after fonts+double-rAF) preserving the home #hash / subpage /{locale}#hash split. Server emits final-state DOM (0 baked opacity:0 → no FOUC for no-JS/reduced). next build + lint clean. Verified in preview: Lenis active, nav smooth-scroll in place, case pin (header position:fixed + pin-spacer), no console errors. Decisions: subtle type parallax, keep pin, keep hero CSS entrance (Framer elsewhere). | CC | CONFIRMED |
+
 Never edit a past entry. Supersede with a new dated entry.
 
 ---
@@ -741,7 +743,7 @@ Never edit a past entry. Supersede with a new dated entry.
 - [ ] Confirm the scope of the DE locale at launch: full translation, or a subset of sections, for v1.
 - [ ] §2 says "Next.js 14" but the scaffold installed **Next.js 16.2.9 / React 19 / Tailwind v4**. Confirm pinning to 16 (and update §2) or deliberately downgrade. Note `app/AGENTS.md` flags the framework as breaking-changed vs training data — read `node_modules/next/dist/docs` before further Next work.
 - [ ] Contact form is UI-only: it reads `NEXT_PUBLIC_CONTACT_API_URL` and shows a graceful error + direct links until DevOps publishes the endpoint (Phase 4 step 7). Wire the real URL then (Phase 5 deliverable 4).
-- [ ] Motion layer (Lenis smooth-scroll + GSAP ScrollTrigger + Framer Motion) is NOT yet built — composition leaves room for it; it is the remaining Phase 5 item.
+- [x] ~~Motion layer (Lenis + GSAP ScrollTrigger + Framer Motion) not yet built.~~ RESOLVED 2026-06-18 — built and verified (see §10). Two follow-ups: (a) Lighthouse ≥90 not measured in this session (no Lighthouse tool in the harness) — run it on the deployed/preview build in Phase 7 hardening, watching TBT after the gsap import (it's dynamic/off the main bundle). (b) The TMMS case-study header pin (GSAP pin + Lenis) is the highest jank risk — re-check on a real mid-tier device during hardening; drop the pin if it can't hold 60fps.
 - [ ] Content placeholders to fill before launch: `telephony_sms` download count, Springer paper DOI link, CV (PDF) link, any shareable TMMS metric. DE copy is realistic native placeholder — refine when final wording exists.
 - [ ] Verify the CloudFront 404 export path before launch: `custom_error_response` maps 403→`/en/404.html`, but the app uses `trailingSlash: true` (which would emit `/en/404/index.html`) and a top-level `/404.html` also exists. Confirm which path actually ships in `out/` and point the error response at it.
 - [x] ~~`deploy.yml` (Phase 4 step 7) not yet written.~~ RESOLVED 2026-06-17 — authored, SHA-pinned, and ran the first prod deploy. See §10.

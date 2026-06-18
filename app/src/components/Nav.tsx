@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
+import { handleHashClick } from "@/lib/motion/scrollToHash";
 import { Button } from "./ui/Button";
 import { LangToggle, ThemeToggle } from "./Toggles";
 
@@ -73,19 +74,35 @@ export function Nav() {
           marginLeft: "var(--space-3)",
         }}
       >
-        <a href={sectionHref("work")} style={navLink}>
+        <a
+          href={sectionHref("work")}
+          style={navLink}
+          onClick={(e) => handleHashClick(e, sectionHref("work"))}
+        >
           <span style={navIdx}>01</span>
           {t("work")}
         </a>
-        <a href={sectionHref("about")} style={navLink}>
+        <a
+          href={sectionHref("about")}
+          style={navLink}
+          onClick={(e) => handleHashClick(e, sectionHref("about"))}
+        >
           <span style={navIdx}>02</span>
           {t("about")}
         </a>
-        <a href={sectionHref("stack")} style={navLink}>
+        <a
+          href={sectionHref("stack")}
+          style={navLink}
+          onClick={(e) => handleHashClick(e, sectionHref("stack"))}
+        >
           <span style={navIdx}>03</span>
           {t("stack")}
         </a>
-        <a href={sectionHref("contact")} style={navLink}>
+        <a
+          href={sectionHref("contact")}
+          style={navLink}
+          onClick={(e) => handleHashClick(e, sectionHref("contact"))}
+        >
           <span style={navIdx}>04</span>
           {t("contact")}
         </a>
@@ -102,7 +119,12 @@ export function Nav() {
       >
         <LangToggle />
         <ThemeToggle />
-        <Button variant="primary" size="sm" href={sectionHref("contact")}>
+        <Button
+          variant="primary"
+          size="sm"
+          href={sectionHref("contact")}
+          onClick={(e) => handleHashClick(e, sectionHref("contact"))}
+        >
           {t("cta")}
         </Button>
       </div>

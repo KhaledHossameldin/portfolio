@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { Reveal } from "../motion/Reveal";
 import { Button } from "../ui/Button";
 import { Input, Textarea } from "../ui/Input";
 import { StatusDot } from "../ui/StatusDot";
@@ -73,6 +74,7 @@ export function Contact() {
         padding: "var(--space-10) var(--gutter)",
       }}
     >
+      <Reveal>
       <span
         style={{
           fontFamily: "var(--font-mono)",
@@ -219,6 +221,7 @@ export function Contact() {
           </div>
         </form>
       </div>
+      </Reveal>
     </section>
   );
 }

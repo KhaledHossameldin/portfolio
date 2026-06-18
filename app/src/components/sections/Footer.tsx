@@ -2,6 +2,8 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
+import { handleHashClick } from "@/lib/motion/scrollToHash";
+import { Reveal } from "../motion/Reveal";
 import { LangToggle, ThemeToggle } from "../Toggles";
 
 type FooterLink = { label: string; href: string };
@@ -23,18 +25,24 @@ export function Footer() {
           padding: "var(--space-9) var(--gutter) var(--space-6)",
         }}
       >
-        <a href={contactHref} style={{ textDecoration: "none", color: "inherit" }}>
-          <h2
-            style={{
-              font: "var(--type-h2)",
-              letterSpacing: "var(--tracking-display)",
-              margin: "0 0 var(--space-7)",
-              maxWidth: "16ch",
-            }}
+        <Reveal>
+          <a
+            href={contactHref}
+            onClick={(e) => handleHashClick(e, contactHref)}
+            style={{ textDecoration: "none", color: "inherit" }}
           >
-            {t("headline")}
-          </h2>
-        </a>
+            <h2
+              style={{
+                font: "var(--type-h2)",
+                letterSpacing: "var(--tracking-display)",
+                margin: "0 0 var(--space-7)",
+                maxWidth: "16ch",
+              }}
+            >
+              {t("headline")}
+            </h2>
+          </a>
+        </Reveal>
         <div
           style={{
             display: "flex",

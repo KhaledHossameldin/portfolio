@@ -45,7 +45,7 @@ type ButtonProps = {
   iconLeft?: ReactNode;
   fullWidth?: boolean;
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
   children?: ReactNode;
   style?: CSSProperties;
 };

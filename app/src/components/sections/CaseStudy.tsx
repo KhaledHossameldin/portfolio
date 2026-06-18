@@ -1,6 +1,10 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import { useReducedMotion } from "@/lib/motion/useReducedMotion";
+import { Reveal } from "../motion/Reveal";
+import { Parallax } from "../motion/Parallax";
 import { Tag } from "../ui/Tag";
 import { ArrowLeft, ArrowRight } from "../ui/icons";
 
@@ -21,8 +25,52 @@ export function CaseStudy() {
   const metrics = t.raw("metrics") as Metric[];
   const stack = t.raw("stack") as string[];
 
+  const reduced = useReducedMotion();
+  const articleRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Pin the case-study header while the meta + narrative scroll past. Distance
+  // is derived from the narrative end (endTrigger), never hard-coded, so longer
+  // DE copy doesn't break it. Lenis drives ScrollTrigger.update (set up in the
+  // provider), so the pin tracks the smooth scroll.
+  useEffect(() => {
+    const header = headerRef.current;
+    const article = articleRef.current;
+    if (reduced || !header || !article) return;
+
+    let cancelled = false;
+    let cleanup = () => {};
+
+    (async () => {
+      const [{ ScrollTrigger }] = await Promise.all([
+        import("gsap/ScrollTrigger"),
+        import("gsap"),
+      ]);
+      if (cancelled) return;
+      const { gsap } = await import("gsap");
+      gsap.registerPlugin(ScrollTrigger);
+
+      const st = ScrollTrigger.create({
+        trigger: header,
+        start: "top 76px",
+        endTrigger: article,
+        end: "bottom 80%",
+        pin: header,
+        pinSpacing: true,
+      });
+
+      cleanup = () => st.kill();
+    })();
+
+    return () => {
+      cancelled = true;
+      cleanup();
+    };
+  }, [reduced]);
+
   return (
     <article
+      ref={articleRef}
       style={{
         maxWidth: "var(--container)",
         margin: "0 auto",
@@ -47,7 +95,7 @@ export function CaseStudy() {
         {t("back")}
       </a>
 
-      <header style={{ marginTop: "var(--space-7)", paddingBottom: "var(--space-7)", borderBottom: "1px solid var(--border)" }}>
+      <header ref={headerRef} style={{ marginTop: "var(--space-7)", paddingBottom: "var(--space-7)", borderBottom: "1px solid var(--border)", background: "var(--bg)" }}>
         <span style={{ ...monoLabel, color: "var(--accent)" }}>— {t("eyebrow")}</span>
         <h1
           style={{
@@ -86,7 +134,7 @@ export function CaseStudy() {
             </div>
           ))}
         </dl>
-        <div style={{ display: "flex", gap: "var(--space-8)", flexWrap: "wrap" }}>
+        <Parallax amount={6} style={{ display: "flex", gap: "var(--space-8)", flexWrap: "wrap" }}>
           {metrics.map((m) => (
             <div key={m.l}>
               <div
@@ -115,11 +163,11 @@ export function CaseStudy() {
               </div>
             </div>
           ))}
-        </div>
+        </Parallax>
       </div>
 
       {/* narrative */}
-      <div
+      <Reveal
         style={{
           maxWidth: "var(--container-prose)",
           display: "flex",
@@ -189,7 +237,7 @@ export function CaseStudy() {
             {t("noteBody")}
           </p>
         </div>
-      </div>
+      </Reveal>
 
       <a
         href={`${home}#work`}

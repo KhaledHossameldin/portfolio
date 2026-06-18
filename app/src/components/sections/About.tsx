@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { Reveal } from "../motion/Reveal";
 
 type Fact = { k: string; v: string };
 
@@ -17,6 +18,7 @@ export function About() {
         padding: "var(--space-10) var(--gutter)",
       }}
     >
+      <Reveal>
       <span
         style={{
           fontFamily: "var(--font-mono)",
@@ -76,6 +78,7 @@ export function About() {
           ))}
         </dl>
       </div>
+      </Reveal>
     </section>
   );
 }
