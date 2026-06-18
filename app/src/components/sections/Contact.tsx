@@ -29,22 +29,31 @@ export function Contact() {
     const form = e.currentTarget;
     const data = new FormData(form);
 
-    // Honeypot: real users leave `_hp` empty. If filled, treat as a quiet success.
-    if (data.get("_hp")) {
+    // Honeypot: real users leave `hp_token` empty. Field name MUST match the
+    // Lambda's check (index.mjs `data.hp_token`) or the server trap is inert.
+    // Name is deliberately not a real field (e.g. company/email) so browser
+    // autofill never populates it and drops a legit submission. If filled,
+    // treat as a quiet success.
+    if (data.get("hp_token")) {
       setStatus("sent");
       form.reset();
       return;
     }
 
     const endpoint = process.env.NEXT_PUBLIC_CONTACT_API_URL;
-    setStatus("sending");
 
     // The real endpoint is provisioned by DevOps later (§10). Until it is wired,
-    // surface a graceful error that points to the direct links below.
+    // this is a config gap (not a user error) — warn the developer in the console
+    // and surface the graceful error state that points to the direct links below.
     if (!endpoint) {
+      console.warn(
+        "NEXT_PUBLIC_CONTACT_API_URL is not set — contact form falls back to the direct links.",
+      );
       setStatus("error");
       return;
     }
+
+    setStatus("sending");
 
     try {
       const res = await fetch(endpoint, {
@@ -54,7 +63,7 @@ export function Contact() {
           name: data.get("name"),
           email: data.get("email"),
           message: data.get("message"),
-          _hp: data.get("_hp"),
+          hp_token: data.get("hp_token"),
         }),
       });
       if (!res.ok) throw new Error(String(res.status));
@@ -187,11 +196,14 @@ export function Contact() {
           />
           <Textarea name="message" label={t("msgLabel")} placeholder={t("msgPh")} rows={4} required />
 
-          {/* Honeypot — visually hidden, off the tab order. Bots fill it; humans don't. */}
+          {/* Honeypot — visually hidden, off the tab order. Bots fill it; humans
+              don't. Field name `hp_token` MUST match the Lambda's check, and is
+              not a real field so autofill won't touch it; `new-password` also
+              blocks Chrome (which ignores autocomplete="off" for known fields). */}
           <div aria-hidden style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
             <label>
               Leave this field empty
-              <input type="text" name="_hp" tabIndex={-1} autoComplete="off" />
+              <input type="text" name="hp_token" tabIndex={-1} autoComplete="new-password" />
             </label>
           </div>
 

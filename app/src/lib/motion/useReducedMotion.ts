@@ -7,15 +7,24 @@ import { useSyncExternalStore } from "react";
 
 const QUERY = "(prefers-reduced-motion: reduce)";
 
+// Reuse one MediaQueryList so getSnapshot doesn't allocate a fresh one on every
+// render. Mirrors the cache in useMediaQuery.
+let mql: MediaQueryList | null = null;
+function getMql(): MediaQueryList | null {
+  if (typeof window === "undefined" || !window.matchMedia) return null;
+  if (!mql) mql = window.matchMedia(QUERY);
+  return mql;
+}
+
 function subscribe(callback: () => void): () => void {
-  if (typeof window === "undefined" || !window.matchMedia) return () => {};
-  const mql = window.matchMedia(QUERY);
-  mql.addEventListener("change", callback);
-  return () => mql.removeEventListener("change", callback);
+  const m = getMql();
+  if (!m) return () => {};
+  m.addEventListener("change", callback);
+  return () => m.removeEventListener("change", callback);
 }
 
 function getSnapshot(): boolean {
-  return window.matchMedia(QUERY).matches;
+  return getMql()?.matches ?? false;
 }
 
 function getServerSnapshot(): boolean {

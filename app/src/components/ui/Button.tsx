@@ -112,6 +112,9 @@ export function Button({
           background: variants[variant].background ?? "",
           borderColor: variants[variant].borderColor ?? "",
           color: variants[variant].color ?? "",
+          // Clear any active-press transform; mouseup may not fire if the
+          // pointer left the element while pressed.
+          transform: "none",
         });
       };
 
