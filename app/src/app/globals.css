@@ -48,18 +48,24 @@
   --text: #f3eee4;
   --text-strong: #fcfaf4;
   --text-muted: #a89e8e;
-  --text-faint: #6e6658;
-  --text-on-accent: #fbf8f2;
+  /* WCAG AA (≥4.5:1 small text) on --bg/--surface-card/--surface-inset. */
+  --text-faint: #8a806e;
+  /* Dark label on accent fills — AA on --accent-surface + hover (5.3–6.5:1). */
+  --text-on-accent: #17140f;
 
   --border: rgba(243, 238, 228, 0.1);
   --border-strong: rgba(243, 238, 228, 0.2);
   --border-faint: rgba(243, 238, 228, 0.06);
 
+  /* --accent = text/line accent (AA as text on bg). --accent-surface = button
+     fill, paired with dark --text-on-accent. Split so each clears AA. */
   --accent: var(--orange-500);
   --accent-hover: var(--orange-400);
   --accent-active: var(--orange-600);
   --accent-soft: rgba(242, 85, 44, 0.14);
   --accent-line: rgba(242, 85, 44, 0.3);
+  --accent-surface: var(--orange-500);
+  --accent-surface-hover: var(--orange-400);
 
   --focus-ring: var(--orange-400);
   --status-available: var(--green-500);
@@ -185,19 +191,25 @@
   --text: #17140f;
   --text-strong: #0c0a07;
   --text-muted: #6b6353;
-  --text-faint: #9a9080;
-  --text-on-accent: #fbf8f2;
+  /* WCAG AA (≥4.5:1 small text) on --bg/--surface-card/--surface-inset. */
+  --text-faint: #736b5c;
+  /* Dark label on accent fills — AA on --accent-surface + hover (5.3–6.5:1). */
+  --text-on-accent: #17140f;
 
   --border: rgba(23, 20, 15, 0.12);
   --border-strong: rgba(23, 20, 15, 0.22);
   --border-faint: rgba(23, 20, 15, 0.07);
 
-  /* deepen accent for AA text contrast on cream */
-  --accent: var(--orange-600);
+  /* --accent deepened to orange-700 so it clears AA as text on cream (5.2–5.9:1).
+     --accent-surface stays vivid (orange-500) for button fills, paired with the
+     dark --text-on-accent — a light fill is what lets dark label text clear AA. */
+  --accent: var(--orange-700);
   --accent-hover: var(--orange-500);
   --accent-active: var(--orange-700);
   --accent-soft: rgba(242, 85, 44, 0.12);
   --accent-line: rgba(220, 68, 25, 0.28);
+  --accent-surface: var(--orange-500);
+  --accent-surface-hover: var(--orange-400);
 
   --focus-ring: var(--orange-600);
   --status-available: #2f8556;
