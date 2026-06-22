@@ -13,9 +13,9 @@ const sizes: Record<Size, { padding: string; height: number | string; font: stri
 
 const variants: Record<Variant, CSSProperties> = {
   primary: {
-    background: "var(--accent)",
+    background: "var(--accent-surface)",
     color: "var(--text-on-accent)",
-    borderColor: "var(--accent)",
+    borderColor: "var(--accent-surface)",
   },
   secondary: {
     background: "transparent",
@@ -95,7 +95,7 @@ export function Button({
     ? undefined
     : (e: React.MouseEvent<HTMLElement>) => {
         const el = e.currentTarget;
-        if (variant === "primary") el.style.background = "var(--accent-hover)";
+        if (variant === "primary") el.style.background = "var(--accent-surface-hover)";
         else if (variant === "secondary") {
           el.style.borderColor = "var(--accent-line)";
           el.style.color = "var(--accent)";
