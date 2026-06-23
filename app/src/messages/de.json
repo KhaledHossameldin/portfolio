@@ -323,7 +323,7 @@
       { "label": "E-Mail", "href": "mailto:khaled@khaledhossameldin.com" },
       { "label": "GitHub", "href": "https://github.com/KhaledHossameldin" },
       { "label": "LinkedIn", "href": "https://www.linkedin.com/in/khaled-hossameldin/" },
-      { "label": "Lebenslauf (PDF)", "href": "#" }
+      { "label": "Lebenslauf (PDF)", "href": "/Khaled_Hossameldin_Resume.pdf" }
     ],
     "colophon": "© 2026 Khaled",
     "signoff": "Gebaut mit Terraform und einer unangemessenen Menge Weißraum."

@@ -323,7 +323,7 @@
       { "label": "Email", "href": "mailto:khaled@khaledhossameldin.com" },
       { "label": "GitHub", "href": "https://github.com/KhaledHossameldin" },
       { "label": "LinkedIn", "href": "https://www.linkedin.com/in/khaled-hossameldin/" },
-      { "label": "CV (PDF)", "href": "#" }
+      { "label": "CV (PDF)", "href": "/Khaled_Hossameldin_Resume.pdf" }
     ],
     "colophon": "© 2026 Khaled",
     "signoff": "Built with Terraform and an unreasonable amount of whitespace."
