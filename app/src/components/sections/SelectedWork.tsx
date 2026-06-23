@@ -6,25 +6,33 @@ import { Card } from "../ui/Card";
 import { Tag } from "../ui/Tag";
 import { ArrowUpRight } from "../ui/icons";
 
+type Link = { label: string; url: string };
+
 type Project = {
-  id: string;
-  tag: string;
+  slug: string;
   title: string;
-  subtitle: string;
-  blurb: string;
+  tagline: string;
+  role: string;
+  contribution?: "author" | "lead" | "developer" | "maintenance";
+  period: string;
+  category: string;
+  summary: string;
   stack: string[];
-  action: "case" | "external" | "none";
-  href?: string;
-  badge: string | null;
-  top: "arrow" | "badge";
+  highlights: string[];
+  links: Link[];
+  detail: boolean;
 };
 
 type AlsoItem = {
+  kind: "oss" | "paper";
   title: string;
   meta: string;
-  year: string;
+  desc: string;
   role: string;
-  href: string;
+  year?: string;
+  links: Link[];
+  cite?: string;
+  citeUrl?: string;
 };
 
 const eyebrow = {
@@ -34,14 +42,50 @@ const eyebrow = {
   textTransform: "uppercase",
 } as const;
 
+const metaMono = {
+  fontFamily: "var(--font-mono)",
+  fontSize: "var(--text-xs)",
+  letterSpacing: "var(--tracking-wide)",
+  color: "var(--text-faint)",
+} as const;
+
+const storeLink = {
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "var(--space-1)",
+  fontFamily: "var(--font-mono)",
+  fontSize: "var(--text-2xs)",
+  letterSpacing: "var(--tracking-wide)",
+  textTransform: "uppercase",
+  color: "var(--text-muted)",
+  textDecoration: "none",
+  border: "1px solid var(--border-strong)",
+  borderRadius: "var(--radius-full)",
+  padding: "2px var(--space-3)",
+  whiteSpace: "nowrap",
+} as const;
+
 export function SelectedWork() {
   const t = useTranslations("work");
   const tAlso = useTranslations("also");
-  const tProjects = useTranslations();
+  const td = useTranslations("projectDetail");
+  const tRoot = useTranslations();
   const locale = useLocale();
-  const projects = tProjects.raw("projects") as Project[];
+
+  const projects = tRoot.raw("projects") as Project[];
   const also = tAlso.raw("items") as AlsoItem[];
   const total = String(projects.length).padStart(2, "0");
+
+  const contributionTag = (c?: string) => {
+    if (c === "maintenance") return td("tagMaintenance");
+    if (c === "lead") return td("tagLead");
+    if (c === "author") return td("tagAuthor");
+    return null;
+  };
+  const categoryLabel = (c: string) => {
+    const raw = td.raw("category") as Record<string, string>;
+    return raw[c] ?? c;
+  };
 
   return (
     <section
@@ -81,7 +125,7 @@ export function SelectedWork() {
               font: "var(--type-small)",
               color: "var(--text-faint)",
               fontStyle: "italic",
-              maxWidth: "28ch",
+              maxWidth: "30ch",
               margin: 0,
             }}
           >
@@ -100,22 +144,11 @@ export function SelectedWork() {
       >
         {projects.map((p, i) => {
           const idx = String(i + 1).padStart(2, "0");
-          const interactive = p.action !== "none";
-          const cardHref =
-            p.action === "case"
-              ? `/${locale}/work/${p.id}`
-              : p.action === "external"
-                ? p.href
-                : undefined;
+          const cTag = contributionTag(p.contribution);
+          const cardHref = p.detail ? `/${locale}/work/${p.slug}` : undefined;
 
-          return (
-            <Reveal item key={p.id}>
-            <Card
-              interactive={interactive}
-              href={cardHref}
-              external={p.action === "external"}
-              padding="var(--space-7)"
-            >
+          const head = (
+            <>
               <div
                 style={{
                   display: "flex",
@@ -124,40 +157,30 @@ export function SelectedWork() {
                   gap: "var(--space-4)",
                 }}
               >
-                <span
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "var(--text-xs)",
-                    letterSpacing: "var(--tracking-wide)",
-                    color: "var(--text-faint)",
-                  }}
-                >
-                  <span style={{ color: "var(--text)", fontWeight: "var(--weight-medium)" }}>
-                    {idx}
-                  </span>{" "}
-                  / {total} &nbsp;·&nbsp; {p.tag}
+                <span style={metaMono}>
+                  <span style={{ color: "var(--text)", fontWeight: "var(--weight-medium)" }}>{idx}</span> /{" "}
+                  {total} &nbsp;·&nbsp; {categoryLabel(p.category)}
                 </span>
-                {p.top === "arrow" && (
+                {p.detail ? (
                   <span style={{ color: "var(--text-faint)", display: "inline-flex" }}>
                     <ArrowUpRight />
                   </span>
-                )}
-                {p.top === "badge" && p.badge && (
-                  <span
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "var(--text-2xs)",
-                      letterSpacing: "var(--tracking-wide)",
-                      textTransform: "uppercase",
-                      color: "var(--text-faint)",
-                      border: "1px solid var(--border-strong)",
-                      borderRadius: "var(--radius-full)",
-                      padding: "2px var(--space-2)",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {p.badge}
-                  </span>
+                ) : (
+                  cTag && (
+                    <span
+                      style={{
+                        ...eyebrow,
+                        fontSize: "var(--text-2xs)",
+                        color: "var(--text-faint)",
+                        border: "1px solid var(--border-strong)",
+                        borderRadius: "var(--radius-full)",
+                        padding: "2px var(--space-2)",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {cTag}
+                    </span>
+                  )
                 )}
               </div>
 
@@ -179,78 +202,99 @@ export function SelectedWork() {
                   margin: "0 0 var(--space-5)",
                 }}
               >
-                <span style={{ color: "var(--text)" }}>{p.subtitle}.</span> {p.blurb}
+                {p.tagline}
               </p>
               <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
-                {p.stack.map((s) => (
+                {p.stack.slice(0, 5).map((s) => (
                   <Tag key={s} size="sm">
                     {s}
                   </Tag>
                 ))}
               </div>
-            </Card>
+            </>
+          );
+
+          return (
+            <Reveal item key={p.slug}>
+              <Card interactive={p.detail} href={cardHref} padding="var(--space-7)">
+                {head}
+                {/* Non-detail cards: surface store links so they aren't dead ends.
+                    drs-space has no links → nothing renders. */}
+                {!p.detail && p.links.length > 0 && (
+                  <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap", marginTop: "var(--space-5)" }}>
+                    {p.links.map((l) => (
+                      <a
+                        key={l.url}
+                        href={l.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={storeLink}
+                      >
+                        {l.label}
+                        <ArrowUpRight size={12} />
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </Card>
             </Reveal>
           );
         })}
       </RevealGroup>
 
-      {/* open source & writing */}
-      <Reveal style={{ marginTop: "var(--space-8)" }}>
+      {/* open source & writing — NOT work cards */}
+      <Reveal style={{ marginTop: "var(--space-9)" }}>
         <span style={{ ...eyebrow, color: "var(--text-faint)" }}>— {tAlso("eyebrow")}</span>
-        <div style={{ marginTop: "var(--space-4)" }}>
+        <div style={{ marginTop: "var(--space-5)", display: "flex", flexDirection: "column", gap: "var(--space-6)" }}>
           {also.map((a) => (
-            <a
+            <div
               key={a.title}
-              href={a.href}
-              target={a.href.startsWith("http") ? "_blank" : undefined}
-              rel={a.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="kp-also-row"
               style={{
-                display: "grid",
-                gridTemplateColumns: "1fr auto auto",
-                gap: "var(--space-5)",
-                alignItems: "baseline",
-                padding: "var(--space-4) 0",
                 borderTop: "1px solid var(--border)",
-                color: "var(--text)",
-                textDecoration: "none",
+                paddingTop: "var(--space-5)",
+                display: "grid",
+                gridTemplateColumns: "1fr",
+                gap: "var(--space-3)",
               }}
             >
-              <span style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "var(--space-4)", flexWrap: "wrap" }}>
                 <span
                   style={{
                     fontFamily: "var(--font-serif)",
-                    fontSize: "var(--text-lg)",
+                    fontSize: "var(--text-xl)",
                     letterSpacing: "var(--tracking-tight)",
                     color: "var(--text-strong)",
                   }}
                 >
                   {a.title}
                 </span>
-                <span
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    fontSize: "var(--text-2xs)",
-                    letterSpacing: "var(--tracking-wide)",
-                    color: "var(--text-faint)",
-                  }}
-                >
+                <span style={metaMono}>
                   {a.meta}
+                  {a.year ? ` · ${a.year}` : ""} · {a.role}
                 </span>
-              </span>
-              <span style={{ fontSize: "var(--text-sm)", color: "var(--text-muted)" }}>
-                {a.role}
-              </span>
-              <span
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: "var(--text-xs)",
-                  color: "var(--text-faint)",
-                }}
-              >
-                {a.year}
-              </span>
-            </a>
+              </div>
+              <p style={{ font: "var(--type-body)", color: "var(--text-muted)", margin: 0, maxWidth: "70ch" }}>
+                {a.desc}
+              </p>
+              <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap", alignItems: "center" }}>
+                {a.links.map((l) => (
+                  <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" style={storeLink}>
+                    {l.label}
+                    <ArrowUpRight size={12} />
+                  </a>
+                ))}
+                {a.cite && (
+                  <a
+                    href={a.citeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ ...metaMono, textDecoration: "none", color: "var(--text-muted)" }}
+                  >
+                    {a.cite}
+                  </a>
+                )}
+              </div>
+            </div>
           ))}
         </div>
       </Reveal>

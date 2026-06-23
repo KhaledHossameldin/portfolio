@@ -57,8 +57,8 @@ export function Footer() {
               <a
                 key={l.label}
                 href={l.href}
-                target={l.href.startsWith("http") ? "_blank" : undefined}
-                rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                target={/^https?:|\.pdf$/.test(l.href) ? "_blank" : undefined}
+                rel={/^https?:|\.pdf$/.test(l.href) ? "noopener noreferrer" : undefined}
                 style={{
                   display: "inline-flex",
                   alignItems: "baseline",

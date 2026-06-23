@@ -25,71 +25,254 @@
   "work": {
     "eyebrow": "Ausgewählte Arbeiten",
     "title": "Einige, an denen ich gern gemessen werde.",
-    "note": "Eine längere Liste existiert. Sie gibt es, gnädigerweise, auf Anfrage."
+    "note": "Ausgewählte Projekte öffnen eine eigene Projektseite. Der Rest steht hier in Kürze."
   },
   "projects": [
     {
-      "id": "tmms",
-      "tag": "Mobile · DevOps",
-      "title": "TMMS",
-      "subtitle": "Tenant- & Mall-Management, durchgängig",
-      "blurb": "Eine mandantenfähige Plattform für den Betrieb von Malls — samt der AWS-Infrastruktur darunter. Ich habe sowohl den Flutter-Client als auch die Cloud gebaut.",
-      "stack": ["Flutter", "AWS EKS", "Terraform", "ArgoCD", "Temporal", "RDS Postgres"],
-      "action": "case",
-      "badge": null,
-      "top": "arrow"
+      "slug": "portfolio-site",
+      "title": "Dieses Portfolio",
+      "tagline": "Die Seite, auf der Sie sind — statisches Next.js auf AWS, vollständig als IaC mit OIDC-CI/CD.",
+      "role": "Alleiniger Autor — Design, Umsetzung, Infrastruktur, Pipeline",
+      "contribution": "author",
+      "period": "2026",
+      "category": "devops",
+      "summary": "Ein hochwertiges persönliches Portfolio, bewusst als Full-Stack-Nachweis gebaut: eine statisch exportierte Next.js-Seite, ausgeliefert über CloudFront, mit sämtlicher AWS-Infrastruktur in Terraform und einem schlüssellosen Deployment über GitHub-Actions-OIDC. Das Repository selbst — sauberes IaC und CI/CD — ist Teil des Nachweises.",
+      "stack": ["Next.js", "React 19", "TypeScript", "Tailwind CSS", "Terraform", "AWS CloudFront", "AWS S3", "AWS Lambda", "Amazon SES", "API Gateway", "GitHub Actions"],
+      "highlights": [
+        "Gesamte Infrastruktur als Terraform — CloudFront mit privatem S3 (OAC), ACM-TLS, Kontakt-Lambda, API Gateway, IAM; vollständig aus Code reproduzierbar.",
+        "Schlüssellose Deployments über GitHub-Actions-OIDC-Föderation zu AWS, jede Drittanbieter-Action auf einen Commit-SHA gepinnt — keine langlebigen Zugangsdaten.",
+        "Serverloser Kontaktweg: API Gateway → Node-20-Lambda → SES, mit Honeypot und serverseitiger Validierung, ganz ohne Datenbank.",
+        "Statisch-export-sichere EN/DE-Internationalisierung über Sub-Pfad-Routing und generateStaticParams — keine Laufzeit-Middleware.",
+        "Motion-Ebene (Lenis-Smooth-Scroll, GSAP ScrollTrigger, Framer Motion) vollständig hinter prefers-reduced-motion gekapselt, bei 60fps.",
+        "Lighthouse 100 in Performance, Accessibility, Best Practices und SEO auf dem Desktop; HSTS und Härtungs-Header über CloudFront."
+      ],
+      "links": [
+        { "label": "Live", "url": "https://www.khaledhossameldin.com" },
+        { "label": "Repo", "url": "https://github.com/KhaledHossameldin/portfolio" }
+      ],
+      "detail": true
     },
     {
-      "id": "atriom",
-      "tag": "Mobile · Flutter",
-      "title": "Atriom",
-      "subtitle": "Eine banking-klare App für Mall-Mieter",
-      "blurb": "Salden, Rechnungszahlung, monatliche Umsatzmeldungen und Wartungstickets — fünf Kern-Workflows in einer ruhigen App mit vier Tabs.",
-      "stack": ["Flutter", "Dart", "Hell / Dunkel"],
-      "action": "none",
-      "badge": "NDA · auf Anfrage",
-      "top": "badge"
+      "slug": "qms",
+      "title": "QMS",
+      "tagline": "Eine integrierte medizinische Plattform für Terminbuchungen und Apotheken-Bestellungen.",
+      "role": "Flutter-Entwickler",
+      "contribution": "developer",
+      "period": "2025",
+      "category": "mobile",
+      "summary": "Ein plattformübergreifendes medizinisches Ökosystem, das Patienten nahtlos mit Ärzten und lokalen Apotheken verbindet. Entwickelt mit Clean Architecture und BLoC, koordiniert die Plattform die Echtzeit-Terminplanung sowie standortbasierte Medikamentenbestellungen.",
+      "stack": ["Flutter", "Dart", "BLoC", "Clean Architecture", "Geofencing", "GitHub Actions"],
+      "highlights": [
+        "Architektur einer skalierbaren medizinischen Marktplatz-App mittels Clean Architecture zur strikten Trennung der Benutzeroberfläche von komplexen Geschäftsregeln.",
+        "Implementierung reaktiver, Stream-basierter Logik und Fallback-Mechanismen zur sicheren Bewältigung paralleler Echtzeit-Buchungen und dynamischer Bestandsprüfungen.",
+        "Integration optimierter, standortbasierter Dienste mit individuellem Geofencing und Request-Debouncing zur Bereitstellung schneller Apotheken-Vorschläge bei minimaler API-Last."
+      ],
+      "links": [
+        { "label": "App Store", "url": "https://apps.apple.com/us/app/qms-sa/id1671837019" },
+        { "label": "Play Store", "url": "https://play.google.com/store/apps/details?id=net.qmsgroup" }
+      ],
+      "detail": true
     },
     {
-      "id": "telephony",
-      "tag": "Open Source · Mobile",
-      "title": "telephony_sms",
-      "subtitle": "Ein quelloffenes Flutter-Plugin",
-      "blurb": "SMS und Telefonie für Flutter über Android-Plattformkanäle. Auf pub.dev veröffentlicht und im echten Einsatz.",
-      "stack": ["Flutter", "Dart", "Plattformkanäle", "pub.dev"],
-      "action": "external",
-      "href": "https://pub.dev/packages/telephony_sms",
-      "badge": null,
-      "top": "arrow"
+      "slug": "albruaz",
+      "title": "Albruaz",
+      "tagline": "Eine video-basierte Wettbewerbsplattform mit spielerischer Nutzerinteraktion.",
+      "role": "Lead Flutter-Entwickler",
+      "contribution": "lead",
+      "period": "2024–2025",
+      "category": "mobile",
+      "summary": "Eine plattformübergreifende mobile Anwendung für Video-Wettbewerbe, bei der Nutzer Beiträge einreichen, abstimmen und an zeitlich begrenzten Wettbewerben teilnehmen können. Entwickelt mit Clean Architecture und BLoC, optimiert das System die Medienbereitstellung für eine flüssige Wiedergabe bei hoher Auslastung.",
+      "stack": ["Flutter", "Dart", "BLoC", "Clean Architecture", "TDD", "GitHub Actions"],
+      "highlights": [
+        "Leitung des Architekturentwurfs und der Kernimplementierung nach SOLID-Prinzipien für ein stabiles MVP, das über 5.000 Videoeinsendungen im ersten Release-Zyklus verarbeitete.",
+        "Optimierung der Videowiedergabe und Reduzierung des Netzwerk-Overheads durch die Implementierung von Caching-Strategien, Lazy Loading und clientseitiger Videokompression.",
+        "Erstellung umfassender TDD-Test-Suites für logikintensive Komponenten und Aufbau von GitHub-Actions-CI/CD-Pipelines zur Automatisierung von Linting, Testing und Deployments."
+      ],
+      "links": [
+        { "label": "App Store", "url": "https://apps.apple.com/us/app/%D8%A7%D9%84%D8%A8%D8%B1%D9%88%D8%A7%D8%B2/id6474915560" },
+        { "label": "Play Store", "url": "https://play.google.com/store/apps/details?id=com.mawasim.mawasim&pli=1" }
+      ],
+      "detail": true
     },
     {
-      "id": "dendru",
-      "tag": "Gründer · Studio",
-      "title": "Dendru",
-      "subtitle": "Ein Studio, das ganze Systeme baut",
-      "blurb": "Mein Software-Studio — Backend, Frontend, Mobile und Cloud unter einem Dach. Roadmap und Verträge stehen; erste Kunden folgen.",
-      "stack": ["Studio", "Full-stack", "Cloud"],
-      "action": "none",
-      "badge": "In Arbeit",
-      "top": "badge"
+      "slug": "royake",
+      "title": "Royake",
+      "tagline": "Eine umfassende Consulting-Plattform mit BLoC und testgetriebener Entwicklung.",
+      "role": "Senior Flutter-Entwickler & Team-Mentor",
+      "contribution": "lead",
+      "period": "2022–2024",
+      "category": "mobile",
+      "summary": "Eine plattformübergreifende Beratungsplattform, entwickelt mit Fokus auf Skalierbarkeit und architektonische Disziplin. Durch den Einsatz von BLoC-Zustandsmanagement und Test-Driven Development (TDD) optimiert das System Onboarding-Prozesse und komplexe Daten-Streams unter höchsten Qualitätsstandards.",
+      "stack": ["Flutter", "Dart", "BLoC", "Clean Architecture", "TDD", "GitLab CI/CD"],
+      "highlights": [
+        "Architektur einer modularen, funktionsgesteuerten Codebasis mittels Clean Architecture und BLoC zur Ermöglichung nahtloser, paralleler Teamentwicklung.",
+        "Aufbau automatisierter GitLab-CI/CD-Pipelines und Etablierung von TDD zur Gewährleistung von über 80% Testabdeckung in allen geschäftskritischen Modulen.",
+        "Mentoring des Entwicklerteams bei der Skalierung der Plattform auf über 40.000 kombinierte Downloads, während der manuelle Arbeitsaufwand um 40% reduziert wurde."
+      ],
+      "links": [
+        { "label": "App Store", "url": "https://apps.apple.com/eg/app/%D8%B1%D8%A4%D9%8A%D8%A7%D9%83/id1247346945" },
+        { "label": "Play Store", "url": "https://play.google.com/store/apps/details?id=royak.royak&hl=en" }
+      ],
+      "detail": true
+    },
+    {
+      "slug": "pet-care",
+      "title": "Pet Care",
+      "tagline": "Ein All-in-One-Marktplatz und eine Gesundheitsplattform für Haustiere.",
+      "role": "Flutter-Entwickler · Support & Wartung",
+      "contribution": "maintenance",
+      "period": "2024",
+      "category": "mobile",
+      "summary": "Ein plattformübergreifendes Haustier-Ökosystem, das Besitzer mit Tierkliniken, Tierhotels und E-Commerce-Diensten verbindet. Übernahme des Post-Launch-Supports, der Stabilitätsupdates und der kontinuierlichen Codebasis-Optimierung.",
+      "stack": ["Flutter", "Dart", "Production Support", "App-Optimierung"],
+      "highlights": [
+        "Übernahme der technischen Verantwortung für die bestehende Produktions-Codebasis zur Sicherung der Betriebskontinuität und Umsetzung gezielter UI/UX-Updates.",
+        "Durchführung gründlicher Debugging- und Optimierungszyklen zur Behebung von Edge-Case-Abstürzen für eine stabile plattformübergreifende Performance.",
+        "Strukturierung der Post-Launch-Wartungsprozesse zur Gewährleistung regressionsfreier Lieferungen bei allen inkrementellen App-Updates."
+      ],
+      "links": [
+        { "label": "App Store", "url": "https://apps.apple.com/eg/app/pet-care/id6451312624" }
+      ],
+      "detail": false
+    },
+    {
+      "slug": "orood",
+      "title": "Orood",
+      "tagline": "Ein plattformübergreifender Aggregator für lokale Angebote und Rabatte.",
+      "role": "Flutter-Entwickler · Support & Wartung",
+      "contribution": "maintenance",
+      "period": "2024",
+      "category": "mobile",
+      "summary": "Eine plattformübergreifende Promotion-Plattform, mit der Nutzer standortbezogene Rabatte, Coupons und Einzelhandelsangebote entdecken können. Übernahme des Post-Launch-Supports, der Performance-Optimierung und der Medien-Bereitstellung für hochdichte Bilder-Feeds.",
+      "stack": ["Flutter", "Dart", "Production Support", "Image Caching & Speicheroptimierung"],
+      "highlights": [
+        "Sicherung hoher Verfügbarkeit und betrieblicher Stabilität der Live-Einzelhandels-App durch die strukturierte Bereitstellung von Hotfixes und kleineren Produkt-Updates.",
+        "Optimierung der Bild-Rendering-Pipelines und Caching-Ebenen innerhalb datenintensiver Produktkataloge zur Reduzierung des Speicherverbrauchs und für flüssiges Scrollen.",
+        "Diagnose und Behebung überregionaler Standort- und Filter-Edge-Cases unter Einhaltung strenger QA-Vorgaben für absolut regressionsfreie Releases."
+      ],
+      "links": [
+        { "label": "App Store", "url": "https://apps.apple.com/us/app/orood/id6470238089" },
+        { "label": "Play Store", "url": "https://play.google.com/store/apps/details?id=com.dev.orood" }
+      ],
+      "detail": false
+    },
+    {
+      "slug": "qrattel",
+      "title": "QRattel",
+      "tagline": "Eine plattformübergreifende App für Kundenbindung und Vorab-Feldtests.",
+      "role": "Flutter-Entwickler & technischer Mitarbeiter",
+      "contribution": "developer",
+      "period": "2021–2023",
+      "category": "mobile",
+      "summary": "Eine plattformübergreifende mobile Anwendung zur Steigerung der Kundenbindung und Durchführung intensiver Vorab-Tests. Die App kombiniert Echtzeit-Kommunikationsmodule mit einer wartungsfreundlichen Architektur, um maximale Stabilität unter realen Bedingungen zu gewährleisten.",
+      "stack": ["Flutter", "Dart", "Agile", "Software-Testing"],
+      "highlights": [
+        "Entwicklung maßgeschneiderter Cross-Platform-Apps mit Fokus auf Skalierbarkeit und Code-Wartbarkeit zur Erfüllung komplexer Geschäftsanforderungen.",
+        "Implementierung nativer Videoanruf-Funktionen inklusive der zugehörigen Signalisierungslogik und responsiver UI für eine stabile Nutzererfahrung.",
+        "Steuerung des gesamten App-Lifecycles und erfolgreiche Bewältigung kundenseitiger Projektpausen durch agile Backlog-Priorisierung und inkrementelle Lieferungen."
+      ],
+      "links": [
+        { "label": "App Store", "url": "https://apps.apple.com/eg/app/%D8%B1%D8%AA-%D9%84-%D8%A7%D9%84%D8%AD%D9%84%D9%82%D8%A9-%D8%A7%D9%84%D8%B0%D9%83%D9%8A%D8%A9/id1608794369" },
+        { "label": "Play Store", "url": "https://play.google.com/store/apps/details?id=com.qrattel.sa&hl=en" }
+      ],
+      "detail": false
+    },
+    {
+      "slug": "al-frayan",
+      "title": "Al Frayan App",
+      "tagline": "Ein plattformübergreifendes Community-Hub und Bildungsportal für kulturelle Dienste.",
+      "role": "Flutter-Entwickler · Support & Wartung",
+      "contribution": "maintenance",
+      "period": "2024–2025",
+      "category": "mobile",
+      "summary": "Ein dediziertes mobiles Portal für strukturierte Bildungsprogramme, interaktive kulturelle Wettbewerbe und soziale Dienste. Übernahme des Post-Launch-Supports zur Absicherung stabiler Newsticker-Feeds und systemweiter Stabilität.",
+      "stack": ["Flutter", "Dart", "Production Support", "Content-Delivery-Optimierung"],
+      "highlights": [
+        "Sicherung des laufenden Betriebs und der Asset-Stabilität einer spezialisierten Bildungs-App zur Gewährleistung einer fehlerfreien plattformübergreifenden Ausführung.",
+        "Refactoring von Datensynchronisations-Routinen zur Behebung von Darstellungsfehlern sowie Aktualisierung von Kernabhängigkeiten zur Optimierung der Laufzeitsicherheit.",
+        "Überwachung inkrementeller Hotfixes und Minor-Releases im Live-Betrieb sowie Umsetzung datenschutzrelevanter Updates unter Einhaltung strenger Regressionsprüfungen."
+      ],
+      "links": [
+        { "label": "App Store", "url": "https://apps.apple.com/eg/app/%D8%A2%D9%84-%D9%81%D8%B1%D9%8A%D8%A7%D9%86/id1552692044" },
+        { "label": "Play Store", "url": "https://play.google.com/store/apps/details?id=com.Alfrayan.sa&hl=ar" }
+      ],
+      "detail": false
+    },
+    {
+      "slug": "sabq-app",
+      "title": "Sabq App",
+      "tagline": "Eine Wettbewerbs- und Bewertungsplattform mit rollenbasiertem Zugriff.",
+      "role": "Flutter-Entwickler · Support & Wartung",
+      "contribution": "maintenance",
+      "period": "2024–2025",
+      "category": "mobile",
+      "summary": "Eine spezialisierte Cross-Platform-App zur Verwaltung und Auswertung mehrstufiger kultureller und religiöser Wettbewerbe. Verantwortlich für den Post-Launch-Support, die Stabilisierung komplexer Benutzer-Workflows für Teilnehmer, Juroren und System-Administratoren.",
+      "stack": ["Flutter", "Dart", "Production Support", "Rollenbasierte Zugriffskontrolle", "State Management"],
+      "highlights": [
+        "Wartung und Optimierung einer komplexen, rollenbasierten Systemarchitektur zur Gewährleistung strikter Datentrennung und fehlerfreier Zustandsübergänge zwischen allen Benutzergruppen.",
+        "Behebung kritischer Fehler in der asynchronen Bewertungs-Engine und den Zuweisungs-Algorithmen zur Sicherung der Datenintegrität während aktiver Bewertungsphasen.",
+        "Bereitstellung von Hotfixes und Plattform-Abhängigkeits-Updates für Live-Releases zur Gewährleistung eines ausfallsicheren Betriebs bei stark frequentierten Wettbewerbsphasen."
+      ],
+      "links": [
+        { "label": "App Store", "url": "https://apps.apple.com/eg/app/%D8%AA%D8%B7%D8%A8%D9%8A%D9%82-%D8%B3%D8%A8%D9%82/id1534112194" },
+        { "label": "Play Store", "url": "https://play.google.com/store/apps/details?id=com.sabq.win.Sabq&hl=ar" }
+      ],
+      "detail": false
+    },
+    {
+      "slug": "drs-space",
+      "title": "Drs Space",
+      "tagline": "Eine Telemedizin-Plattform mit dedizierten Apps für Patienten und Ärzte.",
+      "role": "Flutter-Entwickler & technischer Mitarbeiter",
+      "contribution": "developer",
+      "period": "2021–2022",
+      "category": "mobile",
+      "summary": "Eine plattformübergreifende Telemedizin-Lösung mit synchronisierten Anwendungen für Patienten und Ärzte. Entwickelt auf Basis von Clean Architecture und OOP-Prinzipien, bietet das System Echtzeit-Videokonsultationen zur Optimierung der medizinischen Betreuung.",
+      "stack": ["Flutter", "Dart", "Clean Architecture", "OOP", "Material Design"],
+      "highlights": [
+        "Architektur einer skalierbaren, funktionsgesteuerten Codebasis nach Clean-Architecture-Prinzipien zur gemeinsamen Nutzung der Kernlogik beider Client-Apps.",
+        "Implementierung maßgeschneiderter Widgets, adaptiver Layouts und der Logik für Echtzeit-Videoanrufe für eine reibungslose Benutzererfahrung.",
+        "Verantwortung für den gesamten App-Lifecycle von Feldtests bis zu den App-Store- und Play-Store-Releases samt agiler Anpassungen bei Projektpausen."
+      ],
+      "links": [],
+      "detail": false
     }
   ],
+  "projectDetail": {
+    "back": "Zurück zur Übersicht",
+    "backAll": "Weitere Projekte ansehen",
+    "roleLabel": "Rolle",
+    "periodLabel": "Zeitraum",
+    "categoryLabel": "Bereich",
+    "stackLabel": "Stack",
+    "highlightsLabel": "Highlights",
+    "linksLabel": "Links",
+    "tagMaintenance": "Wartung",
+    "tagLead": "Lead",
+    "tagAuthor": "Autor",
+    "category": { "mobile": "Mobile", "devops": "DevOps", "frontend": "Frontend", "backend": "Backend" }
+  },
   "also": {
     "eyebrow": "Open Source & Publikationen",
     "items": [
       {
-        "title": "Genetischer-Algorithmus-Modell zum Goldenen Schnitt",
-        "meta": "Peer-reviewed · Springer",
-        "year": "2022",
-        "role": "Autor",
-        "href": "#"
+        "kind": "oss",
+        "title": "telephony_sms",
+        "meta": "Quelloffenes Flutter-Plugin · pub.dev",
+        "desc": "SMS-Versand und Telefonie-Status für Flutter unter Android, umgesetzt über Plattformkanäle — eine kleine, typisierte Dart-API, gebrückt über die MethodChannel-Grenze zur nativen Ebene. Auf pub.dev veröffentlicht und in Produktiv-Apps im Einsatz.",
+        "role": "Autor & Maintainer",
+        "links": [{ "label": "pub.dev", "url": "https://pub.dev/packages/telephony_sms" }]
       },
       {
-        "title": "Diese Seite",
-        "meta": "Next.js · Terraform IaC · OIDC-CI/CD",
-        "year": "2026",
-        "role": "Beweis, der sich selbst betreibt",
-        "href": "https://github.com/KhaledHossameldin"
+        "kind": "paper",
+        "title": "Genetischer-Algorithmus-Modell zum Goldenen Schnitt",
+        "meta": "Peer-reviewter Beitrag · Springer",
+        "desc": "Ein Ansatz auf Basis genetischer Algorithmen für ein am Goldenen Schnitt orientiertes Design, veröffentlicht als peer-reviewter Springer-Buchbeitrag.",
+        "role": "Autor",
+        "year": "2022",
+        "links": [{ "label": "Kostenlos lesen", "url": "https://rdcu.be/fpUxZ" }],
+        "cite": "DOI 10.1007/978-3-031-07512-4_8",
+        "citeUrl": "https://doi.org/10.1007/978-3-031-07512-4_8"
       }
     ]
   },
@@ -120,7 +303,7 @@
   "contact": {
     "eyebrow": "Kontakt",
     "title": "Lassen Sie uns etwas Beständiges bauen.",
-    "lead": "Ob Einstellen, Bauen oder nur Tastatur-Layouts vergleichen — ich lese alles und antworte innerhalb eines Tages.",
+    "lead": "Ob Sie einstellen, bauen oder nur Tastatur-Layouts vergleichen — ich lese alles und antworte innerhalb eines Tages.",
     "nameLabel": "Name",
     "namePh": "Jana Personalerin",
     "emailLabel": "E-Mail",
@@ -134,44 +317,13 @@
     "orReach": "Oder direkt erreichen",
     "within": "↵ innerhalb eines Tages"
   },
-  "case": {
-    "eyebrow": "Fallstudie",
-    "title": "TMMS",
-    "subtitle": "Tenant- & Mall-Management, durchgängig.",
-    "back": "Zurück zu den Arbeiten",
-    "roleLabel": "Rolle",
-    "roleVal": "Flutter-Entwickler + DevOps-Engineer",
-    "yearLabel": "Jahr",
-    "yearVal": "2024",
-    "clientLabel": "Kunde",
-    "clientVal": "Gewerbeimmobilien-Betreiber (NDA)",
-    "stackLabel": "Stack",
-    "stack": ["Flutter", "Dart", "AWS EKS", "Terraform", "Terragrunt", "ArgoCD", "RDS Postgres (Multi-AZ)", "Temporal", "Docker"],
-    "metrics": [
-      { "n": "3", "l": "Deployment-Szenarien kalkuliert" },
-      { "n": "Multi-AZ", "l": "Postgres-Ausfallsicherheit" },
-      { "n": "1", "l": "Plattform · viele Malls" }
-    ],
-    "problemLabel": "Das Problem",
-    "problemBody": "Ein Gewerbeimmobilien-Betreiber führte ein Portfolio von Malls mit Tabellen und unverbundenen Werkzeugen. Mieter-Onboarding, Mietverträge, Rechnungen, monatliche Umsatzmeldungen und Wartungsanfragen lagen jeweils woanders. Gewünscht war eine mandantenfähige Plattform, die sich pro Mall aufsetzen lässt — und eine Infrastruktur, die ein kleines Team tatsächlich betreiben kann.",
-    "builtLabel": "Was ich gebaut habe",
-    "appLabel": "Die App",
-    "appBody": "Ein Flutter-Client für den täglichen Gebrauch der Mieter: Kontostände, Rechnungszahlung, monatliche Umsatzmeldungen und Wartungstickets — fünf Kern-Workflows in einer ruhigen App mit vier Tabs, hell und dunkel.",
-    "cloudLabel": "Die Cloud",
-    "cloudBody": "Die Infrastruktur darunter: ein AWS-EKS-Cluster, vollständig in Terraform und Terragrunt beschrieben, GitOps-Auslieferung über ArgoCD, RDS Postgres im Multi-AZ-Betrieb für Ausfallsicherheit und Temporal für die Workflows mit Fristen — Abrechnungszyklen, Meldefenster, Ticket-SLAs.",
-    "outcomeLabel": "Ergebnis",
-    "outcomeBody": "Ein vollständiges Infrastruktur-Design und ein Kostenmodell über drei Deployment-Szenarien hinweg — einzelne Mall, geteilt über mehrere Malls und isoliert für Enterprise — sodass sich Kosten gegen Isolation abwägen lassen. Releases wurden zu GitOps-Nebensachen, und die Datenbank war kein Single Point of Failure mehr.",
-    "noteLabel": "Eine Anmerkung zu den Zahlen",
-    "noteBody": "Kunde und Kennzahlen unterliegen einer NDA und sind hier anonymisiert. Ich gehe die Architektur und die Abwägungen gern in einem Gespräch durch.",
-    "backAll": "Den Rest der Arbeiten ansehen"
-  },
   "footer": {
     "headline": "Immer noch da? Reden wir.",
     "links": [
       { "label": "E-Mail", "href": "mailto:khaled@khaledhossameldin.com" },
       { "label": "GitHub", "href": "https://github.com/KhaledHossameldin" },
       { "label": "LinkedIn", "href": "https://www.linkedin.com/in/khaled-hossameldin/" },
-      { "label": "Lebenslauf (PDF)", "href": "#" }
+      { "label": "Lebenslauf (PDF)", "href": "/Khaled_Hossameldin_Resume.pdf" }
     ],
     "colophon": "© 2026 Khaled",
     "signoff": "Gebaut mit Terraform und einer unangemessenen Menge Weißraum."
