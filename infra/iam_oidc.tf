@@ -36,8 +36,10 @@ data "aws_iam_policy_document" "deploy" {
     resources = [aws_s3_bucket.site.arn]
   }
   statement {
+    # `aws s3 sync app/out → bucket --delete` needs only list + put + delete;
+    # the local→S3 direction never reads objects back, so no s3:GetObject.
     sid       = "S3Objects"
-    actions   = ["s3:PutObject", "s3:DeleteObject", "s3:GetObject"]
+    actions   = ["s3:PutObject", "s3:DeleteObject"]
     resources = ["${aws_s3_bucket.site.arn}/*"]
   }
   statement {
