@@ -25,71 +25,254 @@
   "work": {
     "eyebrow": "Selected work",
     "title": "A few I’m happy to be judged by.",
-    "note": "A longer list exists. It is, mercifully, on request."
+    "note": "Featured projects open a full case page. The rest are here in brief."
   },
   "projects": [
     {
-      "id": "tmms",
-      "tag": "Mobile · DevOps",
-      "title": "TMMS",
-      "subtitle": "Tenant & mall management, end to end",
-      "blurb": "A multi-tenant platform for running malls — and the AWS infrastructure beneath it. I built both the Flutter client and the cloud.",
-      "stack": ["Flutter", "AWS EKS", "Terraform", "ArgoCD", "Temporal", "RDS Postgres"],
-      "action": "case",
-      "badge": null,
-      "top": "arrow"
+      "slug": "portfolio-site",
+      "title": "This portfolio",
+      "tagline": "The site you’re on — static Next.js on AWS, fully IaC + OIDC CI/CD.",
+      "role": "Sole author — design, build, infra, pipeline",
+      "contribution": "author",
+      "period": "2026",
+      "category": "devops",
+      "summary": "A premium personal portfolio built as a deliberate full-stack proof: a statically-exported Next.js site served from CloudFront, with all AWS infrastructure defined in Terraform and deployed through keyless GitHub Actions OIDC. The repository itself — clean IaC and CI/CD — is part of the demonstration.",
+      "stack": ["Next.js", "React 19", "TypeScript", "Tailwind CSS", "Terraform", "AWS CloudFront", "AWS S3", "AWS Lambda", "Amazon SES", "API Gateway", "GitHub Actions"],
+      "highlights": [
+        "All infrastructure as Terraform — CloudFront + private S3 (OAC), ACM TLS, contact Lambda, API Gateway, IAM; reproducible from code.",
+        "Keyless deploys via GitHub Actions OIDC federation to AWS, every third-party action SHA-pinned — no long-lived credentials.",
+        "Serverless contact path: API Gateway → Node 20 Lambda → SES, with a honeypot and server-side validation and no datastore.",
+        "Static-export-safe EN/DE i18n via sub-path routing and generateStaticParams — no runtime middleware.",
+        "Motion layer (Lenis smooth-scroll, GSAP ScrollTrigger, Framer Motion) fully gated behind prefers-reduced-motion at 60fps.",
+        "Lighthouse 100 across Performance, Accessibility, Best Practices and SEO on desktop; HSTS and hardening headers via CloudFront."
+      ],
+      "links": [
+        { "label": "Live", "url": "https://www.khaledhossameldin.com" },
+        { "label": "Repo", "url": "https://github.com/KhaledHossameldin/portfolio" }
+      ],
+      "detail": true
     },
     {
-      "id": "atriom",
-      "tag": "Mobile · Flutter",
-      "title": "Atriom",
-      "subtitle": "A banking-clean app for mall tenants",
-      "blurb": "Balances, invoice payment, monthly sales declarations and maintenance tickets — five core workflows in one calm, four-tab app.",
-      "stack": ["Flutter", "Dart", "Light / Dark"],
-      "action": "none",
-      "badge": "NDA · on request",
-      "top": "badge"
+      "slug": "qms",
+      "title": "QMS",
+      "tagline": "A healthcare ecosystem for synchronized appointment booking and pharmacy fulfillment.",
+      "role": "Flutter Developer",
+      "contribution": "developer",
+      "period": "2025",
+      "category": "mobile",
+      "summary": "A cross-platform medical ecosystem designed to bridge the gap between patients, healthcare providers, and local pharmacies. Built using Clean Architecture and BLoC, the platform coordinates real-time scheduling and location-based medicine ordering through robust asynchronous stream management.",
+      "stack": ["Flutter", "Dart", "BLoC", "Clean Architecture", "Geofencing", "GitHub Actions"],
+      "highlights": [
+        "Architected a scalable medical marketplace application using Clean Architecture to strictly separate UI presentation from complex healthcare business rules.",
+        "Engineered reactive stream-based logic and persistent fallback mechanisms to handle concurrent real-time appointment booking and dynamic pharmacy stock checks smoothly.",
+        "Integrated optimized location-based services featuring custom geofencing and request debouncing to deliver fast nearby-pharmacy recommendations while reducing API load."
+      ],
+      "links": [
+        { "label": "App Store", "url": "https://apps.apple.com/us/app/qms-sa/id1671837019" },
+        { "label": "Play Store", "url": "https://play.google.com/store/apps/details?id=net.qmsgroup" }
+      ],
+      "detail": true
     },
     {
-      "id": "telephony",
-      "tag": "Open source · Mobile",
-      "title": "telephony_sms",
-      "subtitle": "An open-source Flutter plugin",
-      "blurb": "SMS and telephony for Flutter over Android platform channels. Published on pub.dev and used in the wild.",
-      "stack": ["Flutter", "Dart", "Platform channels", "pub.dev"],
-      "action": "external",
-      "href": "https://pub.dev/packages/telephony_sms",
-      "badge": null,
-      "top": "arrow"
+      "slug": "albruaz",
+      "title": "Albruaz",
+      "tagline": "A high-performance, video-driven competition platform with gamified engagement.",
+      "role": "Lead Flutter Developer",
+      "contribution": "lead",
+      "period": "2024–2025",
+      "category": "mobile",
+      "summary": "A cross-platform mobile application designed for video-based competitions, allowing users to upload submissions, cast votes, and participate in time-limited contests. Built using Clean Architecture and BLoC, the platform optimizes media delivery pipelines to guarantee smooth playback and high-bandwidth processing under peak loads.",
+      "stack": ["Flutter", "Dart", "BLoC", "Clean Architecture", "TDD", "GitHub Actions"],
+      "highlights": [
+        "Led the architectural design and core implementation following SOLID principles, launching a stable MVP that handled over 5,000 video submissions in its first release cycle.",
+        "Optimized video playback performance and minimized network overhead across diverse device specs through custom caching strategies, lazy loading, and client-side video compression.",
+        "Authored comprehensive TDD test suites for logic-heavy components and established GitHub Actions CI/CD pipelines to automate linting, testing, and continuous deployment."
+      ],
+      "links": [
+        { "label": "App Store", "url": "https://apps.apple.com/us/app/%D8%A7%D9%84%D8%A8%D8%B1%D9%88%D8%A7%D8%B2/id6474915560" },
+        { "label": "Play Store", "url": "https://play.google.com/store/apps/details?id=com.mawasim.mawasim&pli=1" }
+      ],
+      "detail": true
     },
     {
-      "id": "dendru",
-      "tag": "Founder · Studio",
-      "title": "Dendru",
-      "subtitle": "A studio that builds whole systems",
-      "blurb": "My software studio — backend, frontend, mobile and cloud under one roof. Roadmap and contracts set; first clients next.",
-      "stack": ["Studio", "Full-stack", "Cloud"],
-      "action": "none",
-      "badge": "Building",
-      "top": "badge"
+      "slug": "royake",
+      "title": "Royake",
+      "tagline": "An enterprise-grade consulting application built with BLoC and strict TDD.",
+      "role": "Senior Flutter Developer & Team Mentor",
+      "contribution": "lead",
+      "period": "2022–2024",
+      "category": "mobile",
+      "summary": "A robust, cross-platform consulting platform engineered for maximum testability and scalability. Built using Clean Architecture and BLoC state management, the application automates complex client onboarding and heavy data-streaming workflows while maintaining rigorous production-grade quality standards.",
+      "stack": ["Flutter", "Dart", "BLoC", "Clean Architecture", "TDD", "GitLab CI/CD"],
+      "highlights": [
+        "Architected a modular, feature-driven codebase using Clean Architecture and BLoC to enable seamless parallel development and ensure predictable state propagation.",
+        "Established automated GitLab CI/CD pipelines and implemented Test-Driven Development, sustaining over 80% code coverage across business-critical modules.",
+        "Mentored the engineering team through structured code reviews and TDD workflows, scaling the platform to over 40,000 combined downloads while reducing manual client-onboarding workload by 40%."
+      ],
+      "links": [
+        { "label": "App Store", "url": "https://apps.apple.com/eg/app/%D8%B1%D8%A4%D9%8A%D8%A7%D9%83/id1247346945" },
+        { "label": "Play Store", "url": "https://play.google.com/store/apps/details?id=royak.royak&hl=en" }
+      ],
+      "detail": true
+    },
+    {
+      "slug": "pet-care",
+      "title": "Pet Care",
+      "tagline": "An all-in-one pet services marketplace and healthcare platform.",
+      "role": "Flutter Support & Maintenance Engineer",
+      "contribution": "maintenance",
+      "period": "2024",
+      "category": "mobile",
+      "summary": "A cross-platform pet care ecosystem connecting owners with veterinary clinics, specialized boarding hotels, and pet commerce services. Handled production-phase technical ownership, managing stability patches, code maintenance, and performance fine-tuning post-launch.",
+      "stack": ["Flutter", "Dart", "Production Support", "App Optimization"],
+      "highlights": [
+        "Assumed technical ownership of the inherited production codebase, managing smooth operational continuity and executing targeted UI/UX maintenance updates.",
+        "Conducted thorough debugging and optimization sweeps to address edge-case crashes, ensuring consistent cross-platform performance across iOS and Android.",
+        "Streamlined post-launch maintenance procedures, ensuring zero-regression deliveries for all incremental updates and minor releases."
+      ],
+      "links": [
+        { "label": "App Store", "url": "https://apps.apple.com/eg/app/pet-care/id6451312624" }
+      ],
+      "detail": false
+    },
+    {
+      "slug": "orood",
+      "title": "Orood",
+      "tagline": "A cross-platform localized deals and commercial promotions aggregator.",
+      "role": "Flutter Support & Maintenance Engineer",
+      "contribution": "maintenance",
+      "period": "2024",
+      "category": "mobile",
+      "summary": "A dynamic, cross-platform shopping promotions ecosystem enabling users to discover location-targeted commercial discounts, retail coupons, and catalog offers. Managed post-launch product ownership, production stability patches, and media optimization for high-density image feeds.",
+      "stack": ["Flutter", "Dart", "Production Support", "Image Caching & Memory Optimization"],
+      "highlights": [
+        "Maintained operational stability and high availability for a production retail deals platform, orchestrating seamless delivery of hotfixes and minor version updates.",
+        "Optimized image rendering pipelines and data caching layers across high-volume commercial catalog streams to minimize client-side memory footprints and ensure smooth infinite scroll.",
+        "Diagnosed and resolved multi-region location and filter edge cases, enforcing strict QA validation standards to ensure zero-regression releases."
+      ],
+      "links": [
+        { "label": "App Store", "url": "https://apps.apple.com/us/app/orood/id6470238089" },
+        { "label": "Play Store", "url": "https://play.google.com/store/apps/details?id=com.dev.orood" }
+      ],
+      "detail": false
+    },
+    {
+      "slug": "qrattel",
+      "title": "QRattel",
+      "tagline": "A cross-platform app for client engagement and real-world pre-release testing.",
+      "role": "Flutter Developer & Technical Collaborator",
+      "contribution": "developer",
+      "period": "2021–2023",
+      "category": "mobile",
+      "summary": "A cross-platform mobile application engineered to drive client engagement and facilitate rigorous pre-release field testing. Built with a focus on high maintainability, the platform features real-time communication modules to validate performance and stability under live operational conditions.",
+      "stack": ["Flutter", "Dart", "Agile", "Software Testing"],
+      "highlights": [
+        "Developed custom cross-platform applications optimized for long-term scalability and code maintainability, directly aligning technical execution with business requirements.",
+        "Engineered real-time video-calling features from scratch, incorporating custom signaling logic and highly responsive UI layouts to maintain connection stability.",
+        "Managed the end-to-end application lifecycle and navigated client-side development halts through proactive communication, incremental delivery, and strategic backlog reprioritization."
+      ],
+      "links": [
+        { "label": "App Store", "url": "https://apps.apple.com/eg/app/%D8%B1%D8%AA-%D9%84-%D8%A7%D9%84%D8%AD%D9%84%D9%82%D8%A9-%D8%A7%D9%84%D8%B0%D9%83%D9%8A%D8%A9/id1608794369" },
+        { "label": "Play Store", "url": "https://play.google.com/store/apps/details?id=com.qrattel.sa&hl=en" }
+      ],
+      "detail": false
+    },
+    {
+      "slug": "al-frayan",
+      "title": "Al Frayan App",
+      "tagline": "A cross-platform community hub and educational portal for cultural services.",
+      "role": "Flutter Support & Maintenance Engineer",
+      "contribution": "maintenance",
+      "period": "2024–2025",
+      "category": "mobile",
+      "summary": "A dedicated cross-platform mobile portal engineered to deliver structured educational modules, interactive cultural and religious competitions, and specialized social utility services. Directed post-launch technical management, ensuring reliable news-feed delivery and robust error handling.",
+      "stack": ["Flutter", "Dart", "Production Support", "Content Delivery Optimization"],
+      "highlights": [
+        "Maintained operational continuity and asset stability for an educational community platform, ensuring predictable cross-platform execution on updated iOS and Android versions.",
+        "Refactored data synchronization routines to address edge-case content rendering failures and systematically upgraded core dependencies to enhance runtime exception safety.",
+        "Supervised incremental hotfixes and minor production deployments, executing compliance and account-privacy changes with a strict focus on zero-regression safety."
+      ],
+      "links": [
+        { "label": "App Store", "url": "https://apps.apple.com/eg/app/%D8%A2%D9%84-%D9%81%D8%B1%D9%8A%D8%A7%D9%86/id1552692044" },
+        { "label": "Play Store", "url": "https://play.google.com/store/apps/details?id=com.Alfrayan.sa&hl=ar" }
+      ],
+      "detail": false
+    },
+    {
+      "slug": "sabq-app",
+      "title": "Sabq App",
+      "tagline": "A multi-role competition management and evaluation ecosystem.",
+      "role": "Flutter Support & Maintenance Engineer",
+      "contribution": "maintenance",
+      "period": "2024–2025",
+      "category": "mobile",
+      "summary": "A specialized cross-platform competition platform engineered to manage, track, and evaluate multi-stage cultural and religious contests. Supervised production-phase code maintenance, focusing on stabilizing complex role-based access layers and auditing pipelines for competitors, judges, and administrators.",
+      "stack": ["Flutter", "Dart", "Production Support", "Role-Based Access Control", "State Management"],
+      "highlights": [
+        "Maintained and optimized a complex, multi-role architecture, ensuring strict data isolation and flawless state propagation between competitors, independent evaluators, and system admins.",
+        "Diagnosed and resolved subtle edge cases in the asynchronous evaluation engine and randomized submission-assignment algorithms to preserve data integrity and fairness during active grading cycles.",
+        "Orchestrated hotfixes and platform dependency updates for live production builds, guaranteeing continuous runtime availability during peak high-traffic competition phases."
+      ],
+      "links": [
+        { "label": "App Store", "url": "https://apps.apple.com/eg/app/%D8%AA%D8%B7%D8%A8%D9%8A%D9%82-%D8%B3%D8%A8%D9%82/id1534112194" },
+        { "label": "Play Store", "url": "https://play.google.com/store/apps/details?id=com.sabq.win.Sabq&hl=ar" }
+      ],
+      "detail": false
+    },
+    {
+      "slug": "drs-space",
+      "title": "Drs Space",
+      "tagline": "A dual-app telemedicine platform streamlining doctor–patient interactions.",
+      "role": "Flutter Developer & Technical Collaborator",
+      "contribution": "developer",
+      "period": "2021–2022",
+      "category": "mobile",
+      "summary": "A cross-platform telemedicine ecosystem featuring dedicated applications for both patients and doctors. Built using Clean Architecture and OOP principles, the platform delivers synchronized workflows and real-time video consultations to optimize remote healthcare delivery.",
+      "stack": ["Flutter", "Dart", "Clean Architecture", "OOP", "Material Design"],
+      "highlights": [
+        "Architected a scalable, feature-driven codebase using Clean Architecture to share core logic and maximize maintainability across both client applications.",
+        "Implemented custom widgets, adaptive layouts, and real-time video consultation components to ensure a seamless, responsive user experience.",
+        "Managed the end-to-end lifecycle, navigating intermittent development pauses through proactive client communication and incremental App Store and Play Store deployments."
+      ],
+      "links": [],
+      "detail": false
     }
   ],
+  "projectDetail": {
+    "back": "Back to work",
+    "backAll": "See the rest of the work",
+    "roleLabel": "Role",
+    "periodLabel": "Period",
+    "categoryLabel": "Category",
+    "stackLabel": "Stack",
+    "highlightsLabel": "Highlights",
+    "linksLabel": "Links",
+    "tagMaintenance": "Maintenance",
+    "tagLead": "Lead",
+    "tagAuthor": "Author",
+    "category": { "mobile": "Mobile", "devops": "DevOps", "frontend": "Frontend", "backend": "Backend" }
+  },
   "also": {
     "eyebrow": "Open source & writing",
     "items": [
       {
-        "title": "Genetic Algorithm Golden-Ratio Design Model",
-        "meta": "Peer-reviewed paper · Springer",
-        "year": "2022",
-        "role": "Author",
-        "href": "#"
+        "kind": "oss",
+        "title": "telephony_sms",
+        "meta": "Open-source Flutter plugin · pub.dev",
+        "desc": "SMS sending and telephony state for Flutter on Android, built over platform channels — a small, typed Dart API bridged across the MethodChannel boundary to the native layer. Published on pub.dev and used in production apps.",
+        "role": "Author & maintainer",
+        "links": [{ "label": "pub.dev", "url": "https://pub.dev/packages/telephony_sms" }]
       },
       {
-        "title": "This portfolio",
-        "meta": "Next.js · Terraform IaC · OIDC CI/CD",
-        "year": "2026",
-        "role": "Proof that runs itself",
-        "href": "https://github.com/KhaledHossameldin"
+        "kind": "paper",
+        "title": "Genetic Algorithm Golden-Ratio Design Model",
+        "meta": "Peer-reviewed chapter · Springer",
+        "desc": "A genetic-algorithm approach to golden-ratio-guided design, published as a peer-reviewed Springer book chapter.",
+        "role": "Author",
+        "year": "2022",
+        "links": [{ "label": "Read (free)", "url": "https://rdcu.be/fpUxZ" }],
+        "cite": "DOI 10.1007/978-3-031-07512-4_8",
+        "citeUrl": "https://doi.org/10.1007/978-3-031-07512-4_8"
       }
     ]
   },
@@ -133,37 +316,6 @@
     "errorMsg": "Couldn’t send — please use a direct link below.",
     "orReach": "Or reach me directly",
     "within": "↵ within a day"
-  },
-  "case": {
-    "eyebrow": "Case study",
-    "title": "TMMS",
-    "subtitle": "Tenant & mall management, end to end.",
-    "back": "Back to work",
-    "roleLabel": "Role",
-    "roleVal": "Flutter developer + DevOps engineer",
-    "yearLabel": "Year",
-    "yearVal": "2024",
-    "clientLabel": "Client",
-    "clientVal": "Commercial real-estate operator (NDA)",
-    "stackLabel": "Stack",
-    "stack": ["Flutter", "Dart", "AWS EKS", "Terraform", "Terragrunt", "ArgoCD", "RDS Postgres (Multi-AZ)", "Temporal", "Docker"],
-    "metrics": [
-      { "n": "3", "l": "deployment scenarios costed" },
-      { "n": "Multi-AZ", "l": "Postgres durability" },
-      { "n": "1", "l": "platform · many malls" }
-    ],
-    "problemLabel": "The problem",
-    "problemBody": "A commercial real-estate operator ran a portfolio of malls on spreadsheets and disconnected tools. Tenant onboarding, leases, invoices, monthly sales declarations and maintenance requests each lived somewhere different. They wanted one multi-tenant platform that could be stood up per mall — and infrastructure a small team could actually operate.",
-    "builtLabel": "What I built",
-    "appLabel": "The app",
-    "appBody": "A Flutter client tenants use daily: account balances, invoice payment, monthly sales declarations and maintenance tickets — five core workflows in one composed, four-tab app, light and dark.",
-    "cloudLabel": "The cloud",
-    "cloudBody": "The infrastructure under it: an AWS EKS cluster described entirely in Terraform and Terragrunt, GitOps delivery through ArgoCD, RDS Postgres in Multi-AZ for durability, and Temporal running the workflows that have deadlines — billing cycles, declaration windows, ticket SLAs.",
-    "outcomeLabel": "Outcome",
-    "outcomeBody": "A full infrastructure design and a cost model across three deployment scenarios — single mall, shared multi-mall and isolated enterprise — so spend could be traded against isolation. Releases became GitOps non-events, and the database stopped being a single point of failure.",
-    "noteLabel": "A note on the numbers",
-    "noteBody": "Client and figures are under NDA, anonymised here. I’m happy to walk through the architecture and the trade-offs in a call.",
-    "backAll": "See the rest of the work"
   },
   "footer": {
     "headline": "Still here? Let’s talk.",
