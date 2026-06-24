@@ -49,7 +49,7 @@ resource "aws_cloudwatch_log_group" "contact" {
 resource "aws_lambda_function" "contact" {
   function_name    = "khaled-portfolio-contact"
   role             = aws_iam_role.contact_lambda.arn
-  runtime          = "nodejs20.x"
+  runtime          = "nodejs22.x"
   handler          = "index.handler"
   filename         = data.archive_file.contact.output_path
   source_code_hash = data.archive_file.contact.output_base64sha256
