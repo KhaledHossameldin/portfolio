@@ -1,27 +1,14 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
+import { projects } from "@/data/projects";
+import type { Locale } from "@/i18n/routing";
 import { Reveal } from "../motion/Reveal";
 import { Card } from "../ui/Card";
 import { Tag } from "../ui/Tag";
 import { ArrowUpRight } from "../ui/icons";
 
 type Link = { label: string; url: string };
-
-type Project = {
-  slug: string;
-  title: string;
-  tagline: string;
-  role: string;
-  contribution?: "author" | "lead" | "developer" | "maintenance";
-  period: string;
-  category: string;
-  summary: string;
-  stack: string[];
-  highlights: string[];
-  links: Link[];
-  detail: boolean;
-};
 
 type AlsoItem = {
   kind: "oss" | "paper";
@@ -69,10 +56,8 @@ export function SelectedWork() {
   const t = useTranslations("work");
   const tAlso = useTranslations("also");
   const td = useTranslations("projectDetail");
-  const tRoot = useTranslations();
-  const locale = useLocale();
+  const locale = useLocale() as Locale;
 
-  const projects = tRoot.raw("projects") as Project[];
   const also = tAlso.raw("items") as AlsoItem[];
   const total = String(projects.length).padStart(2, "0");
 
@@ -196,7 +181,7 @@ export function SelectedWork() {
                   margin: "var(--space-5) 0 var(--space-1)",
                 }}
               >
-                {p.title}
+                {p.title[locale]}
               </h3>
               <p
                 style={{
@@ -209,7 +194,7 @@ export function SelectedWork() {
                   overflow: "hidden",
                 }}
               >
-                {p.tagline}
+                {p.tagline[locale]}
               </p>
             </>
           );
@@ -220,7 +205,7 @@ export function SelectedWork() {
           const footer = (
             <div style={{ marginTop: "auto" }}>
               <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
-                {p.stack.slice(0, 5).map((s) => (
+                {p.stack[locale].slice(0, 5).map((s) => (
                   <Tag key={s} size="sm">
                     {s}
                   </Tag>
