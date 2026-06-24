@@ -140,9 +140,9 @@ export function Contact() {
               {t("orReach")}
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)" }}>
-              <a href="mailto:khaled@khaledhossameldin.com" style={directLink}>
+              <a href="mailto:contact@khaledhossameldin.com" style={directLink}>
                 <Mail />
-                khaled@khaledhossameldin.com
+                contact@khaledhossameldin.com
               </a>
               <a
                 href="https://github.com/KhaledHossameldin"
