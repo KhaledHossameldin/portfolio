@@ -17,8 +17,8 @@
     "panelLabel": "Status",
     "panel": [
       { "k": "Standort", "v": "6th of October City, EG" },
-      { "k": "Umzug", "v": "Bereit — Deutschland zuerst" },
-      { "k": "Bandbreite", "v": "Mobile · Front · Back · DevOps" },
+      { "k": "Umzug", "v": "International offen · Fokus Deutschland" },
+      { "k": "Bandbreite", "v": "Mobile · DevOps · Front · Back" },
       { "k": "Diese Seite", "v": "Next.js · S3/CF · OIDC-CI/CD" }
     ]
   },
@@ -282,9 +282,9 @@
     "note": "Keine Buzzword-Wand — nur Dinge, die ich im Review verteidigen würde.",
     "groups": [
       { "label": "Mobile", "items": ["Flutter", "Dart", "Swift", "Kotlin", "Plattformkanäle"] },
+      { "label": "DevOps · Cloud", "items": ["AWS", "Kubernetes", "Terraform", "ArgoCD", "GH Actions"] },
       { "label": "Frontend", "items": ["TypeScript", "React", "Next.js", "Vite", "CSS"] },
-      { "label": "Backend", "items": ["Node", "REST", "PostgreSQL", "Temporal", "Redis"] },
-      { "label": "DevOps · Cloud", "items": ["AWS", "Kubernetes", "Terraform", "ArgoCD", "GH Actions"] }
+      { "label": "Backend", "items": ["Node", "REST", "PostgreSQL", "Temporal", "Redis"] }
     ]
   },
   "about": {
@@ -293,11 +293,11 @@
     "body1": "Ich bin Khaled — ein Senior-Entwickler, der dieses Handwerk wirklich mag und nicht so tut, als wäre es anders. Über fünf Jahre bewege ich mich zwischen einem Flutter-Screen, einem Backend-Service und dem Terraform, das beides zu den Menschen bringt.",
     "body2": "Mich interessiert die unglamouröse Mitte: die Fehlermeldung, die Ihre Zeit respektiert, die Migration, die niemanden um drei Uhr morgens weckt, die Pipeline, die das Ausliefern zur Nebensache macht. Ernst bei der Arbeit, locker bei mir selbst.",
     "facts": [
-      { "k": "Bandbreite", "v": "Mobile · Frontend · Backend · DevOps" },
+      { "k": "Bandbreite", "v": "Mobile · DevOps · Frontend · Backend" },
       { "k": "Erfahrung", "v": "5+ Jahre, Senior" },
       { "k": "Sprachen", "v": "Englisch · Deutsch (B2) · Arabisch" },
       { "k": "Standort", "v": "6th of October City, Ägypten" },
-      { "k": "Offen für", "v": "Remote · Umzug — Deutschland zuerst" }
+      { "k": "Offen für", "v": "Remote · Umzug — international, Fokus Deutschland" }
     ]
   },
   "contact": {
@@ -320,7 +320,7 @@
   "footer": {
     "headline": "Immer noch da? Reden wir.",
     "links": [
-      { "label": "E-Mail", "href": "mailto:khaled@khaledhossameldin.com" },
+      { "label": "E-Mail", "href": "mailto:contact@khaledhossameldin.com" },
       { "label": "GitHub", "href": "https://github.com/KhaledHossameldin" },
       { "label": "LinkedIn", "href": "https://www.linkedin.com/in/khaled-hossameldin/" },
       { "label": "Lebenslauf (PDF)", "href": "/Khaled_Hossameldin_Resume.pdf" }

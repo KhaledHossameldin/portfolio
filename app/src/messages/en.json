@@ -17,8 +17,8 @@
     "panelLabel": "Status",
     "panel": [
       { "k": "Based", "v": "6th of October City, EG" },
-      { "k": "Relocation", "v": "Ready — Germany first" },
-      { "k": "Range", "v": "Mobile · Front · Back · DevOps" },
+      { "k": "Relocation", "v": "Open internationally · Germany focus" },
+      { "k": "Range", "v": "Mobile · DevOps · Front · Back" },
       { "k": "This site", "v": "Next.js · S3/CF · OIDC CI/CD" }
     ]
   },
@@ -282,9 +282,9 @@
     "note": "Not a buzzword wall — only things I’d defend in review.",
     "groups": [
       { "label": "Mobile", "items": ["Flutter", "Dart", "Swift", "Kotlin", "Platform channels"] },
+      { "label": "DevOps · Cloud", "items": ["AWS", "Kubernetes", "Terraform", "ArgoCD", "GH Actions"] },
       { "label": "Frontend", "items": ["TypeScript", "React", "Next.js", "Vite", "CSS"] },
-      { "label": "Backend", "items": ["Node", "REST", "PostgreSQL", "Temporal", "Redis"] },
-      { "label": "DevOps · Cloud", "items": ["AWS", "Kubernetes", "Terraform", "ArgoCD", "GH Actions"] }
+      { "label": "Backend", "items": ["Node", "REST", "PostgreSQL", "Temporal", "Redis"] }
     ]
   },
   "about": {
@@ -293,11 +293,11 @@
     "body1": "I’m Khaled — a senior engineer who’s genuinely fond of this craft and won’t pretend otherwise. Five-plus years moving between a Flutter screen, a backend service, and the Terraform that puts them in front of people.",
     "body2": "I care about the unglamorous middle: the error message that respects your time, the migration that doesn’t wake anyone at 3 a.m., the pipeline that makes shipping a non-event. Serious about the work, light about myself.",
     "facts": [
-      { "k": "Range", "v": "Mobile · Frontend · Backend · DevOps" },
+      { "k": "Range", "v": "Mobile · DevOps · Frontend · Backend" },
       { "k": "Experience", "v": "5+ years, senior" },
       { "k": "Languages", "v": "English · German (B2) · Arabic" },
       { "k": "Based", "v": "6th of October City, Egypt" },
-      { "k": "Open to", "v": "Remote · relocation — Germany first" }
+      { "k": "Open to", "v": "Remote · relocation — international, Germany in focus" }
     ]
   },
   "contact": {
@@ -320,7 +320,7 @@
   "footer": {
     "headline": "Still here? Let’s talk.",
     "links": [
-      { "label": "Email", "href": "mailto:khaled@khaledhossameldin.com" },
+      { "label": "Email", "href": "mailto:contact@khaledhossameldin.com" },
       { "label": "GitHub", "href": "https://github.com/KhaledHossameldin" },
       { "label": "LinkedIn", "href": "https://www.linkedin.com/in/khaled-hossameldin/" },
       { "label": "CV (PDF)", "href": "/Khaled_Hossameldin_Resume.pdf" }

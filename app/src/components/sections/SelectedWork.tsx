@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { Reveal, RevealGroup } from "../motion/Reveal";
+import { Reveal } from "../motion/Reveal";
 import { Card } from "../ui/Card";
 import { Tag } from "../ui/Tag";
 import { ArrowUpRight } from "../ui/icons";
@@ -134,7 +134,10 @@ export function SelectedWork() {
         </header>
       </Reveal>
 
-      <RevealGroup
+      {/* Plain grid (not RevealGroup): each card reveals on its OWN whileInView
+          so every card animates uniformly as it scrolls in, rather than the whole
+          grid staggering at once (which left lower cards animating off-screen). */}
+      <div
         className="kp-work-grid"
         style={{
           display: "grid",
@@ -200,10 +203,22 @@ export function SelectedWork() {
                   font: "var(--type-body)",
                   color: "var(--text-muted)",
                   margin: "0 0 var(--space-5)",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
                 }}
               >
                 {p.tagline}
               </p>
+            </>
+          );
+
+          // Bottom block — stack tags (+ store links for non-detail cards),
+          // pushed to the card's base with margin-top:auto so footers align
+          // across a row even when taglines differ in length.
+          const footer = (
+            <div style={{ marginTop: "auto" }}>
               <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
                 {p.stack.slice(0, 5).map((s) => (
                   <Tag key={s} size="sm">
@@ -211,36 +226,42 @@ export function SelectedWork() {
                   </Tag>
                 ))}
               </div>
-            </>
+              {/* Non-detail cards: surface store links so they aren't dead ends.
+                  drs-space has no links → nothing renders. */}
+              {!p.detail && p.links.length > 0 && (
+                <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap", marginTop: "var(--space-5)" }}>
+                  {p.links.map((l) => (
+                    <a
+                      key={l.url}
+                      href={l.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={storeLink}
+                    >
+                      {l.label}
+                      <ArrowUpRight size={12} />
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
           );
 
           return (
-            <Reveal item key={p.slug}>
-              <Card interactive={p.detail} href={cardHref} padding="var(--space-7)">
+            <Reveal key={p.slug} style={{ height: "100%" }}>
+              <Card
+                interactive={p.detail}
+                href={cardHref}
+                padding="var(--space-7)"
+                style={{ height: "100%", display: "flex", flexDirection: "column" }}
+              >
                 {head}
-                {/* Non-detail cards: surface store links so they aren't dead ends.
-                    drs-space has no links → nothing renders. */}
-                {!p.detail && p.links.length > 0 && (
-                  <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap", marginTop: "var(--space-5)" }}>
-                    {p.links.map((l) => (
-                      <a
-                        key={l.url}
-                        href={l.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={storeLink}
-                      >
-                        {l.label}
-                        <ArrowUpRight size={12} />
-                      </a>
-                    ))}
-                  </div>
-                )}
+                {footer}
               </Card>
             </Reveal>
           );
         })}
-      </RevealGroup>
+      </div>
 
       {/* open source & writing — NOT work cards */}
       <Reveal style={{ marginTop: "var(--space-9)" }}>
