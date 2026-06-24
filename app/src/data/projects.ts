@@ -88,7 +88,7 @@ export const projects: Project[] = [
     },
     role: {
       en: "Flutter Support & Maintenance Engineer",
-      de: "Flutter Support- & Wartungsingenieur"
+      de: "Flutter-Support- & Wartungsingenieur"
     },
     stack: {
       en: ["Flutter", "Dart", "Production Support", "App Optimization"],
@@ -184,13 +184,13 @@ export const projects: Project[] = [
       { label: "Play Store", url: "https://play.google.com/store/apps/details?id=royak.royak&hl=en" },
     ],
     title: { en: "Royake", de: "Royake" },
-    tagline: { en: "An enterprise-grade consulting application built with BLoC and strict TDD.", de: "Eine umfassende Consulting-Plattform mit BLoC und testgetriebener Entwicklung." },
+    tagline: { en: "An enterprise-grade consulting application built with BLoC and strict TDD.", de: "Eine umfassende Beratungsplattform mit BLoC und testgetriebener Entwicklung." },
     role: { en: "Senior Flutter Developer & Team Mentor", de: "Senior Flutter-Entwickler & Team-Mentor" },
     stack: {
       en: ["Flutter", "Dart", "BLoC", "Clean Architecture", "TDD", "GitLab CI/CD"],
       de: ["Flutter", "Dart", "BLoC", "Clean Architecture", "TDD", "GitLab CI/CD"],
     },
-    summary: { en: "A robust, cross-platform consulting platform engineered for maximum testability and scalability. Built using Clean Architecture and BLoC state management, the application automates complex client onboarding and heavy data-streaming workflows while maintaining rigorous production-grade quality standards.", de: "Eine plattformübergreifende Beratungsplattform, entwickelt mit Fokus auf Skalierbarkeit und architektonische Disziplin. Durch den Einsatz von BLoC-Zustandsmanagement und Test-Driven Development (TDD) optimiert das System Onboarding-Prozesse und komplexe Daten-Streams unter höchsten Qualitätsstandards." },
+    summary: { en: "A robust, cross-platform consulting platform engineered for maximum testability and scalability. Built using Clean Architecture and BLoC state management, the application automates complex client onboarding and heavy data-streaming workflows while maintaining rigorous production-grade quality standards.", de: "Eine plattformübergreifende Beratungsplattform, entwickelt mit Fokus auf Skalierbarkeit und architektonische Disziplin. Durch den Einsatz von BLoC-Zustandsmanagement und testgetriebener Entwicklung (TDD) optimiert das System Onboarding-Prozesse und komplexe Datenströme unter höchsten Qualitätsstandards." },
     highlights: {
       en: [
         "Architected a modular, feature-driven codebase using Clean Architecture and BLoC to enable seamless parallel development and ensure predictable state propagation.",
@@ -218,7 +218,7 @@ export const projects: Project[] = [
     role: { en: "Flutter Support & Maintenance Engineer", de: "Flutter-Entwickler · Support & Wartung" },
     stack: {
       en: ["Flutter", "Dart", "Production Support", "App Optimization"],
-      de: ["Flutter", "Dart", "Production Support", "App-Optimierung"],
+      de: ["Flutter", "Dart", "Produktions-Support", "App-Optimierung"],
     },
     summary: { en: "A cross-platform pet care ecosystem connecting owners with veterinary clinics, specialized boarding hotels, and pet commerce services. Handled production-phase technical ownership, managing stability patches, code maintenance, and performance fine-tuning post-launch.", de: "Ein plattformübergreifendes Haustier-Ökosystem, das Besitzer mit Tierkliniken, Tierhotels und E-Commerce-Diensten verbindet. Übernahme des Post-Launch-Supports, der Stabilitätsupdates und der kontinuierlichen Codebasis-Optimierung." },
     highlights: {
@@ -249,9 +249,9 @@ export const projects: Project[] = [
     role: { en: "Flutter Support & Maintenance Engineer", de: "Flutter-Entwickler · Support & Wartung" },
     stack: {
       en: ["Flutter", "Dart", "Production Support", "Image Caching & Memory Optimization"],
-      de: ["Flutter", "Dart", "Production Support", "Image Caching & Speicheroptimierung"],
+      de: ["Flutter", "Dart", "Produktions-Support", "Bild-Caching & Speicheroptimierung"],
     },
-    summary: { en: "A dynamic, cross-platform shopping promotions ecosystem enabling users to discover location-targeted commercial discounts, retail coupons, and catalog offers. Managed post-launch product ownership, production stability patches, and media optimization for high-density image feeds.", de: "Eine plattformübergreifende Promotion-Plattform, mit der Nutzer standortbezogene Rabatte, Coupons und Einzelhandelsangebote entdecken können. Übernahme des Post-Launch-Supports, der Performance-Optimierung und der Medien-Bereitstellung für hochdichte Bilder-Feeds." },
+    summary: { en: "A dynamic, cross-platform shopping promotions ecosystem enabling users to discover location-targeted commercial discounts, retail coupons, and catalog offers. Managed post-launch product ownership, production stability patches, and media optimization for high-density image feeds.", de: "Eine plattformübergreifende Aktions-Plattform, mit der Nutzer standortbezogene Rabatte, Coupons und Einzelhandelsangebote entdecken können. Übernahme des Post-Launch-Supports, der Performance-Optimierung und der Medien-Bereitstellung für hochdichte Bilder-Feeds." },
     highlights: {
       en: [
         "Maintained operational stability and high availability for a production retail deals platform, orchestrating seamless delivery of hotfixes and minor version updates.",
@@ -280,7 +280,7 @@ export const projects: Project[] = [
     role: { en: "Flutter Developer & Technical Collaborator", de: "Flutter-Entwickler & technischer Mitarbeiter" },
     stack: {
       en: ["Flutter", "Dart", "Agile", "Software Testing"],
-      de: ["Flutter", "Dart", "Agile", "Software-Testing"],
+      de: ["Flutter", "Dart", "Agile", "Softwaretests"],
     },
     summary: { en: "A cross-platform mobile application engineered to drive client engagement and facilitate rigorous pre-release field testing. Built with a focus on high maintainability, the platform features real-time communication modules to validate performance and stability under live operational conditions.", de: "Eine plattformübergreifende mobile Anwendung zur Steigerung der Kundenbindung und Durchführung intensiver Vorab-Tests. Die App kombiniert Echtzeit-Kommunikationsmodule mit einer wartungsfreundlichen Architektur, um maximale Stabilität unter realen Bedingungen zu gewährleisten." },
     highlights: {
@@ -290,7 +290,7 @@ export const projects: Project[] = [
         "Managed the end-to-end application lifecycle and navigated client-side development halts through proactive communication, incremental delivery, and strategic backlog reprioritization.",
       ],
       de: [
-        "Entwicklung maßgeschneiderter Cross-Platform-Apps mit Fokus auf Skalierbarkeit und Code-Wartbarkeit zur Erfüllung komplexer Geschäftsanforderungen.",
+        "Entwicklung maßgeschneiderter plattformübergreifender Apps mit Fokus auf Skalierbarkeit und Code-Wartbarkeit zur Erfüllung komplexer Geschäftsanforderungen.",
         "Implementierung nativer Videoanruf-Funktionen inklusive der zugehörigen Signalisierungslogik und responsiver UI für eine stabile Nutzererfahrung.",
         "Steuerung des gesamten App-Lifecycles und erfolgreiche Bewältigung kundenseitiger Projektpausen durch agile Backlog-Priorisierung und inkrementelle Lieferungen.",
       ],
@@ -311,7 +311,7 @@ export const projects: Project[] = [
     role: { en: "Flutter Support & Maintenance Engineer", de: "Flutter-Entwickler · Support & Wartung" },
     stack: {
       en: ["Flutter", "Dart", "Production Support", "Content Delivery Optimization"],
-      de: ["Flutter", "Dart", "Production Support", "Content-Delivery-Optimierung"],
+      de: ["Flutter", "Dart", "Produktions-Support", "Content-Auslieferungsoptimierung"],
     },
     summary: { en: "A dedicated cross-platform mobile portal engineered to deliver structured educational modules, interactive cultural and religious competitions, and specialized social utility services. Directed post-launch technical management, ensuring reliable news-feed delivery and robust error handling.", de: "Ein dediziertes mobiles Portal für strukturierte Bildungsprogramme, interaktive kulturelle Wettbewerbe und soziale Dienste. Übernahme des Post-Launch-Supports zur Absicherung stabiler Newsticker-Feeds und systemweiter Stabilität." },
     highlights: {
@@ -342,9 +342,9 @@ export const projects: Project[] = [
     role: { en: "Flutter Support & Maintenance Engineer", de: "Flutter-Entwickler · Support & Wartung" },
     stack: {
       en: ["Flutter", "Dart", "Production Support", "Role-Based Access Control", "State Management"],
-      de: ["Flutter", "Dart", "Production Support", "Rollenbasierte Zugriffskontrolle", "State Management"],
+      de: ["Flutter", "Dart", "Produktions-Support", "Rollenbasierte Zugriffskontrolle", "Zustandsverwaltung"],
     },
-    summary: { en: "A specialized cross-platform competition platform engineered to manage, track, and evaluate multi-stage cultural and religious contests. Supervised production-phase code maintenance, focusing on stabilizing complex role-based access layers and auditing pipelines for competitors, judges, and administrators.", de: "Eine spezialisierte Cross-Platform-App zur Verwaltung und Auswertung mehrstufiger kultureller und religiöser Wettbewerbe. Verantwortlich für den Post-Launch-Support, die Stabilisierung komplexer Benutzer-Workflows für Teilnehmer, Juroren und System-Administratoren." },
+    summary: { en: "A specialized cross-platform competition platform engineered to manage, track, and evaluate multi-stage cultural and religious contests. Supervised production-phase code maintenance, focusing on stabilizing complex role-based access layers and auditing pipelines for competitors, judges, and administrators.", de: "Eine spezialisierte plattformübergreifende App zur Verwaltung und Auswertung mehrstufiger kultureller und religiöser Wettbewerbe. Verantwortlich für den Post-Launch-Support, die Stabilisierung komplexer Benutzer-Workflows für Teilnehmer, Juroren und System-Administratoren." },
     highlights: {
       en: [
         "Maintained and optimized a complex, multi-role architecture, ensuring strict data isolation and flawless state propagation between competitors, independent evaluators, and system admins.",
