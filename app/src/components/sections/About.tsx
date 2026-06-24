@@ -1,13 +1,17 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useVisitorCountry } from "@/lib/geo/useVisitorCountry";
 import { Reveal } from "../motion/Reveal";
 
-type Fact = { k: string; v: string };
+type Fact = { k: string; v: string; geo?: string };
 
 export function About() {
   const t = useTranslations("about");
   const facts = t.raw("facts") as Fact[];
+  // Geo-enhance the "Based" fact: country default in static HTML; EG visitors see
+  // the city swapped in place after mount (null until then → no hydration drift).
+  const country = useVisitorCountry();
 
   return (
     <section
@@ -73,7 +77,12 @@ export function About() {
               >
                 {f.k}
               </dt>
-              <dd style={{ margin: 0, font: "var(--type-body)", color: "var(--text)" }}>{f.v}</dd>
+              <dd style={{ margin: 0, font: "var(--type-body)", color: "var(--text)" }}>
+                {/* inline-block so the in-place geo swap grows only this line */}
+                <span style={{ display: "inline-block" }}>
+                  {f.geo && country === "EG" ? f.geo : f.v}
+                </span>
+              </dd>
             </div>
           ))}
         </dl>

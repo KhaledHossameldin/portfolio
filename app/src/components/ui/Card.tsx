@@ -1,6 +1,7 @@
 "use client";
 
 import type { CSSProperties, ReactNode } from "react";
+import { useReducedMotion } from "@/lib/motion/useReducedMotion";
 
 // Project/content surface. Hairline border in dark, soft shadow in light.
 // `interactive` adds the calm 2px lift + accent border on hover.
@@ -21,6 +22,8 @@ export function Card({
   children: ReactNode;
   style?: CSSProperties;
 }) {
+  const reduced = useReducedMotion();
+
   const base: CSSProperties = {
     display: "block",
     position: "relative",
@@ -30,17 +33,21 @@ export function Card({
     borderRadius: "var(--radius-lg)",
     color: "var(--text)",
     textDecoration: "none",
-    cursor: interactive || href || onClick ? "pointer" : "default",
+    // Pointer only when the whole card is a click target; an interactive (hover)
+    // card that isn't a link keeps the default cursor (its inner links are clickable).
+    cursor: href || onClick ? "pointer" : "default",
     boxShadow: "var(--shadow-sm)",
     transition:
       "border-color var(--dur) var(--ease-out), transform var(--dur) var(--ease-out)",
     ...style,
   };
 
+  // Hover affordance applies to EVERY interactive card (featured + non-featured).
+  // The border always warms; the 2px lift is gated behind reduced-motion.
   const onEnter = interactive
     ? (e: React.MouseEvent<HTMLElement>) => {
         e.currentTarget.style.borderColor = "var(--accent-line)";
-        e.currentTarget.style.transform = "translateY(-2px)";
+        if (!reduced) e.currentTarget.style.transform = "translateY(-2px)";
       }
     : undefined;
   const onLeave = interactive

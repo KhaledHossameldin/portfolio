@@ -16,8 +16,8 @@
     "ctaSecondary": "Ausgewählte Arbeiten",
     "panelLabel": "Status",
     "panel": [
-      { "k": "Standort", "v": "6th of October City, EG" },
-      { "k": "Umzug", "v": "International offen · Fokus Deutschland" },
+      { "k": "Standort", "v": "Ägypten", "geo": "6th of October City" },
+      { "k": "Umzug", "v": "Weltweit umzugsbereit" },
       { "k": "Bandbreite", "v": "Mobile · DevOps · Front · Back" },
       { "k": "Diese Seite", "v": "Next.js · S3/CF · OIDC-CI/CD" }
     ]
@@ -296,8 +296,8 @@
       { "k": "Bandbreite", "v": "Mobile · DevOps · Frontend · Backend" },
       { "k": "Erfahrung", "v": "5+ Jahre, Senior" },
       { "k": "Sprachen", "v": "Englisch · Deutsch (B2) · Arabisch" },
-      { "k": "Standort", "v": "6th of October City, Ägypten" },
-      { "k": "Offen für", "v": "Remote · Umzug — international, Fokus Deutschland" }
+      { "k": "Standort", "v": "Ägypten", "geo": "6th of October City" },
+      { "k": "Offen für", "v": "Remote · Umzug weltweit" }
     ]
   },
   "contact": {

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Newsreader, Hanken_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import { SmoothScrollProvider } from "@/components/motion/SmoothScrollProvider";
 import "./globals.css";
@@ -37,14 +37,24 @@ export const metadata: Metadata = {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
     ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
+  manifest: "/site.webmanifest",
   openGraph: {
     title: "Khaled — Senior Software Engineer",
     description:
       "End to end — infrastructure included. Flutter/mobile, frontend, backend, DevOps.",
     type: "website",
   },
+};
+
+// theme-color = the dark-default surface (#0E0C0A), so the browser chrome matches
+// the site's default theme. Next 16 reads themeColor from the viewport export.
+export const viewport: Viewport = {
+  themeColor: "#0E0C0A",
 };
 
 // Pre-paint: apply the saved theme (default dark) before first paint, no flash.
