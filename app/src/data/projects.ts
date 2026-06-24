@@ -88,11 +88,11 @@ export const projects: Project[] = [
     },
     role: {
       en: "Flutter Support & Maintenance Engineer",
-      de: "Flutter Support- & Wartungsingenieur"
+      de: "Flutter-Support- & Wartungsingenieur"
     },
     stack: {
       en: ["Flutter", "Dart", "Production Support", "App Optimization"],
-      de: ["Flutter", "Dart", "Produktions-Support", "App-Optimierung"]
+      de: ["Flutter", "Dart", "Production Support", "App-Optimierung"]
     },
     summary: {
       en: "A specialized mobile real estate and lifestyle platform showcasing premium residential and commercial projects for a leading developer in Upper Egypt. Handled ongoing technical ownership, ensuring production stability, zero-regression dependency updates, and interface optimizations.",
