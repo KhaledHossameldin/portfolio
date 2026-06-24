@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: 20
           cache: npm
@@ -28,11 +28,23 @@ jobs:
           NEXT_PUBLIC_CONTACT_API_URL: ${{ vars.CONTACT_API_URL }}
         run: npm run build
       - name: AWS creds (OIDC)
-        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4.3.1
+        uses: aws-actions/configure-aws-credentials@e7f100cf4c008499ea8adda475de1042d6975c7b # v6.2.0
         with:
           role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
           aws-region: eu-central-1
-      - name: Sync to S3
-        run: aws s3 sync app/out "s3://${{ vars.S3_BUCKET }}" --delete
+      # Two passes over disjoint prefixes. Content-hashed assets are immutable;
+      # HTML (and the rest) must revalidate so new deploys show immediately.
+      # Assets first, so freshly-synced HTML never references a chunk not yet up.
+      - name: Sync immutable assets
+        run: >
+          aws s3 sync app/out/_next/static "s3://${{ vars.S3_BUCKET }}/_next/static"
+          --delete
+          --cache-control "public, max-age=31536000, immutable"
+      - name: Sync HTML + the rest (short TTL)
+        run: >
+          aws s3 sync app/out "s3://${{ vars.S3_BUCKET }}"
+          --delete
+          --exclude "_next/static/*"
+          --cache-control "public, max-age=0, must-revalidate"
       - name: Invalidate CloudFront
         run: aws cloudfront create-invalidation --distribution-id "${{ vars.CF_DIST_ID }}" --paths "/*"
