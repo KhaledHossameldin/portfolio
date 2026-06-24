@@ -2,12 +2,13 @@
 
 import { useTranslations } from "next-intl";
 import { handleHashClick } from "@/lib/motion/scrollToHash";
+import { useVisitorCountry } from "@/lib/geo/useVisitorCountry";
 import { Parallax } from "../motion/Parallax";
 import { Button } from "../ui/Button";
 import { StatusDot } from "../ui/StatusDot";
 import { ArrowUpRight } from "../ui/icons";
 
-type PanelRow = { k: string; v: string };
+type PanelRow = { k: string; v: string; geo?: string };
 
 const eyebrow = {
   fontFamily: "var(--font-mono)",
@@ -21,6 +22,9 @@ export function Hero() {
   const t = useTranslations("hero");
   const tStatus = useTranslations();
   const panel = t.raw("panel") as PanelRow[];
+  // Geo-enhance the "Based" row: country default in static HTML; swap to the city
+  // in place only for EG visitors after mount (null until then → no hydration drift).
+  const country = useVisitorCountry();
 
   return (
     <section
@@ -155,7 +159,10 @@ export function Hero() {
             >
               <dt style={eyebrow}>{row.k}</dt>
               <dd style={{ margin: 0, fontSize: "var(--text-sm)", color: "var(--text)" }}>
-                {row.v}
+                {/* inline-block so the in-place geo swap grows only this line */}
+                <span style={{ display: "inline-block" }}>
+                  {row.geo && country === "EG" ? row.geo : row.v}
+                </span>
               </dd>
             </div>
           ))}

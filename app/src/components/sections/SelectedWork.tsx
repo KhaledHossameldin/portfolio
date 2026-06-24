@@ -250,7 +250,7 @@ export function SelectedWork() {
           return (
             <Reveal key={p.slug} style={{ height: "100%" }}>
               <Card
-                interactive={p.detail}
+                interactive
                 href={cardHref}
                 padding="var(--space-7)"
                 style={{ height: "100%", display: "flex", flexDirection: "column" }}
