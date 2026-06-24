@@ -1,28 +1,13 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
+import { getProject } from "@/data/projects";
+import type { Locale } from "@/i18n/routing";
 import { Reveal } from "../motion/Reveal";
 import { Parallax } from "../motion/Parallax";
 import { Tag } from "../ui/Tag";
 import { Button } from "../ui/Button";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "../ui/icons";
-
-type Link = { label: string; url: string };
-
-type Project = {
-  slug: string;
-  title: string;
-  tagline: string;
-  role: string;
-  contribution?: "author" | "lead" | "developer" | "maintenance";
-  period: string;
-  category: string;
-  summary: string;
-  stack: string[];
-  highlights: string[];
-  links: Link[];
-  detail: boolean;
-};
 
 const monoLabel = {
   fontFamily: "var(--font-mono)",
@@ -34,12 +19,10 @@ const monoLabel = {
 
 export function ProjectDetail({ slug }: { slug: string }) {
   const td = useTranslations("projectDetail");
-  const tRoot = useTranslations();
-  const locale = useLocale();
+  const locale = useLocale() as Locale;
   const home = `/${locale}`;
 
-  const projects = tRoot.raw("projects") as Project[];
-  const p = projects.find((x) => x.slug === slug);
+  const p = getProject(slug);
   if (!p) return null;
 
   const categoryLabel = (c: string) => {
@@ -48,7 +31,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
   };
 
   const meta = [
-    { k: td("roleLabel"), v: p.role },
+    { k: td("roleLabel"), v: p.role[locale] },
     { k: td("periodLabel"), v: p.period },
     { k: td("categoryLabel"), v: categoryLabel(p.category) },
   ];
@@ -85,10 +68,10 @@ export function ProjectDetail({ slug }: { slug: string }) {
             margin: "var(--space-4) 0 var(--space-3)",
           }}
         >
-          {p.title}
+          {p.title[locale]}
         </h1>
         <p style={{ font: "var(--type-lead)", color: "var(--text-muted)", margin: 0, maxWidth: "52ch" }}>
-          {p.tagline}
+          {p.tagline[locale]}
         </p>
       </header>
 
@@ -114,7 +97,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
           </dl>
         </Parallax>
         <Reveal>
-          <p style={{ font: "var(--type-lead)", color: "var(--text)", margin: 0, maxWidth: "60ch" }}>{p.summary}</p>
+          <p style={{ font: "var(--type-lead)", color: "var(--text)", margin: 0, maxWidth: "60ch" }}>{p.summary[locale]}</p>
         </Reveal>
       </div>
 
@@ -127,7 +110,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
       >
         <h2 style={{ ...monoLabel, margin: "0 0 var(--space-5)" }}>{td("highlightsLabel")}</h2>
         <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-5)" }}>
-          {p.highlights.map((h, i) => (
+          {p.highlights[locale].map((h, i) => (
             <div key={i} style={{ borderLeft: "2px solid var(--accent-line)", paddingLeft: "var(--space-5)" }}>
               <p style={{ font: "var(--type-body)", color: "var(--text-muted)", margin: 0 }}>{h}</p>
             </div>
@@ -139,7 +122,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
       <Reveal style={{ paddingTop: "var(--space-8)" }}>
         <h2 style={{ ...monoLabel, margin: "0 0 var(--space-4)" }}>{td("stackLabel")}</h2>
         <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
-          {p.stack.map((s) => (
+          {p.stack[locale].map((s) => (
             <Tag key={s} size="sm">
               {s}
             </Tag>
