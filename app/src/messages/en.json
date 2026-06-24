@@ -16,7 +16,7 @@
     "ctaSecondary": "See selected work",
     "panelLabel": "Status",
     "panel": [
-      { "k": "Based", "v": "Egypt", "geo": "6th of October City" },
+      { "k": "Based", "v": "Egypt", "geo": "6th of October City, Egypt" },
       { "k": "Relocation", "v": "Open to relocation — worldwide" },
       { "k": "Range", "v": "Mobile · DevOps · Front · Back" },
       { "k": "This site", "v": "Next.js · S3/CF · OIDC CI/CD" }
@@ -296,7 +296,7 @@
       { "k": "Range", "v": "Mobile · DevOps · Frontend · Backend" },
       { "k": "Experience", "v": "5+ years, senior" },
       { "k": "Languages", "v": "English · German (B2) · Arabic" },
-      { "k": "Based", "v": "Egypt", "geo": "6th of October City" },
+      { "k": "Based", "v": "Egypt", "geo": "6th of October City, Egypt" },
       { "k": "Open to", "v": "Remote · relocation worldwide" }
     ]
   },
