@@ -71,8 +71,8 @@ export const projects: Project[] = [
   {
     slug: "sedra-life",
     category: "mobile",
-    contribution: "maintenance",
-    period: "2025–2026",
+    contribution: "developer",
+    period: "2026–",
     detail: true,
     links: [
       { label: "App Store", url: "https://apps.apple.com/eg/app/sedra-life/id6759986998" },
@@ -83,31 +83,69 @@ export const projects: Project[] = [
       de: "Sedra Life"
     },
     tagline: {
-      en: "A premium cross-platform real estate and lifestyle application for property management",
-      de: "Eine erstklassige, plattformübergreifende Immobilien- und Lifestyle-Anwendung für die Immobilienverwaltung"
+      en: "A premium cross-platform real-estate & lifestyle app, built ground-up for AbyDOS.",
+      de: "Eine erstklassige, plattformübergreifende Immobilien- und Lifestyle-App, von Grund auf für AbyDOS entwickelt."
     },
     role: {
-      en: "Flutter Support & Maintenance Engineer",
-      de: "Flutter-Support- & Wartungsingenieur"
+      en: "Flutter Engineer — ground-up build",
+      de: "Flutter-Entwickler — Neuentwicklung"
     },
     stack: {
-      en: ["Flutter", "Dart", "Production Support", "App Optimization"],
-      de: ["Flutter", "Dart", "Produktions-Support", "App-Optimierung"]
+      en: ["Flutter", "Dart", "Clean Architecture", "BLoC"],
+      de: ["Flutter", "Dart", "Clean Architecture", "BLoC"]
     },
     summary: {
-      en: "A specialized mobile real estate and lifestyle platform showcasing premium residential and commercial projects for a leading developer in Upper Egypt. Handled ongoing technical ownership, ensuring production stability, zero-regression dependency updates, and interface optimizations.",
-      de: "Eine spezialisierte mobile Immobilien- und Lifestyle-Plattform, die erstklassige Wohn- und Gewerbeprojekte eines führenden Bauträgers in Oberägypten präsentiert. Übernahme der laufenden technischen Verantwortung zur Sicherung der Produktionsstabilität, regressionsfreier Updates und UI-Optimierungen."
+      en: "A cross-platform real-estate and lifestyle platform built from the ground up for AbyDOS, a software company in Sohag, Egypt, to showcase premium residential and commercial projects. Architected on a shared Clean Architecture + BLoC foundation that is reused across a two-app Sedra suite, with a scalable, testable codebase from day one.",
+      de: "Eine plattformübergreifende Immobilien- und Lifestyle-Plattform, von Grund auf für AbyDOS — ein Softwareunternehmen in Sohag, Ägypten — entwickelt, um erstklassige Wohn- und Gewerbeprojekte zu präsentieren. Aufgebaut auf einem gemeinsamen Fundament aus Clean Architecture und BLoC, das in einer aus zwei Apps bestehenden Sedra-Suite wiederverwendet wird — mit einer skalierbaren, testbaren Codebasis von Tag eins an."
     },
     highlights: {
       en: [
-        "Maintained production operational continuity, managing hotfixes and platform compatibility updates for both iOS and Android stores.",
-        "Optimized content rendering and localized listing layouts to ensure a smooth, high-performance showcase of real estate portfolios and payment plans.",
-        "Conducted thorough post-launch debugging sweeps to address edge-case runtime exceptions, keeping application availability uninterrupted."
+        "Building the app from the ground up on a Clean Architecture + BLoC foundation designed for reuse across the companion Sedra suite.",
+        "Modeling property listings, project showcases and payment plans into a scalable, testable domain layer.",
+        "Establishing the shared architecture and state management that both Sedra apps are built on."
       ],
       de: [
-        "Sicherung der laufenden Betriebskontinuität in der Produktionsphase inklusive Hotfixes und Plattformkompatibilitäts-Updates für die iOS- und Android-Stores.",
-        "Optimierung des Content-Renderings und der lokalisierten Layouts für eine flüssige, performante Präsentation von Immobilienportfolios und Zahlungsplänen.",
-        "Durchführung gründlicher Post-Launch-Debugging-Zyklen zur Behebung von Laufzeitfehlern bei extremen Randbedingungen, um eine unterbrechungsfreie Verfügbarkeit zu garantieren."
+        "Aufbau der App von Grund auf auf einem Fundament aus Clean Architecture und BLoC, das für die Wiederverwendung in der begleitenden Sedra-Suite ausgelegt ist.",
+        "Modellierung von Immobilienangeboten, Projektpräsentationen und Zahlungsplänen in einer skalierbaren, testbaren Domänenschicht.",
+        "Etablierung der gemeinsamen Architektur und Zustandsverwaltung, auf der beide Sedra-Apps aufbauen."
+      ]
+    }
+  },
+  {
+    slug: "sedra-resident",
+    category: "mobile",
+    contribution: "developer",
+    period: "2026–",
+    detail: false,
+    links: [],
+    title: {
+      en: "Sedra Resident",
+      de: "Sedra Resident"
+    },
+    tagline: {
+      en: "A companion app for residents who’ve purchased units — post-purchase services & management.",
+      de: "Eine Begleit-App für Bewohner mit gekauften Einheiten — Dienste und Verwaltung nach dem Kauf."
+    },
+    role: {
+      en: "Flutter Engineer — ground-up build",
+      de: "Flutter-Entwickler — Neuentwicklung"
+    },
+    stack: {
+      en: ["Flutter", "Dart", "Clean Architecture", "BLoC"],
+      de: ["Flutter", "Dart", "Clean Architecture", "BLoC"]
+    },
+    summary: {
+      en: "A companion application for Sedra residents who have purchased units, centered on the post-purchase journey — handovers, service requests, payments and community updates. Built on the same Clean Architecture + BLoC foundation as Sedra Life and currently in active development.",
+      de: "Eine Begleitanwendung für Sedra-Bewohner, die Einheiten gekauft haben, mit Fokus auf die Phase nach dem Kauf — Übergaben, Serviceanfragen, Zahlungen und Community-Updates. Aufgebaut auf demselben Fundament aus Clean Architecture und BLoC wie Sedra Life und derzeit in aktiver Entwicklung."
+    },
+    highlights: {
+      en: [
+        "Sharing one Clean Architecture + BLoC foundation with Sedra Life to keep both apps consistent and maintainable.",
+        "Focused on the post-purchase resident journey — service requests, payments and updates."
+      ],
+      de: [
+        "Gemeinsame Nutzung eines Fundaments aus Clean Architecture und BLoC mit Sedra Life, um beide Apps konsistent und wartbar zu halten.",
+        "Fokus auf die Phase nach dem Kauf — Serviceanfragen, Zahlungen und Updates."
       ]
     }
   },
