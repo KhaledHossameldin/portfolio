@@ -112,7 +112,8 @@
       { "label": "Email", "href": "mailto:contact@khaledhossameldin.com" },
       { "label": "GitHub", "href": "https://github.com/KhaledHossameldin" },
       { "label": "LinkedIn", "href": "https://www.linkedin.com/in/khaled-hossameldin/" },
-      { "label": "CV (PDF)", "href": "/Khaled_Hossameldin_Resume.pdf" }
+      { "label": "CV — Mobile Engineer", "href": "/Khaled_Hossameldin_Mobile_CV.pdf" },
+      { "label": "CV — DevOps & Cloud", "href": "/Khaled_Hossameldin_DevOps_CV.pdf" }
     ],
     "colophon": "© 2026 Khaled",
     "signoff": "Built with Terraform and an unreasonable amount of whitespace."
