@@ -64,6 +64,9 @@ jobs:
           ACTOR: ${{ github.actor }}
           COMMIT_MSG: ${{ github.event.head_commit.message }}
         run: |
+          if [ -z "$SLACK_WEBHOOK_URL" ]; then
+            echo "SLACK_WEBHOOK_URL not set — skipping Slack notification."; exit 0
+          fi
           SHORT_SHA="${SHA:0:7}"
           MSG="$(printf '%s' "$COMMIT_MSG" | head -n1)"
           TEXT=":white_check_mark: *Deploy succeeded* — \`$REPO\`
@@ -84,6 +87,9 @@ jobs:
           ACTOR: ${{ github.actor }}
           COMMIT_MSG: ${{ github.event.head_commit.message }}
         run: |
+          if [ -z "$SLACK_WEBHOOK_URL" ]; then
+            echo "SLACK_WEBHOOK_URL not set — skipping Slack notification."; exit 0
+          fi
           SHORT_SHA="${SHA:0:7}"
           MSG="$(printf '%s' "$COMMIT_MSG" | head -n1)"
           TEXT=":x: *Deploy failed* — \`$REPO\`
