@@ -112,44 +112,6 @@ export const projects: Project[] = [
     }
   },
   {
-    slug: "sedra-resident",
-    category: "mobile",
-    contribution: "developer",
-    period: "2026–",
-    detail: false,
-    links: [],
-    title: {
-      en: "Sedra Resident",
-      de: "Sedra Resident"
-    },
-    tagline: {
-      en: "A companion app for residents who’ve purchased units — post-purchase services & management.",
-      de: "Eine Begleit-App für Bewohner mit gekauften Einheiten — Dienste und Verwaltung nach dem Kauf."
-    },
-    role: {
-      en: "Flutter Engineer — ground-up build",
-      de: "Flutter-Entwickler — Neuentwicklung"
-    },
-    stack: {
-      en: ["Flutter", "Dart", "Clean Architecture", "BLoC"],
-      de: ["Flutter", "Dart", "Clean Architecture", "BLoC"]
-    },
-    summary: {
-      en: "A companion application for Sedra residents who have purchased units, centered on the post-purchase journey — handovers, service requests, payments and community updates. Built on the same Clean Architecture + BLoC foundation as Sedra Life and currently in active development.",
-      de: "Eine Begleitanwendung für Sedra-Bewohner, die Einheiten gekauft haben, mit Fokus auf die Phase nach dem Kauf — Übergaben, Serviceanfragen, Zahlungen und Community-Updates. Aufgebaut auf demselben Fundament aus Clean Architecture und BLoC wie Sedra Life und derzeit in aktiver Entwicklung."
-    },
-    highlights: {
-      en: [
-        "Sharing one Clean Architecture + BLoC foundation with Sedra Life to keep both apps consistent and maintainable.",
-        "Focused on the post-purchase resident journey — service requests, payments and updates."
-      ],
-      de: [
-        "Gemeinsame Nutzung eines Fundaments aus Clean Architecture und BLoC mit Sedra Life, um beide Apps konsistent und wartbar zu halten.",
-        "Fokus auf die Phase nach dem Kauf — Serviceanfragen, Zahlungen und Updates."
-      ]
-    }
-  },
-  {
     slug: "qms",
     category: "mobile",
     contribution: "developer",

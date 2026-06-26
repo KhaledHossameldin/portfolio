@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "ogTitle": "Khaled — Senior Software Engineer",
+    "ogDescription": "End to end — infrastructure included. Flutter/mobile, frontend, backend, and the DevOps that runs it."
+  },
   "nav": {
     "work": "Work",
     "about": "About",
