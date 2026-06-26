@@ -22,6 +22,9 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
   return {
+    // Localized, SERP-length (~155) home meta description — overrides the longer
+    // root-layout default for /en and /de, and stays in sync with the OG description.
+    description: t("ogDescription"),
     alternates: {
       canonical: `/${locale}`,
       languages: { en: "/en", de: "/de", "x-default": "/en" },
