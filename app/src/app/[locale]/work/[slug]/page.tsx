@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { detailSlugs, getProject } from "@/data/projects";
 import type { Locale } from "@/i18n/routing";
+import { socialMeta } from "@/lib/seo/og";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/sections/Footer";
@@ -36,6 +37,13 @@ export async function generateMetadata({
         "x-default": `/en/work/${slug}`,
       },
     },
+    ...socialMeta({
+      locale: locale as Locale,
+      title: p.title[locale as Locale],
+      description: p.tagline[locale as Locale],
+      path: `/${locale}/work/${slug}`,
+      type: "article",
+    }),
   };
 }
 

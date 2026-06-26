@@ -44,10 +44,23 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   openGraph: {
+    type: "website",
+    siteName: "Khaled Hossameldin",
     title: "Khaled — Senior Software Engineer",
     description:
       "End to end — infrastructure included. Flutter/mobile, frontend, backend, DevOps.",
-    type: "website",
+    url: "/",
+    locale: "en_US",
+    images: [
+      { url: "/og.png", width: 1200, height: 630, alt: "Khaled — Senior Software Engineer" },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Khaled — Senior Software Engineer",
+    description:
+      "End to end — infrastructure included. Flutter/mobile, frontend, backend, DevOps.",
+    images: ["/og.png"],
   },
 };
 

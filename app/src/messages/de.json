@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "ogTitle": "Khaled — Senior Software-Entwickler",
+    "ogDescription": "Von Anfang bis Ende — Infrastruktur inklusive. Flutter/Mobile, Frontend, Backend und die DevOps, die alles betreibt."
+  },
   "nav": {
     "work": "Arbeiten",
     "about": "Über mich",

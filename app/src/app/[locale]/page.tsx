@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
+import { socialMeta } from "@/lib/seo/og";
+import type { Locale } from "@/i18n/routing";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ConsoleEasterEgg } from "@/components/ConsoleEasterEgg";
 import { Nav } from "@/components/Nav";
@@ -18,11 +20,18 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta" });
   return {
     alternates: {
       canonical: `/${locale}`,
       languages: { en: "/en", de: "/de", "x-default": "/en" },
     },
+    ...socialMeta({
+      locale: locale as Locale,
+      title: t("ogTitle"),
+      description: t("ogDescription"),
+      path: `/${locale}`,
+    }),
   };
 }
 
