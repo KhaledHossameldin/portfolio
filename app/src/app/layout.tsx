@@ -30,7 +30,8 @@ const plexMono = IBM_Plex_Mono({
 const plexArabic = IBM_Plex_Sans_Arabic({
   variable: "--font-arabic",
   subsets: ["arabic"],
-  weight: ["300", "400", "500", "600", "700"],
+  // Only the weights the type scale uses (300/400/500/600); 700 is unused.
+  weight: ["300", "400", "500", "600"],
   display: "swap",
   preload: false,
 });
