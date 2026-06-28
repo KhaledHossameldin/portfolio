@@ -5,6 +5,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { handleHashClick } from "@/lib/motion/scrollToHash";
 import { Button } from "./ui/Button";
 import { LangToggle, ThemeToggle } from "./Toggles";
+import { MobileMenu } from "./MobileMenu";
 
 const navLink = {
   display: "inline-flex",
@@ -111,6 +112,7 @@ export function Nav() {
       </nav>
 
       <div
+        className="kp-nav-desktop"
         style={{
           marginInlineStart: "auto",
           display: "flex",
@@ -130,6 +132,9 @@ export function Nav() {
           {t("cta")}
         </Button>
       </div>
+
+      {/* Compact hamburger menu — shown only below the 900px nav breakpoint. */}
+      <MobileMenu />
     </header>
   );
 }
