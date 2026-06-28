@@ -81,11 +81,13 @@ export const viewport: Viewport = {
   themeColor: "#0E0C0A",
 };
 
-// Pre-paint (in <head>, before first paint → no flash): (1) apply the saved theme
-// (default dark); (2) set lang + dir from the URL's locale segment so /ar renders
+// Pre-paint (in <head>, before first paint → no flash): (1) apply the theme — a
+// session manual override (sessionStorage) if present, else the OS preference
+// (prefers-color-scheme); (2) drop the legacy localStorage key so it can't override
+// the OS default; (3) set lang + dir from the URL's locale segment so /ar renders
 // RTL with no LTR flash. The static <html> is locale-agnostic (one root layout);
 // this corrects it per document. Mirrors the [locale] no-JS dir wrapper.
-const themeInit = `(function(){var d=document.documentElement;try{var t=localStorage.getItem('kp-theme');if(t!=='light'&&t!=='dark'){t='dark'}d.setAttribute('data-theme',t)}catch(e){d.setAttribute('data-theme','dark')}try{var seg=location.pathname.split('/')[1];var loc=(seg==='ar'||seg==='de'||seg==='en')?seg:'en';d.lang=loc;d.dir=(loc==='ar')?'rtl':'ltr'}catch(e){}})();`;
+const themeInit = `(function(){var d=document.documentElement;try{var o=sessionStorage.getItem('kp-theme');var t=(o==='light'||o==='dark')?o:(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');d.setAttribute('data-theme',t)}catch(e){d.setAttribute('data-theme','dark')}try{localStorage.removeItem('kp-theme')}catch(e){}try{var seg=location.pathname.split('/')[1];var loc=(seg==='ar'||seg==='de'||seg==='en')?seg:'en';d.lang=loc;d.dir=(loc==='ar')?'rtl':'ltr'}catch(e){}})();`;
 
 export default function RootLayout({
   children,

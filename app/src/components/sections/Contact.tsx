@@ -85,6 +85,7 @@ export function Contact() {
     >
       <Reveal>
       <span
+        id="contact"
         style={{
           fontFamily: "var(--font-mono)",
           fontSize: "var(--text-2xs)",
@@ -168,7 +169,6 @@ export function Contact() {
         </div>
 
         <form
-          id="contact"
           onSubmit={onSubmit}
           style={{
             display: "flex",

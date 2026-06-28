@@ -19,7 +19,6 @@ export function Stack() {
 
   return (
     <section
-      id="stack"
       style={{
         maxWidth: "var(--container)",
         margin: "0 auto",
@@ -38,7 +37,7 @@ export function Stack() {
           }}
         >
           <div>
-            <span style={{ ...eyebrow, color: "var(--accent)" }}>— {t("eyebrow")}</span>
+            <span id="stack" style={{ ...eyebrow, color: "var(--accent)" }}>— {t("eyebrow")}</span>
             <h2
               style={{
                 font: "var(--type-h2)",

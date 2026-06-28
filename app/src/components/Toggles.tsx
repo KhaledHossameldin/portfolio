@@ -77,7 +77,8 @@ export function LangToggle() {
   );
 }
 
-/** Theme toggle — client state on <html data-theme>, persisted to localStorage. */
+/** Theme toggle — client state on <html data-theme>. Default follows the OS
+ *  (prefers-color-scheme); a manual flip is a per-session override in sessionStorage. */
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   return (
