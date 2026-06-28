@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { getProject } from "@/data/projects";
+import { getProject, pick } from "@/data/projects";
 import type { Locale } from "@/i18n/routing";
 import { Reveal } from "../motion/Reveal";
 import { Parallax } from "../motion/Parallax";
@@ -31,7 +31,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
   };
 
   const meta = [
-    { k: td("roleLabel"), v: p.role[locale] },
+    { k: td("roleLabel"), v: pick(p.role, locale) },
     { k: td("periodLabel"), v: p.period },
     { k: td("categoryLabel"), v: categoryLabel(p.category) },
   ];
@@ -55,7 +55,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
           textDecoration: "none",
         }}
       >
-        <ArrowLeft />
+        <ArrowLeft className="kp-mirror" />
         {td("back")}
       </a>
 
@@ -68,10 +68,10 @@ export function ProjectDetail({ slug }: { slug: string }) {
             margin: "var(--space-4) 0 var(--space-3)",
           }}
         >
-          {p.title[locale]}
+          {pick(p.title, locale)}
         </h1>
         <p style={{ font: "var(--type-lead)", color: "var(--text-muted)", margin: 0, maxWidth: "52ch" }}>
-          {p.tagline[locale]}
+          {pick(p.tagline, locale)}
         </p>
       </header>
 
@@ -97,7 +97,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
           </dl>
         </Parallax>
         <Reveal>
-          <p style={{ font: "var(--type-lead)", color: "var(--text)", margin: 0, maxWidth: "60ch" }}>{p.summary[locale]}</p>
+          <p style={{ font: "var(--type-lead)", color: "var(--text)", margin: 0, maxWidth: "60ch" }}>{pick(p.summary, locale)}</p>
         </Reveal>
       </div>
 
@@ -110,8 +110,8 @@ export function ProjectDetail({ slug }: { slug: string }) {
       >
         <h2 style={{ ...monoLabel, margin: "0 0 var(--space-5)" }}>{td("highlightsLabel")}</h2>
         <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-5)" }}>
-          {p.highlights[locale].map((h, i) => (
-            <div key={i} style={{ borderLeft: "2px solid var(--accent-line)", paddingLeft: "var(--space-5)" }}>
+          {pick(p.highlights, locale).map((h, i) => (
+            <div key={i} style={{ borderInlineStart: "2px solid var(--accent-line)", paddingInlineStart: "var(--space-5)" }}>
               <p style={{ font: "var(--type-body)", color: "var(--text-muted)", margin: 0 }}>{h}</p>
             </div>
           ))}
@@ -122,7 +122,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
       <Reveal style={{ paddingTop: "var(--space-8)" }}>
         <h2 style={{ ...monoLabel, margin: "0 0 var(--space-4)" }}>{td("stackLabel")}</h2>
         <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
-          {p.stack[locale].map((s) => (
+          {pick(p.stack, locale).map((s) => (
             <Tag key={s} size="sm">
               {s}
             </Tag>
@@ -136,7 +136,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
           <h2 style={{ ...monoLabel, margin: "0 0 var(--space-4)" }}>{td("linksLabel")}</h2>
           <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
             {p.links.map((l) => (
-              <Button key={l.url} variant="secondary" size="sm" href={l.url} iconRight={<ArrowUpRight size={16} />}>
+              <Button key={l.url} variant="secondary" size="sm" href={l.url} iconRight={<ArrowUpRight size={16} className="kp-mirror" />}>
                 {l.label}
               </Button>
             ))}
@@ -165,7 +165,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
           {td("backAll")}
         </span>
         <span style={{ color: "var(--accent)", display: "inline-flex" }}>
-          <ArrowRight size={24} />
+          <ArrowRight size={24} className="kp-mirror" />
         </span>
       </a>
     </article>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { projects } from "@/data/projects";
+import { projects, pick } from "@/data/projects";
 import type { Locale } from "@/i18n/routing";
 import { Reveal } from "../motion/Reveal";
 import { Card } from "../ui/Card";
@@ -106,6 +106,7 @@ export function SelectedWork() {
             </h2>
           </div>
           <p
+            className="kp-em"
             style={{
               font: "var(--type-small)",
               color: "var(--text-faint)",
@@ -146,12 +147,15 @@ export function SelectedWork() {
                 }}
               >
                 <span style={metaMono}>
-                  <span style={{ color: "var(--text)", fontWeight: "var(--weight-medium)" }}>{idx}</span> /{" "}
-                  {total} &nbsp;·&nbsp; {categoryLabel(p.category)}
+                  <span className="kp-ltr">
+                    <span style={{ color: "var(--text)", fontWeight: "var(--weight-medium)" }}>{idx}</span> /{" "}
+                    {total}
+                  </span>
+                  &nbsp;·&nbsp; {categoryLabel(p.category)}
                 </span>
                 {p.detail ? (
                   <span style={{ color: "var(--text-faint)", display: "inline-flex" }}>
-                    <ArrowUpRight />
+                    <ArrowUpRight className="kp-mirror" />
                   </span>
                 ) : (
                   cTag && (
@@ -181,7 +185,7 @@ export function SelectedWork() {
                   margin: "var(--space-5) 0 var(--space-1)",
                 }}
               >
-                {p.title[locale]}
+                {pick(p.title, locale)}
               </h3>
               <p
                 style={{
@@ -194,7 +198,7 @@ export function SelectedWork() {
                   overflow: "hidden",
                 }}
               >
-                {p.tagline[locale]}
+                {pick(p.tagline, locale)}
               </p>
             </>
           );
@@ -205,7 +209,7 @@ export function SelectedWork() {
           const footer = (
             <div style={{ marginTop: "auto" }}>
               <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
-                {p.stack[locale].slice(0, 5).map((s) => (
+                {pick(p.stack, locale).slice(0, 5).map((s) => (
                   <Tag key={s} size="sm">
                     {s}
                   </Tag>
@@ -224,7 +228,7 @@ export function SelectedWork() {
                       style={storeLink}
                     >
                       {l.label}
-                      <ArrowUpRight size={12} />
+                      <ArrowUpRight size={12} className="kp-mirror" />
                     </a>
                   ))}
                 </div>
@@ -286,7 +290,7 @@ export function SelectedWork() {
                 {a.links.map((l) => (
                   <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" style={storeLink}>
                     {l.label}
-                    <ArrowUpRight size={12} />
+                    <ArrowUpRight size={12} className="kp-mirror" />
                   </a>
                 ))}
                 {a.cite && (

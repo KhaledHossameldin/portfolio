@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { routing } from "@/i18n/routing";
+import { routing, isRtl } from "@/i18n/routing";
 
 // Build /en and /de at export time; reject anything else (no runtime middleware).
 export function generateStaticParams() {
@@ -24,14 +24,17 @@ export default async function LocaleLayout({
   // Enable static rendering for this locale.
   setRequestLocale(locale);
 
-  // The root layout owns <html> with a default lang; correct it to the active
-  // locale on load (each locale is a separate static document).
-  const setLang = `document.documentElement.lang=${JSON.stringify(locale)};`;
+  // The root layout owns <html> (locale-agnostic); the root pre-paint script sets
+  // documentElement.lang/dir per URL for JS users (no FOUC). This server-rendered
+  // wrapper bakes the direction into the static HTML for no-JS/crawlers.
+  // display:contents → no extra box; `dir` still inherits to all descendants.
+  const dir = isRtl(locale) ? "rtl" : "ltr";
 
   return (
     <NextIntlClientProvider>
-      <script dangerouslySetInnerHTML={{ __html: setLang }} />
-      {children}
+      <div dir={dir} style={{ display: "contents" }}>
+        {children}
+      </div>
     </NextIntlClientProvider>
   );
 }

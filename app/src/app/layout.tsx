@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Newsreader, Hanken_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import { Newsreader, Hanken_Grotesk, IBM_Plex_Mono, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { SmoothScrollProvider } from "@/components/motion/SmoothScrollProvider";
 import "./globals.css";
 
@@ -23,6 +23,17 @@ const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   display: "swap",
+});
+
+// Arabic face for the RTL locale (/ar). preload:false so en/de don't fetch it;
+// applied only under [dir="rtl"] (globals.css overrides the font vars there).
+const plexArabic = IBM_Plex_Sans_Arabic({
+  variable: "--font-arabic",
+  subsets: ["arabic"],
+  // Only the weights the type scale uses (300/400/500/600); 700 is unused.
+  weight: ["300", "400", "500", "600"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -70,9 +81,11 @@ export const viewport: Viewport = {
   themeColor: "#0E0C0A",
 };
 
-// Pre-paint: apply the saved theme (default dark) before first paint, no flash.
-// lang defaults to "en" here and is corrected per-locale in the [locale] layout.
-const themeInit = `(function(){try{var t=localStorage.getItem('kp-theme');if(t!=='light'&&t!=='dark'){t='dark'}document.documentElement.setAttribute('data-theme',t)}catch(e){document.documentElement.setAttribute('data-theme','dark')}})();`;
+// Pre-paint (in <head>, before first paint → no flash): (1) apply the saved theme
+// (default dark); (2) set lang + dir from the URL's locale segment so /ar renders
+// RTL with no LTR flash. The static <html> is locale-agnostic (one root layout);
+// this corrects it per document. Mirrors the [locale] no-JS dir wrapper.
+const themeInit = `(function(){var d=document.documentElement;try{var t=localStorage.getItem('kp-theme');if(t!=='light'&&t!=='dark'){t='dark'}d.setAttribute('data-theme',t)}catch(e){d.setAttribute('data-theme','dark')}try{var seg=location.pathname.split('/')[1];var loc=(seg==='ar'||seg==='de'||seg==='en')?seg:'en';d.lang=loc;d.dir=(loc==='ar')?'rtl':'ltr'}catch(e){}})();`;
 
 export default function RootLayout({
   children,
@@ -83,7 +96,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme="dark"
-      className={`${newsreader.variable} ${hanken.variable} ${plexMono.variable}`}
+      className={`${newsreader.variable} ${hanken.variable} ${plexMono.variable} ${plexArabic.variable}`}
       suppressHydrationWarning
     >
       <head>

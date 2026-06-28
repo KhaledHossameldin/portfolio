@@ -51,6 +51,7 @@ export function Stack() {
             </h2>
           </div>
           <p
+            className="kp-em"
             style={{
               font: "var(--type-small)",
               color: "var(--text-faint)",

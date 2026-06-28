@@ -62,7 +62,9 @@ export function Nav() {
           textDecoration: "none",
         }}
       >
-        Khaled<span style={{ color: "var(--accent)" }}>.</span>
+        <span className="kp-ltr">
+          Khaled<span style={{ color: "var(--accent)" }}>.</span>
+        </span>
       </Link>
 
       <nav
@@ -71,7 +73,7 @@ export function Nav() {
           display: "flex",
           alignItems: "center",
           gap: "var(--space-5)",
-          marginLeft: "var(--space-3)",
+          marginInlineStart: "var(--space-3)",
         }}
       >
         <a
@@ -79,7 +81,7 @@ export function Nav() {
           style={navLink}
           onClick={(e) => handleHashClick(e, sectionHref("work"))}
         >
-          <span style={navIdx}>01</span>
+          <span className="kp-ltr" style={navIdx}>01</span>
           {t("work")}
         </a>
         <a
@@ -87,7 +89,7 @@ export function Nav() {
           style={navLink}
           onClick={(e) => handleHashClick(e, sectionHref("about"))}
         >
-          <span style={navIdx}>02</span>
+          <span className="kp-ltr" style={navIdx}>02</span>
           {t("about")}
         </a>
         <a
@@ -95,7 +97,7 @@ export function Nav() {
           style={navLink}
           onClick={(e) => handleHashClick(e, sectionHref("stack"))}
         >
-          <span style={navIdx}>03</span>
+          <span className="kp-ltr" style={navIdx}>03</span>
           {t("stack")}
         </a>
         <a
@@ -103,14 +105,14 @@ export function Nav() {
           style={navLink}
           onClick={(e) => handleHashClick(e, sectionHref("contact"))}
         >
-          <span style={navIdx}>04</span>
+          <span className="kp-ltr" style={navIdx}>04</span>
           {t("contact")}
         </a>
       </nav>
 
       <div
         style={{
-          marginLeft: "auto",
+          marginInlineStart: "auto",
           display: "flex",
           alignItems: "center",
           gap: "var(--space-3)",

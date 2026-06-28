@@ -12,7 +12,7 @@ const OG_IMAGE = {
   height: 630,
   alt: "Khaled — Senior Software Engineer",
 } as const;
-const OG_LOCALE: Record<Locale, string> = { en: "en_US", de: "de_DE" };
+const OG_LOCALE: Record<Locale, string> = { en: "en_US", de: "de_DE", ar: "ar_SA" };
 
 export function socialMeta({
   locale,

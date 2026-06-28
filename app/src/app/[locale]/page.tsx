@@ -27,7 +27,7 @@ export async function generateMetadata({
     description: t("ogDescription"),
     alternates: {
       canonical: `/${locale}`,
-      languages: { en: "/en", de: "/de", "x-default": "/en" },
+      languages: { en: "/en", de: "/de", ar: "/ar", "x-default": "/en" },
     },
     ...socialMeta({
       locale: locale as Locale,

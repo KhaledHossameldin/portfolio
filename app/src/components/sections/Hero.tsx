@@ -69,7 +69,7 @@ export function Hero() {
           }}
         >
           {t("line1")}{" "}
-          <span style={{ fontStyle: "italic", color: "var(--text-muted)" }}>
+          <span className="kp-em" style={{ fontStyle: "italic", color: "var(--text-muted)" }}>
             {t("line2")}
           </span>
         </h1>
@@ -103,7 +103,7 @@ export function Hero() {
             variant="primary"
             size="lg"
             href="#contact"
-            iconRight={<ArrowUpRight />}
+            iconRight={<ArrowUpRight className="kp-mirror" />}
             onClick={(e) => handleHashClick(e, "#contact")}
           >
             {t("ctaPrimary")}
