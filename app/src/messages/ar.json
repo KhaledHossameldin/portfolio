@@ -1,125 +1,220 @@
 {
   "meta": {
-    "ogTitle": "Khaled — Senior Software Engineer",
-    "ogDescription": "Senior software engineer working end to end — strongest in mobile and DevOps/cloud, fluent across frontend and backend, from app to deployed infrastructure."
+    "ogTitle": "خالد — مهندس برمجيات أول",
+    "ogDescription": "مهندس برمجيات أول يعمل من الطرف إلى الطرف — الأقوى في تطبيقات الموبايل وDevOps والسحابة، ومتمكّن في الواجهة الأمامية والخلفية، من التطبيق حتى البنية التحتية المُشغّلة."
   },
   "nav": {
-    "work": "Work",
-    "about": "About",
-    "stack": "Stack",
-    "contact": "Contact",
-    "cta": "Get in touch"
+    "work": "الأعمال",
+    "about": "نبذة",
+    "stack": "التقنيات",
+    "contact": "تواصل",
+    "cta": "تواصل معي"
   },
-  "status": "Available — remote or relocation",
+  "status": "متاح — عن بُعد أو للانتقال",
   "hero": {
-    "eyebrow": "Senior Software Engineer",
-    "line1": "End to end —",
-    "line2": "infrastructure included.",
-    "lead": "Five-plus years across Flutter and mobile, frontend, backend, and the DevOps that runs them. This very site ships itself — same Terraform and OIDC CI/CD it talks about.",
-    "ctaPrimary": "Get in touch",
-    "ctaSecondary": "See selected work",
-    "panelLabel": "Status",
+    "eyebrow": "مهندس برمجيات أول",
+    "line1": "من الطرف إلى الطرف —",
+    "line2": "والبنية التحتية مشمولة.",
+    "lead": "أكثر من خمس سنوات عبر Flutter والموبايل، والواجهة الأمامية، والخلفية، وDevOps التي تُشغّلها. هذا الموقع نفسه يَنشُر ذاته — بنفس Terraform وOIDC CI/CD الذي يتحدّث عنه.",
+    "ctaPrimary": "تواصل معي",
+    "ctaSecondary": "اطّلع على أعمال مختارة",
+    "panelLabel": "الحالة",
     "panel": [
-      { "k": "Based", "v": "Egypt", "geo": "6th of October City, Egypt" },
-      { "k": "Relocation", "v": "Open to relocation — worldwide" },
-      { "k": "Range", "v": "Mobile · DevOps · Front · Back" },
-      { "k": "This site", "v": "Next.js · S3/CF · OIDC CI/CD" }
+      {
+        "k": "المقر",
+        "v": "مصر",
+        "geo": "مدينة 6 أكتوبر، مصر"
+      },
+      {
+        "k": "الانتقال",
+        "v": "منفتح على الانتقال — عالميًا"
+      },
+      {
+        "k": "النطاق",
+        "v": "موبايل · DevOps · واجهة · خلفية"
+      },
+      {
+        "k": "هذا الموقع",
+        "v": "Next.js · S3/CF · OIDC CI/CD"
+      }
     ]
   },
   "work": {
-    "eyebrow": "Selected work",
-    "title": "A few I’m happy to be judged by.",
-    "note": "Featured projects open a full case page. The rest are here in brief."
+    "eyebrow": "أعمال مختارة",
+    "title": "أعمالٌ يسعدني أن أُقيَّم بها.",
+    "note": "المشاريع المميّزة تفتح صفحة تفصيلية كاملة، والبقية مُوجزة هنا."
   },
   "projectDetail": {
-    "back": "Back to work",
-    "backAll": "See the rest of the work",
-    "roleLabel": "Role",
-    "periodLabel": "Period",
-    "categoryLabel": "Category",
-    "stackLabel": "Stack",
-    "highlightsLabel": "Highlights",
-    "linksLabel": "Links",
-    "tagMaintenance": "Maintenance",
-    "tagLead": "Lead",
-    "tagAuthor": "Author",
-    "category": { "mobile": "Mobile", "devops": "DevOps", "frontend": "Frontend", "backend": "Backend" }
+    "back": "العودة إلى الأعمال",
+    "backAll": "اطّلع على بقية الأعمال",
+    "roleLabel": "الدور",
+    "periodLabel": "الفترة",
+    "categoryLabel": "الفئة",
+    "stackLabel": "التقنيات",
+    "highlightsLabel": "أبرز النقاط",
+    "linksLabel": "روابط",
+    "tagMaintenance": "صيانة",
+    "tagLead": "قيادة",
+    "tagAuthor": "مؤلِّف",
+    "category": {
+      "mobile": "موبايل",
+      "devops": "DevOps",
+      "frontend": "الواجهة الأمامية",
+      "backend": "الخلفية"
+    }
   },
   "also": {
-    "eyebrow": "Open source & writing",
+    "eyebrow": "مفتوح المصدر وكتابات",
     "items": [
       {
         "kind": "oss",
         "title": "telephony_sms",
-        "meta": "Open-source Flutter plugin · pub.dev",
-        "desc": "SMS sending and telephony state for Flutter on Android, built over platform channels — a small, typed Dart API bridged across the MethodChannel boundary to the native layer. Published on pub.dev and used in production apps.",
-        "role": "Author & maintainer",
-        "links": [{ "label": "pub.dev", "url": "https://pub.dev/packages/telephony_sms" }]
+        "meta": "إضافة Flutter مفتوحة المصدر · pub.dev",
+        "desc": "إرسال الرسائل القصيرة وحالة الاتصال الهاتفي في Flutter على أندرويد، مبنيّة فوق قنوات المنصّة — واجهة Dart صغيرة ومُحكَمة الأنواع، مُجسَّرة عبر حدود MethodChannel إلى الطبقة الأصلية. منشورة على pub.dev ومُستخدَمة في تطبيقات إنتاجية.",
+        "role": "مؤلِّف ومشرف",
+        "links": [
+          {
+            "label": "pub.dev",
+            "url": "https://pub.dev/packages/telephony_sms"
+          }
+        ]
       },
       {
         "kind": "paper",
-        "title": "Genetic Algorithm Golden-Ratio Design Model",
-        "meta": "Peer-reviewed chapter · Springer",
-        "desc": "A genetic-algorithm approach to golden-ratio-guided design, published as a peer-reviewed Springer book chapter.",
-        "role": "Author",
+        "title": "نموذج تصميم بالخوارزمية الجينية وفق النسبة الذهبية",
+        "meta": "فصلٌ مُحكَّم · Springer",
+        "desc": "مقاربة قائمة على الخوارزميات الجينية لتصميمٍ مُوجَّه بالنسبة الذهبية، منشورة كفصلٍ مُحكَّم في كتابٍ من Springer.",
+        "role": "مؤلِّف",
         "year": "2022",
-        "links": [{ "label": "Read (free)", "url": "https://rdcu.be/fpUxZ" }],
+        "links": [
+          {
+            "label": "Read (free)",
+            "url": "https://rdcu.be/fpUxZ"
+          }
+        ],
         "cite": "DOI 10.1007/978-3-031-07512-4_8",
         "citeUrl": "https://doi.org/10.1007/978-3-031-07512-4_8"
       }
     ]
   },
   "stack": {
-    "eyebrow": "Stack & tooling",
-    "title": "The range, honestly labelled.",
-    "note": "Not a buzzword wall — only things I’d defend in review.",
+    "eyebrow": "التقنيات والأدوات",
+    "title": "النطاق، موصوفٌ بصدق.",
+    "note": "ليست جدارًا من المصطلحات الرنّانة — فقط ما أستطيع الدفاع عنه في المراجعة.",
     "groups": [
-      { "label": "Mobile", "items": ["Flutter", "Dart", "Swift", "Kotlin", "Platform channels"] },
-      { "label": "DevOps · Cloud", "items": ["AWS", "Kubernetes", "Terraform", "ArgoCD", "GH Actions"] },
-      { "label": "Frontend", "items": ["TypeScript", "React", "Next.js", "Vite", "CSS"] },
-      { "label": "Backend", "items": ["Node", "REST", "PostgreSQL", "Temporal", "Redis"] }
+      {
+        "label": "الموبايل",
+        "items": [
+          "Flutter",
+          "Dart",
+          "Swift",
+          "Kotlin",
+          "قنوات المنصّة"
+        ]
+      },
+      {
+        "label": "DevOps · السحابة",
+        "items": [
+          "AWS",
+          "Kubernetes",
+          "Terraform",
+          "ArgoCD",
+          "GH Actions"
+        ]
+      },
+      {
+        "label": "الواجهة الأمامية",
+        "items": [
+          "TypeScript",
+          "React",
+          "Next.js",
+          "Vite",
+          "CSS"
+        ]
+      },
+      {
+        "label": "الخلفية",
+        "items": [
+          "Node",
+          "REST",
+          "PostgreSQL",
+          "Temporal",
+          "Redis"
+        ]
+      }
     ]
   },
   "about": {
-    "eyebrow": "About",
-    "title": "I like the part where it works.",
-    "body1": "I’m Khaled — a senior engineer who’s genuinely fond of this craft and won’t pretend otherwise. Five-plus years moving between a Flutter screen, a backend service, and the Terraform that puts them in front of people.",
-    "body2": "I care about the unglamorous middle: the error message that respects your time, the migration that doesn’t wake anyone at 3 a.m., the pipeline that makes shipping a non-event. Serious about the work, light about myself.",
+    "eyebrow": "نبذة",
+    "title": "يعجبني الجزء الذي يعمل فيه.",
+    "body1": "أنا خالد — مهندس أول شغوفٌ حقًّا بهذه الحِرفة ولا أتظاهر بغير ذلك. أكثر من خمس سنوات أتنقّل بين شاشة Flutter، وخدمة خلفية، وTerraform التي تضعهما أمام الناس.",
+    "body2": "يهمّني الوسط غير البرّاق: رسالة الخطأ التي تحترم وقتك، والترحيل الذي لا يوقظ أحدًا في الثالثة فجرًا، وخط الأنابيب الذي يجعل النشر حدثًا عاديًا. جادٌّ في العمل، خفيفٌ مع نفسي.",
     "facts": [
-      { "k": "Range", "v": "Mobile · DevOps · Frontend · Backend" },
-      { "k": "Experience", "v": "5+ years, senior" },
-      { "k": "Languages", "v": "English · German (B2) · Arabic" },
-      { "k": "Based", "v": "Egypt", "geo": "6th of October City, Egypt" },
-      { "k": "Open to", "v": "Remote · relocation worldwide" }
+      {
+        "k": "النطاق",
+        "v": "موبايل · DevOps · واجهة أمامية · خلفية"
+      },
+      {
+        "k": "الخبرة",
+        "v": "أكثر من 5 سنوات، مستوى أول"
+      },
+      {
+        "k": "اللغات",
+        "v": "الإنجليزية · الألمانية (B2) · العربية"
+      },
+      {
+        "k": "المقر",
+        "v": "مصر",
+        "geo": "مدينة 6 أكتوبر، مصر"
+      },
+      {
+        "k": "منفتح على",
+        "v": "العمل عن بُعد · الانتقال عالميًا"
+      }
     ]
   },
   "contact": {
-    "eyebrow": "Contact",
-    "title": "Let’s make something that lasts.",
-    "lead": "Hiring, building, or just comparing keyboard layouts — I read everything and reply within a day.",
-    "nameLabel": "Name",
-    "namePh": "Jane Recruiter",
-    "emailLabel": "E-mail",
+    "eyebrow": "تواصل",
+    "title": "لِنصنع شيئًا يدوم.",
+    "lead": "توظيفًا أو بناءً أو حتى مقارنةً لتخطيطات لوحات المفاتيح — أقرأ كل شيء وأردّ خلال يوم.",
+    "nameLabel": "الاسم",
+    "namePh": "سارة، مسؤولة التوظيف",
+    "emailLabel": "البريد الإلكتروني",
     "emailPh": "jane@company.com",
-    "msgLabel": "Message",
-    "msgPh": "Tell me about the role or the problem…",
-    "send": "Send message",
-    "sending": "Sending…",
-    "sent": "Sent. Talk soon.",
-    "errorMsg": "Couldn’t send — please use a direct link below.",
-    "orReach": "Or reach me directly",
-    "within": "↵ within a day"
+    "msgLabel": "الرسالة",
+    "msgPh": "أخبرني عن الدور أو المشكلة…",
+    "send": "إرسال الرسالة",
+    "sending": "جارٍ الإرسال…",
+    "sent": "تم الإرسال. إلى اللقاء قريبًا.",
+    "errorMsg": "تعذّر الإرسال — يُرجى استخدام رابطٍ مباشر بالأسفل.",
+    "orReach": "أو تواصل معي مباشرة",
+    "within": "↵ خلال يوم"
   },
   "footer": {
-    "headline": "Still here? Let’s talk.",
+    "headline": "ما زلت هنا؟ لِنتحدّث.",
     "links": [
-      { "label": "Email", "href": "mailto:contact@khaledhossameldin.com" },
-      { "label": "GitHub", "href": "https://github.com/KhaledHossameldin" },
-      { "label": "LinkedIn", "href": "https://www.linkedin.com/in/khaled-hossameldin/" },
-      { "label": "CV — Mobile Engineer", "href": "/Khaled_Hossameldin_Mobile_CV.pdf" },
-      { "label": "CV — DevOps & Cloud", "href": "/Khaled_Hossameldin_DevOps_CV.pdf" }
+      {
+        "label": "البريد الإلكتروني",
+        "href": "mailto:contact@khaledhossameldin.com"
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/KhaledHossameldin"
+      },
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/khaled-hossameldin/"
+      },
+      {
+        "label": "السيرة الذاتية — مهندس موبايل",
+        "href": "/Khaled_Hossameldin_Mobile_CV.pdf"
+      },
+      {
+        "label": "السيرة الذاتية — DevOps والسحابة",
+        "href": "/Khaled_Hossameldin_DevOps_CV.pdf"
+      }
     ],
-    "colophon": "© 2026 Khaled",
-    "signoff": "Built with Terraform and an unreasonable amount of whitespace."
+    "colophon": "© 2026 خالد",
+    "signoff": "بُنِي باستخدام Terraform وكمٍّ غير معقول من المساحات البيضاء."
   }
 }
