@@ -6,8 +6,15 @@ import type { Locale } from "@/i18n/routing";
 // (SelectedWork), the detail body (ProjectDetail) and the detail route all read this.
 // Add / edit / delete a project = edit THIS file only.
 
-/** Per-locale value: { en, de }. */
-type Loc<T> = Record<Locale, T>;
+// Per-locale value. `en` + `de` are required; `ar` is optional during the Arabic
+// rollout (Stage A scaffolding) — read it via `pick()`, which falls back to English
+// until the native Arabic copy lands. Flip `ar` to required once content is in.
+type Loc<T> = { en: T; de: T; ar?: T };
+
+/** Localized read with an English fallback (so /ar renders before its copy exists). */
+export function pick<T>(value: Loc<T>, locale: Locale): T {
+  return (value[locale] ?? value.en) as T;
+}
 
 export type ProjectLink = { label: string; url: string };
 

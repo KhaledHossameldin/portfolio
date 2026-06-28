@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
-import { detailSlugs, getProject } from "@/data/projects";
+import { detailSlugs, getProject, pick } from "@/data/projects";
 import type { Locale } from "@/i18n/routing";
 import { socialMeta } from "@/lib/seo/og";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -27,20 +27,21 @@ export async function generateMetadata({
   const p = getProject(slug);
   if (!p) return {};
   return {
-    title: p.title[locale as Locale],
-    description: p.tagline[locale as Locale],
+    title: pick(p.title, locale as Locale),
+    description: pick(p.tagline, locale as Locale),
     alternates: {
       canonical: `/${locale}/work/${slug}`,
       languages: {
         en: `/en/work/${slug}`,
         de: `/de/work/${slug}`,
+        ar: `/ar/work/${slug}`,
         "x-default": `/en/work/${slug}`,
       },
     },
     ...socialMeta({
       locale: locale as Locale,
-      title: p.title[locale as Locale],
-      description: p.tagline[locale as Locale],
+      title: pick(p.title, locale as Locale),
+      description: pick(p.tagline, locale as Locale),
       path: `/${locale}/work/${slug}`,
       type: "article",
     }),

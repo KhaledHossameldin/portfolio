@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { projects } from "@/data/projects";
+import { projects, pick } from "@/data/projects";
 import type { Locale } from "@/i18n/routing";
 import { Reveal } from "../motion/Reveal";
 import { Card } from "../ui/Card";
@@ -181,7 +181,7 @@ export function SelectedWork() {
                   margin: "var(--space-5) 0 var(--space-1)",
                 }}
               >
-                {p.title[locale]}
+                {pick(p.title, locale)}
               </h3>
               <p
                 style={{
@@ -194,7 +194,7 @@ export function SelectedWork() {
                   overflow: "hidden",
                 }}
               >
-                {p.tagline[locale]}
+                {pick(p.tagline, locale)}
               </p>
             </>
           );
@@ -205,7 +205,7 @@ export function SelectedWork() {
           const footer = (
             <div style={{ marginTop: "auto" }}>
               <div style={{ display: "flex", gap: "var(--space-2)", flexWrap: "wrap" }}>
-                {p.stack[locale].slice(0, 5).map((s) => (
+                {pick(p.stack, locale).slice(0, 5).map((s) => (
                   <Tag key={s} size="sm">
                     {s}
                   </Tag>

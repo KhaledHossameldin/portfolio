@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   // The root is a locale dispatcher, not a content page — keep it out of indexes.
   robots: { index: false, follow: false },
   alternates: {
-    languages: { en: "/en", de: "/de", "x-default": "/en" },
+    languages: { en: "/en", de: "/de", ar: "/ar", "x-default": "/en" },
   },
 };
 

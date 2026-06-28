@@ -323,3 +323,14 @@ a {
     }
   }
 }
+
+/* ── RTL / Arabic (/ar) ──────────────────────────────────────────────────────
+   Direction is set on <html> by the root pre-paint script and on a server-rendered
+   wrapper for no-JS (see layout.tsx). Under RTL, swap all three font families to the
+   Arabic face (IBM Plex Sans Arabic, loaded in layout.tsx). Later stages (B) add the
+   logical-property fixes and icon mirroring; this block is the Stage-A font scaffold. */
+[dir="rtl"] {
+  --font-serif: var(--font-arabic), "Segoe UI", Tahoma, sans-serif;
+  --font-sans: var(--font-arabic), "Segoe UI", Tahoma, sans-serif;
+  --font-mono: var(--font-arabic), ui-monospace, monospace;
+}
