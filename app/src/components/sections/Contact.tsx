@@ -140,7 +140,7 @@ export function Contact() {
               {t("orReach")}
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-3)" }}>
-              <a href="mailto:contact@khaledhossameldin.com" style={directLink}>
+              <a href="mailto:contact@khaledhossameldin.com" className="kp-ltr" style={directLink}>
                 <Mail />
                 contact@khaledhossameldin.com
               </a>
@@ -148,7 +148,7 @@ export function Contact() {
                 href="https://github.com/KhaledHossameldin"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={directLink}
+                className="kp-ltr" style={directLink}
               >
                 <Github />
                 github.com/KhaledHossameldin
@@ -157,7 +157,7 @@ export function Contact() {
                 href="https://www.linkedin.com/in/khaled-hossameldin/"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={directLink}
+                className="kp-ltr" style={directLink}
               >
                 <Linkedin />
                 linkedin.com/in/khaled-hossameldin
@@ -227,7 +227,7 @@ export function Contact() {
                 {t("within")}
               </span>
             )}
-            <Button variant="primary" type="submit" disabled={status === "sending"} iconRight={<ArrowUpRight />}>
+            <Button variant="primary" type="submit" disabled={status === "sending"} iconRight={<ArrowUpRight className="kp-mirror" />}>
               {status === "sending" ? t("sending") : t("send")}
             </Button>
           </div>

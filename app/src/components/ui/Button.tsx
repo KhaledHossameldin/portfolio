@@ -132,13 +132,13 @@ export function Button({
   const inner = (
     <>
       {iconLeft && (
-        <span style={{ display: "inline-flex", marginLeft: variant === "link" ? 0 : -2 }}>
+        <span style={{ display: "inline-flex", marginInlineStart: variant === "link" ? 0 : -2 }}>
           {iconLeft}
         </span>
       )}
       {children}
       {iconRight && (
-        <span style={{ display: "inline-flex", marginRight: variant === "link" ? 0 : -2 }}>
+        <span style={{ display: "inline-flex", marginInlineEnd: variant === "link" ? 0 : -2 }}>
           {iconRight}
         </span>
       )}

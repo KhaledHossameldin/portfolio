@@ -334,3 +334,23 @@ a {
   --font-sans: var(--font-arabic), "Segoe UI", Tahoma, sans-serif;
   --font-mono: var(--font-arabic), ui-monospace, monospace;
 }
+
+/* Mirror directional icons (back/forward/external arrows) in RTL — NOT the logo
+   or channel glyphs (mail/github), which are not tagged. */
+[dir="rtl"] .kp-mirror {
+  transform: scaleX(-1);
+}
+
+/* Arabic has no italic; neutralize the editorial italic accents under RTL.
+   !important so it beats the inline `font-style:italic` on these elements. */
+[dir="rtl"] .kp-em {
+  font-style: normal !important;
+}
+
+/* Bidi isolation for embedded Latin / numeric runs inside RTL text (the
+   `Khaled.` wordmark, mono indices like `01 / 10`, emails, URLs) so they don't
+   reorder. No-op in LTR. */
+.kp-ltr {
+  unicode-bidi: isolate;
+  direction: ltr;
+}

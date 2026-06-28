@@ -69,7 +69,7 @@ export function Footer() {
                   textDecoration: "none",
                 }}
               >
-                <span style={{ color: "var(--text-faint)" }}>↗</span>
+                <span className="kp-mirror" style={{ color: "var(--text-faint)", display: "inline-block" }}>↗</span>
                 {l.label}
               </a>
             ))}
@@ -95,7 +95,7 @@ export function Footer() {
           }}
         >
           <span>{t("colophon")}</span>
-          <span style={{ fontStyle: "italic" }}>{t("signoff")}</span>
+          <span className="kp-em" style={{ fontStyle: "italic" }}>{t("signoff")}</span>
         </div>
       </div>
     </footer>

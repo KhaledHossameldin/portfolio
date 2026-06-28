@@ -55,7 +55,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
           textDecoration: "none",
         }}
       >
-        <ArrowLeft />
+        <ArrowLeft className="kp-mirror" />
         {td("back")}
       </a>
 
@@ -111,7 +111,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
         <h2 style={{ ...monoLabel, margin: "0 0 var(--space-5)" }}>{td("highlightsLabel")}</h2>
         <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-5)" }}>
           {pick(p.highlights, locale).map((h, i) => (
-            <div key={i} style={{ borderLeft: "2px solid var(--accent-line)", paddingLeft: "var(--space-5)" }}>
+            <div key={i} style={{ borderInlineStart: "2px solid var(--accent-line)", paddingInlineStart: "var(--space-5)" }}>
               <p style={{ font: "var(--type-body)", color: "var(--text-muted)", margin: 0 }}>{h}</p>
             </div>
           ))}
@@ -136,7 +136,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
           <h2 style={{ ...monoLabel, margin: "0 0 var(--space-4)" }}>{td("linksLabel")}</h2>
           <div style={{ display: "flex", gap: "var(--space-3)", flexWrap: "wrap" }}>
             {p.links.map((l) => (
-              <Button key={l.url} variant="secondary" size="sm" href={l.url} iconRight={<ArrowUpRight size={16} />}>
+              <Button key={l.url} variant="secondary" size="sm" href={l.url} iconRight={<ArrowUpRight size={16} className="kp-mirror" />}>
                 {l.label}
               </Button>
             ))}
@@ -165,7 +165,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
           {td("backAll")}
         </span>
         <span style={{ color: "var(--accent)", display: "inline-flex" }}>
-          <ArrowRight size={24} />
+          <ArrowRight size={24} className="kp-mirror" />
         </span>
       </a>
     </article>

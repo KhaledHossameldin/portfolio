@@ -106,6 +106,7 @@ export function SelectedWork() {
             </h2>
           </div>
           <p
+            className="kp-em"
             style={{
               font: "var(--type-small)",
               color: "var(--text-faint)",
@@ -146,12 +147,15 @@ export function SelectedWork() {
                 }}
               >
                 <span style={metaMono}>
-                  <span style={{ color: "var(--text)", fontWeight: "var(--weight-medium)" }}>{idx}</span> /{" "}
-                  {total} &nbsp;·&nbsp; {categoryLabel(p.category)}
+                  <span className="kp-ltr">
+                    <span style={{ color: "var(--text)", fontWeight: "var(--weight-medium)" }}>{idx}</span> /{" "}
+                    {total}
+                  </span>
+                  &nbsp;·&nbsp; {categoryLabel(p.category)}
                 </span>
                 {p.detail ? (
                   <span style={{ color: "var(--text-faint)", display: "inline-flex" }}>
-                    <ArrowUpRight />
+                    <ArrowUpRight className="kp-mirror" />
                   </span>
                 ) : (
                   cTag && (
@@ -224,7 +228,7 @@ export function SelectedWork() {
                       style={storeLink}
                     >
                       {l.label}
-                      <ArrowUpRight size={12} />
+                      <ArrowUpRight size={12} className="kp-mirror" />
                     </a>
                   ))}
                 </div>
@@ -286,7 +290,7 @@ export function SelectedWork() {
                 {a.links.map((l) => (
                   <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" style={storeLink}>
                     {l.label}
-                    <ArrowUpRight size={12} />
+                    <ArrowUpRight size={12} className="kp-mirror" />
                   </a>
                 ))}
                 {a.cite && (
