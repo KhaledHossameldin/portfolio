@@ -74,7 +74,6 @@ export function SelectedWork() {
 
   return (
     <section
-      id="work"
       style={{
         maxWidth: "var(--container)",
         margin: "0 auto",
@@ -93,7 +92,7 @@ export function SelectedWork() {
           }}
         >
           <div>
-            <span style={{ ...eyebrow, color: "var(--accent)" }}>— {t("eyebrow")}</span>
+            <span id="work" style={{ ...eyebrow, color: "var(--accent)" }}>— {t("eyebrow")}</span>
             <h2
               style={{
                 font: "var(--type-h2)",

@@ -15,7 +15,6 @@ export function About() {
 
   return (
     <section
-      id="about"
       style={{
         maxWidth: "var(--container)",
         margin: "0 auto",
@@ -24,6 +23,7 @@ export function About() {
     >
       <Reveal>
       <span
+        id="about"
         style={{
           fontFamily: "var(--font-mono)",
           fontSize: "var(--text-2xs)",
