@@ -253,6 +253,11 @@ a {
 }
 
 /* ── motion primitives — gated behind prefers-reduced-motion ── */
+/* Hamburger button — hidden on desktop, revealed below the nav breakpoint. */
+.kp-nav-mobile {
+  display: none;
+}
+
 /* ── responsive — design breakpoints 900 / 560 ── */
 @media (max-width: 900px) {
   .kp-col2 {
@@ -267,6 +272,13 @@ a {
   }
   .kp-nav-links {
     display: none !important;
+  }
+  /* Collapse the desktop toggle+CTA cluster into the hamburger menu. */
+  .kp-nav-desktop {
+    display: none !important;
+  }
+  .kp-nav-mobile {
+    display: inline-flex !important;
   }
   .kp-also-row {
     grid-template-columns: 1fr !important;

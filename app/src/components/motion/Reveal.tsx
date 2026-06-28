@@ -1,8 +1,8 @@
 "use client";
 
-import { useSyncExternalStore, type CSSProperties, type ReactNode } from "react";
+import { type CSSProperties, type ReactNode } from "react";
 import { motion, type Variants } from "framer-motion";
-import { useReducedMotion } from "@/lib/motion/useReducedMotion";
+import { useMotionActive } from "@/lib/motion/useMotionActive";
 
 // Mirrors --ease-out / --dur-reveal from globals.css.
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -18,27 +18,6 @@ const groupVariants: Variants = {
 };
 
 const viewport = { once: true, margin: "-10% 0px" } as const;
-
-// SSR-safe "is the client hydrated yet" flag — false on the server and the
-// first client render, true thereafter. No effect/setState, so it sidesteps the
-// cascading-render lint rule.
-const emptySubscribe = () => () => {};
-function useHydrated(): boolean {
-  return useSyncExternalStore(
-    emptySubscribe,
-    () => true,
-    () => false,
-  );
-}
-
-// True only after hydration AND when motion is allowed. Server + reduced-motion
-// render the final state with no `initial`, so there is no FOUC for no-JS or
-// reduced-motion users.
-function useMotionActive(): boolean {
-  const reduced = useReducedMotion();
-  const hydrated = useHydrated();
-  return hydrated && !reduced;
-}
 
 type RevealProps = {
   children: ReactNode;
