@@ -88,7 +88,7 @@ export const projects: Project[] = [
       { label: "App Store", url: "https://apps.apple.com/eg/app/sedra-life/id6759986998" },
       { label: "Play Store", url: "https://play.google.com/store/apps/details?id=com.sedra&hl=en" },
     ],
-    title: { en: "Sedra Life", de: "Sedra Life", ar: "Sedra Life" },
+    title: { en: "Sedra Life", de: "Sedra Life", ar: "سيدرا" },
     tagline: { en: "A premium cross-platform real-estate & lifestyle app, built ground-up for AbyDOS.", de: "Eine erstklassige, plattformübergreifende Immobilien- und Lifestyle-App, von Grund auf für AbyDOS entwickelt.", ar: "تطبيق عقارات وأسلوب حياة راقٍ ومتعدّد المنصّات، مبنيٌّ من الصفر لشركة AbyDOS." },
     role: { en: "Flutter Engineer — ground-up build", de: "Flutter-Entwickler — Neuentwicklung", ar: "مهندس Flutter — بناء من الصفر" },
     stack: {
@@ -111,7 +111,7 @@ export const projects: Project[] = [
       ar: [
         "بناء التطبيق من الصفر على أساسٍ من Clean Architecture وBLoC مُصمَّم لإعادة الاستخدام عبر حزمة Sedra المرافِقة.",
         "نمذجة قوائم العقارات وعروض المشاريع وخطط السداد ضمن طبقة مجال قابلة للتوسّع والاختبار.",
-        "إرساء البنية المعمارية المشتركة وإدارة الحالة التي يقوم عليها تطبيقا Sedra.",
+        "إرساء البنية المعمارية المشتركة وإدارة الحالة التي يقوم عليها تطبيقا سيدرا.",
       ],
     },
   },
@@ -162,7 +162,7 @@ export const projects: Project[] = [
       { label: "App Store", url: "https://apps.apple.com/us/app/%D8%A7%D9%84%D8%A8%D8%B1%D9%88%D8%A7%D8%B2/id6474915560" },
       { label: "Play Store", url: "https://play.google.com/store/apps/details?id=com.mawasim.mawasim&pli=1" },
     ],
-    title: { en: "Albruaz", de: "Albruaz", ar: "Albruaz" },
+    title: { en: "Albruaz", de: "Albruaz", ar: "البرواز" },
     tagline: { en: "A high-performance, video-driven competition platform with gamified engagement.", de: "Eine video-basierte Wettbewerbsplattform mit spielerischer Nutzerinteraktion.", ar: "منصّة مسابقات عالية الأداء قائمة على الفيديو بطابعٍ تفاعلي مُلعَّب." },
     role: { en: "Lead Flutter Developer", de: "Lead Flutter-Entwickler", ar: "مطوّر Flutter رئيسي" },
     stack: {
@@ -199,7 +199,7 @@ export const projects: Project[] = [
       { label: "App Store", url: "https://apps.apple.com/eg/app/%D8%B1%D8%A4%D9%8A%D8%A7%D9%83/id1247346945" },
       { label: "Play Store", url: "https://play.google.com/store/apps/details?id=royak.royak&hl=en" },
     ],
-    title: { en: "Royake", de: "Royake", ar: "Royake" },
+    title: { en: "Royake", de: "Royake", ar: "رؤياك" },
     tagline: { en: "An enterprise-grade consulting application built with BLoC and strict TDD.", de: "Eine umfassende Beratungsplattform mit BLoC und testgetriebener Entwicklung.", ar: "تطبيق استشارات بمستوى المؤسسات مبنيٌّ بـ BLoC وTDD صارم." },
     role: { en: "Senior Flutter Developer & Team Mentor", de: "Senior Flutter-Entwickler & Team-Mentor", ar: "مطوّر Flutter أول ومُرشِد فريق" },
     stack: {
@@ -272,7 +272,7 @@ export const projects: Project[] = [
       { label: "App Store", url: "https://apps.apple.com/us/app/orood/id6470238089" },
       { label: "Play Store", url: "https://play.google.com/store/apps/details?id=com.dev.orood" },
     ],
-    title: { en: "Orood", de: "Orood", ar: "Orood" },
+    title: { en: "Orood", de: "Orood", ar: "عروض" },
     tagline: { en: "A cross-platform localized deals and commercial promotions aggregator.", de: "Ein plattformübergreifender Aggregator für lokale Angebote und Rabatte.", ar: "مُجمِّع متعدّد المنصّات للعروض المحلية والترويجات التجارية." },
     role: { en: "Flutter Support & Maintenance Engineer", de: "Flutter-Entwickler · Support & Wartung", ar: "مهندس دعم وصيانة Flutter" },
     stack: {
@@ -309,7 +309,7 @@ export const projects: Project[] = [
       { label: "App Store", url: "https://apps.apple.com/eg/app/%D8%B1%D8%AA-%D9%84-%D8%A7%D9%84%D8%AD%D9%84%D9%82%D8%A9-%D8%A7%D9%84%D8%B0%D9%83%D9%8A%D8%A9/id1608794369" },
       { label: "Play Store", url: "https://play.google.com/store/apps/details?id=com.qrattel.sa&hl=en" },
     ],
-    title: { en: "QRattel", de: "QRattel", ar: "QRattel" },
+    title: { en: "QRattel", de: "QRattel", ar: "رتل الحلقة الذكية" },
     tagline: { en: "A cross-platform app for client engagement and real-world pre-release testing.", de: "Eine plattformübergreifende App für Kundenbindung und Vorab-Feldtests.", ar: "تطبيق متعدّد المنصّات لإشراك العملاء واختبارات ما قبل الإصدار في الميدان." },
     role: { en: "Flutter Developer & Technical Collaborator", de: "Flutter-Entwickler & technischer Mitarbeiter", ar: "مطوّر Flutter ومتعاون تقني" },
     stack: {
@@ -417,7 +417,7 @@ export const projects: Project[] = [
     period: "2021–2022",
     detail: false,
     links: [],
-    title: { en: "Drs Space", de: "Drs Space", ar: "Drs Space" },
+    title: { en: "Drs Space", de: "Drs Space", ar: "دكتور سبيس" },
     tagline: { en: "A dual-app telemedicine platform streamlining doctor–patient interactions.", de: "Eine Telemedizin-Plattform mit dedizierten Apps für Patienten und Ärzte.", ar: "منصّة طب عن بُعد بتطبيقين تُبسِّط تفاعلات الطبيب والمريض." },
     role: { en: "Flutter Developer & Technical Collaborator", de: "Flutter-Entwickler & technischer Mitarbeiter", ar: "مطوّر Flutter ومتعاون تقني" },
     stack: {
