@@ -83,10 +83,6 @@ export function Contact() {
         padding: "var(--space-10) var(--gutter)",
       }}
     >
-      {/* Scroll anchor at the content-box top — lands #contact on the heading/form,
-          not the section's space-10 top-padding band. Non-animated so its offsetTop
-          is stable (Reveal's transform would shift a measured target mid-entrance). */}
-      <span id="contact" aria-hidden style={{ display: "block", height: 0 }} />
       <Reveal>
       <span
         style={{
@@ -172,6 +168,7 @@ export function Contact() {
         </div>
 
         <form
+          id="contact"
           onSubmit={onSubmit}
           style={{
             display: "flex",
