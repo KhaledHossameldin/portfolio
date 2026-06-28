@@ -76,13 +76,17 @@ export function Contact() {
 
   return (
     <section
-      id="contact"
+      aria-labelledby="contact-heading"
       style={{
         maxWidth: "var(--container)",
         margin: "0 auto",
         padding: "var(--space-10) var(--gutter)",
       }}
     >
+      {/* Scroll anchor at the content-box top — lands #contact on the heading/form,
+          not the section's space-10 top-padding band. Non-animated so its offsetTop
+          is stable (Reveal's transform would shift a measured target mid-entrance). */}
+      <span id="contact" aria-hidden style={{ display: "block", height: 0 }} />
       <Reveal>
       <span
         style={{
@@ -107,6 +111,7 @@ export function Contact() {
       >
         <div>
           <h2
+            id="contact-heading"
             style={{
               font: "var(--type-h2)",
               letterSpacing: "var(--tracking-display)",
