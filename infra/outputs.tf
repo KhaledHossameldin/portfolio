@@ -19,3 +19,7 @@ output "analytics_database" { value = aws_glue_catalog_database.analytics.name }
 output "analytics_table" { value = "${aws_glue_catalog_database.analytics.name}.${aws_glue_catalog_table.cf_logs.name}" }
 output "athena_workgroup" { value = aws_athena_workgroup.analytics.name }
 output "athena_results_location" { value = "s3://${aws_s3_bucket.logs.bucket}/athena-results/" }
+
+output "analytics_dashboard_name" { value = aws_cloudwatch_dashboard.analytics.dashboard_name }
+output "analytics_dashboard_url" { value = "https://${var.aws_region}.console.aws.amazon.com/cloudwatch/home?region=${var.aws_region}#dashboards:name=${aws_cloudwatch_dashboard.analytics.dashboard_name}" }
+output "contact_submissions_metric" { value = "${local.metrics_namespace}/${local.contact_metric_name}" }

@@ -78,5 +78,10 @@ export const handler = async (event) => {
     return resp(502, { error: "send_failed" }, origin);
   }
 
+  // Aggregate analytics: one PII-free line, emitted only on a real successful send
+  // (honeypot passed + validation passed + SES ok). No name/email/message contents.
+  // A CloudWatch metric filter turns this into KhaledPortfolio/ContactSubmissions.
+  console.log("ANALYTICS contact_sent");
+
   return resp(200, { ok: true }, origin);
 };
