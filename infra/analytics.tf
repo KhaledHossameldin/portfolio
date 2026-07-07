@@ -67,6 +67,10 @@ locals {
     "requests-by-edge-location",
     "top-referrers",
     "requests-over-time",
+    "cv-opens-by-type",
+    "project-views",
+    "locale-split",
+    "page-views-vs-cv-opens",
   ]
 }
 

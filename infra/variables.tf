@@ -61,3 +61,8 @@ variable "athena_workgroup_name" {
   type        = string
   default     = "khaled-portfolio-analytics"
 }
+variable "dashboard_name" {
+  description = "CloudWatch dashboard name (glance surface: contacts, traffic, Lambda health)."
+  type        = string
+  default     = "khaled-portfolio-analytics"
+}

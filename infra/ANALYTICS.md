@@ -2,8 +2,21 @@
 
 Privacy-scoped, **server-side, aggregate-only** web analytics. No client-side tracking, no
 cookies, no third-party scripts, no cookie banner — nothing is added to `/app` or shipped to the
-browser. All of it is Terraform (`analytics.tf`); a human runs `terraform apply` (Terraform is
-not run in CI).
+browser. All of it is Terraform (`analytics.tf`, `dashboard.tf`); a human runs `terraform apply`
+(Terraform is not run in CI).
+
+## Two surfaces — where to read each number
+
+| Surface | Read it in | Best for |
+|---|---|---|
+| **CloudWatch dashboard** `khaled-portfolio-analytics` | CloudWatch console → Dashboards | Everyday glance: **contact submissions/day**, CloudFront requests/day, Lambda health |
+| **Athena saved queries** (workgroup `khaled-portfolio-analytics`) | Athena console → Saved queries | Breakdowns: CV-by-type, projects, locale split, top pages/referrers, geography |
+
+Why two: **contact submissions** are counted server-side in the **Lambda** (the contact POST goes to
+API Gateway → Lambda, *not* through CloudFront), so they surface as a **CloudWatch metric**.
+**Traffic / pages / CV opens** come from **CloudFront access logs**, queried in **Athena**. The
+`page-views-vs-cv-opens` funnel lives in Athena; pair it with the dashboard's contact count for the
+full picture.
 
 ## How it works
 
@@ -41,7 +54,7 @@ Aggregate queries: page views, top pages, referrers, edge geography, traffic ove
 
 ## Running the example queries
 
-The six examples in `athena/queries/*.sql` are provisioned as **saved queries** in the workgroup.
+The ten examples in `athena/queries/*.sql` are provisioned as **saved queries** in the workgroup.
 
 **Console:** Athena → switch **Workgroup** to `khaled-portfolio-analytics` → **Saved queries** →
 pick one → **Run**. (Or paste any `.sql` file into the editor.)
@@ -61,8 +74,12 @@ aws athena start-query-execution \
 | `top-pages.sql` | Most-visited paths |
 | `unique-viewers-per-day.sql` | Approx. distinct viewers — `COUNT(DISTINCT c_ip)` (see caveat in file) |
 | `requests-by-edge-location.sql` | Requests by CloudFront edge PoP — a **geographic proxy** (see caveat) |
-| `top-referrers.sql` | Where external traffic comes from |
+| `top-referrers.sql` | Where external traffic comes from (external + `(direct/none)`) |
 | `requests-over-time.sql` | Daily traffic + edge cache-hit ratio |
+| `cv-opens-by-type.sql` | **Which CV resonates** — Mobile vs DevOps PDF (approx. distinct openers) |
+| `project-views.sql` | Case-study `/work/<slug>/` pages, ranked (across locales) |
+| `locale-split.sql` | Page views by locale — `/en` vs `/de` vs `/ar` |
+| `page-views-vs-cv-opens.sql` | Per-day funnel: page views vs CV opens (contacts: see dashboard) |
 
 ### Geography caveat
 
@@ -70,6 +87,23 @@ CloudFront **standard** logs expose the **edge Point of Presence** (`x_edge_loca
 `FRA56` = Frankfurt), **not the viewer's country.** The edge PoP approximates region only. True
 viewer-country would require real-time logs or an added `CloudFront-Viewer-Country` header —
 intentionally out of scope (extra cost/complexity; this stays aggregate-only).
+
+## CloudWatch dashboard & the contact metric
+
+Defined in `dashboard.tf`. The **`khaled-portfolio-analytics`** dashboard has three per-day widgets:
+
+- **Contact submissions/day** — the real "people who contacted me" count.
+- **CloudFront requests/day** — total traffic (the free `AWS/CloudFront` `Requests` metric; it is
+  global, published to **us-east-1**, so that widget pins `region: us-east-1`).
+- **Contact Lambda invocations & errors/day** — health.
+
+**How the contact count works (honeypot-safe, no PII):** on a *successful* send only (honeypot
+passed + validation passed + SES `SendEmail` ok), the Lambda emits one line — `ANALYTICS
+contact_sent` — with **no name/email/message**. Honeypot-dropped, validation-failed, and
+send-failed requests return earlier and never log it. A metric filter
+(`khaled-portfolio-contact-submissions`) on the Lambda log group counts that line into
+**`KhaledPortfolio/ContactSubmissions`** (value 1). The metric appears after the first real
+submission; the dashboard shows a continuous 0 line until then (`default_value = 0`).
 
 ## Apply (human, with AWS credentials)
 
