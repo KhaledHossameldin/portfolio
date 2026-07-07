@@ -94,4 +94,16 @@ resource "aws_cloudfront_distribution" "site" {
     ssl_support_method             = var.enable_custom_domain ? "sni-only" : null
     minimum_protocol_version       = var.enable_custom_domain ? "TLSv1.2_2021" : null
   }
+
+  # Standard access logs (legacy) -> private S3 log bucket -> Athena (see analytics.tf).
+  # Server-side + aggregate-only; cookies are never logged. Attaching logging is an
+  # in-place update to this distribution (0 destroy). depends_on: the awslogsdelivery ACL
+  # grant must exist before CloudFront validates the log destination.
+  logging_config {
+    bucket          = aws_s3_bucket.logs.bucket_domain_name
+    prefix          = var.cf_log_prefix
+    include_cookies = false
+  }
+
+  depends_on = [aws_s3_bucket_acl.logs]
 }

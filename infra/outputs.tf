@@ -13,3 +13,9 @@ output "acm_validation_records" {
     }
   ]
 }
+
+output "analytics_log_bucket" { value = aws_s3_bucket.logs.bucket }
+output "analytics_database" { value = aws_glue_catalog_database.analytics.name }
+output "analytics_table" { value = "${aws_glue_catalog_database.analytics.name}.${aws_glue_catalog_table.cf_logs.name}" }
+output "athena_workgroup" { value = aws_athena_workgroup.analytics.name }
+output "athena_results_location" { value = "s3://${aws_s3_bucket.logs.bucket}/athena-results/" }
