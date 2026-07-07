@@ -1,12 +1,10 @@
--- Top external referrers — AGGREGATE ONLY.
--- Excludes empty referrers ('-') and self-referrals from the site's own hosts.
-SELECT cs_referrer AS referrer,
-       COUNT(*) AS requests
+-- Top referrers — AGGREGATE ONLY.
+-- External sources + direct traffic. Same-site (internal-nav) referrers are excluded;
+-- blank/'-' referrers are coalesced to '(direct/none)' rather than dropped.
+SELECT
+  CASE WHEN cs_referrer = '-' OR cs_referrer = '' THEN '(direct/none)' ELSE cs_referrer END AS ref,
+  COUNT(*) AS hits
 FROM khaled_portfolio_analytics.cloudfront_standard_logs
-WHERE cs_method = 'GET'
-  AND sc_status < 400
-  AND cs_referrer <> '-'
-  AND cs_referrer NOT LIKE '%khaledhossameldin.com%'
-GROUP BY cs_referrer
-ORDER BY requests DESC
-LIMIT 50;
+WHERE cs_referrer NOT LIKE '%khaledhossameldin.com%'
+GROUP BY 1
+ORDER BY hits DESC;
