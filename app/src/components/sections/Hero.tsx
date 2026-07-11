@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { handleHashClick } from "@/lib/motion/scrollToHash";
 import { useVisitorCountry } from "@/lib/geo/useVisitorCountry";
 import { Parallax } from "../motion/Parallax";
+import { CvLinks } from "../CvLinks";
 import { Button } from "../ui/Button";
 import { StatusDot } from "../ui/StatusDot";
 import { ArrowUpRight } from "../ui/icons";
@@ -31,8 +32,13 @@ export function Hero() {
       className="kp-hero"
       style={{
         maxWidth: "var(--container)",
+        // Top air trimmed from space-11 → space-6 so the CTA + the two CV links
+        // both clear the fold at desktop across all locales — the taller German /
+        // Arabic headlines need the extra lift. Paired with a tighter lead→CTA gap
+        // below so no single gap looks starved. Mobile drops min-height to auto via
+        // the ≤900px rule in globals.css.
         margin: "0 auto",
-        padding: "var(--space-11) var(--gutter) var(--space-10)",
+        padding: "var(--space-6) var(--gutter) var(--space-10)",
         display: "grid",
         gridTemplateColumns: "minmax(0, 1.55fr) minmax(290px, 0.85fr)",
         gap: "var(--space-9)",
@@ -93,7 +99,7 @@ export function Hero() {
           style={{
             display: "flex",
             gap: "var(--space-3)",
-            marginTop: "var(--space-7)",
+            marginTop: "var(--space-6)",
             flexWrap: "wrap",
             animation: "kp-rise var(--dur-reveal) var(--ease-out) both",
             animationDelay: "240ms",
@@ -116,6 +122,30 @@ export function Hero() {
           >
             {t("ctaSecondary")}
           </Button>
+        </div>
+
+        {/* Two CVs as quiet, always-visible labelled links (real anchors, so both
+            PDFs are in the static DOM — crawlable + JS-off). Sits just under the
+            CTAs, above the fold; audience labels make the choice instant. */}
+        <div
+          data-rise
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "var(--space-5)",
+            flexWrap: "wrap",
+            marginTop: "var(--space-4)",
+            animation: "kp-rise var(--dur-reveal) var(--ease-out) both",
+            animationDelay: "320ms",
+          }}
+        >
+          <CvLinks
+            itemStyle={{
+              fontFamily: "var(--font-mono)",
+              fontSize: "var(--text-xs)",
+              letterSpacing: "var(--tracking-wide)",
+            }}
+          />
         </div>
       </div>
 

@@ -110,6 +110,11 @@
     "orReach": "Or reach me directly",
     "within": "↵ within a day"
   },
+  "cv": {
+    "label": "CV",
+    "mobile": "CV — Mobile Engineer",
+    "devops": "CV — DevOps & Cloud"
+  },
   "footer": {
     "headline": "Still here? Let’s talk.",
     "links": [

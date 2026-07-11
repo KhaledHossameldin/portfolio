@@ -10,6 +10,7 @@ import { handleHashClick } from "@/lib/motion/scrollToHash";
 import { getLenis } from "@/lib/motion/lenisRef";
 import { useMotionActive } from "@/lib/motion/useMotionActive";
 import { Button } from "./ui/Button";
+import { CvLinks } from "./CvLinks";
 import { LangToggle, ThemeToggle } from "./Toggles";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -60,6 +61,7 @@ function Bar({ open, top, animate }: { open: boolean; top: boolean; animate: boo
 
 export function MobileMenu() {
   const t = useTranslations("nav");
+  const tcv = useTranslations("cv");
   const locale = useLocale();
   const pathname = usePathname();
   const onHome = pathname === "/";
@@ -205,6 +207,35 @@ export function MobileMenu() {
                 >
                   <LangToggle />
                   <ThemeToggle />
+                </div>
+
+                {/* CVs — convenience copy for mobile; closes the menu on tap.
+                    (The static-DOM copies live in the hero + contact + footer.) */}
+                <div
+                  style={{
+                    marginBlockStart: "var(--space-5)",
+                    paddingBlockStart: "var(--space-5)",
+                    borderBlockStart: "1px solid var(--border)",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "var(--space-3)",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "var(--text-2xs)",
+                      letterSpacing: "var(--tracking-label)",
+                      textTransform: "uppercase",
+                      color: "var(--text-faint)",
+                    }}
+                  >
+                    {tcv("label")}
+                  </span>
+                  <CvLinks
+                    itemStyle={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-sm)" }}
+                    onNavigate={() => change(false)}
+                  />
                 </div>
 
                 <Button
