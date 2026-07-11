@@ -5,6 +5,35 @@ cookies, no third-party scripts, no cookie banner — nothing is added to `/app`
 browser. All of it is Terraform (`analytics.tf`, `dashboard.tf`); a human runs `terraform apply`
 (Terraform is not run in CI).
 
+## Which number means what — requests are NOT visitors
+
+> **The dashboard's "CloudFront requests" tile is raw traffic — HTML _plus_ assets (JS/CSS/fonts/
+> images) _plus_ bots/scanners. It is NOT a visitor count** (it typically runs several× the number
+> of real people). Reading it as "visitors per day" is the single easiest way to mislead yourself —
+> that is exactly the misread this section exists to prevent.
+
+| You want… | Read | Notes |
+|---|---|---|
+| **How many people visited** | `unique-viewers-per-day` (distinct human IPs) + `page-views-per-day` | Bots + assets excluded. Distinct-IP undercounts (NAT/CGNAT) and can overcount (IPv6 rotation) → an **approximation**, and a **ceiling on humans is really a floor** because UA-spoofers still count. |
+| **Which pages / locales / projects** | `top-pages`, `locale-split`, `project-views` | Humans only. |
+| **CV opens (Mobile vs DevOps)** | `cv-opens-by-type` | Distinct openers per CV, with range-request de-dup. |
+| **How much traffic is automated** | `traffic-quality` | bot / scanner / tool / browser-ish split — see caveat below. |
+| **Where visitors came from** | `top-referrers` | External sources + `(direct/none)`. |
+| **Contacts — the real conversion** | CloudWatch metric `KhaledPortfolio/ContactSubmissions` (dashboard tile) | Counted server-side in the Lambda — **exact**, and the **only true conversion number**. |
+
+**"Humans only" is a shared filter.** The metric queries drop assets and obvious non-humans:
+`/_next/*` and static extensions (`.js .css .woff2 .png .svg .ico .webmanifest …`), plus User-Agents
+matching `bot|crawl|spider|scan|curl|wget|python|headless`, matched on `lower(url_decode(cs_user_agent))`
+(**CloudFront URL-encodes the UA**, so decode first; matching is case-insensitive). Page metrics also
+require `cs_method='GET'` and `sc_status < 400`. **CV opens deliberately do NOT require `GET`** — a PDF
+open is logged as range/`206`/`HEAD` rows, not a clean `GET 200`, and requiring `GET` is exactly the
+bug that once made `cv-opens-by-type` report **0**.
+
+**Honest floor, not truth.** `traffic-quality` and the human filter are **UA heuristics**. A scraper
+that sends a real browser User-Agent is indistinguishable from a person and lands in **"browser-ish"**.
+So "browser-ish" / unique-viewer numbers are a **floor on automation removed**, not a guarantee of real
+humans. Treat them as directional, never exact.
+
 ## Two surfaces — where to read each number
 
 | Surface | Read it in | Best for |
@@ -54,7 +83,7 @@ Aggregate queries: page views, top pages, referrers, edge geography, traffic ove
 
 ## Running the example queries
 
-The ten examples in `athena/queries/*.sql` are provisioned as **saved queries** in the workgroup.
+The eleven examples in `athena/queries/*.sql` are provisioned as **saved queries** in the workgroup.
 
 **Console:** Athena → switch **Workgroup** to `khaled-portfolio-analytics` → **Saved queries** →
 pick one → **Run**. (Or paste any `.sql` file into the editor.)
@@ -68,18 +97,23 @@ aws athena start-query-execution \
   --query-string "$(cat infra/athena/queries/page-views-per-day.sql)"
 ```
 
+The page / viewer / CV / project / locale queries are **humans only** (bots + assets filtered — see
+the shared filter above); `requests-over-time` and `requests-by-edge-location` intentionally count
+**all** traffic.
+
 | Query | Answers |
 |---|---|
-| `page-views-per-day.sql` | HTML page views per day (assets excluded) |
-| `top-pages.sql` | Most-visited paths |
-| `unique-viewers-per-day.sql` | Approx. distinct viewers — `COUNT(DISTINCT c_ip)` (see caveat in file) |
-| `requests-by-edge-location.sql` | Requests by CloudFront edge PoP — a **geographic proxy** (see caveat) |
+| `page-views-per-day.sql` | HTML page views per day (bots + assets excluded) |
+| `top-pages.sql` | Most-visited paths (humans only) |
+| `unique-viewers-per-day.sql` | Approx. distinct **human** viewers — `COUNT(DISTINCT c_ip)` (see caveat in file) |
+| `traffic-quality.sql` | How much traffic is automated — **bot / scanner / tool / browser-ish** (UA heuristic; a floor, not truth) |
+| `requests-by-edge-location.sql` | Requests by CloudFront edge PoP — a **geographic proxy** (see caveat); all traffic |
 | `top-referrers.sql` | Where external traffic comes from (external + `(direct/none)`) |
-| `requests-over-time.sql` | Daily traffic + edge cache-hit ratio |
-| `cv-opens-by-type.sql` | **Which CV resonates** — Mobile vs DevOps PDF (approx. distinct openers) |
-| `project-views.sql` | Case-study `/work/<slug>/` pages, ranked (across locales) |
-| `locale-split.sql` | Page views by locale — `/en` vs `/de` vs `/ar` |
-| `page-views-vs-cv-opens.sql` | Per-day funnel: page views vs CV opens (contacts: see dashboard) |
+| `requests-over-time.sql` | Daily traffic + edge cache-hit ratio (all traffic, incl. assets) |
+| `cv-opens-by-type.sql` | **Which CV resonates** — Mobile vs DevOps PDF (distinct openers; range-request de-dup; any method) |
+| `project-views.sql` | Case-study `/work/<slug>/` pages, ranked (across locales; humans only) |
+| `locale-split.sql` | Page views by locale — `/en` vs `/de` vs `/ar` (humans only) |
+| `page-views-vs-cv-opens.sql` | Per-day funnel: page views vs CV opens (humans only; contacts: see dashboard) |
 
 ### Geography caveat
 
@@ -90,11 +124,15 @@ intentionally out of scope (extra cost/complexity; this stays aggregate-only).
 
 ## CloudWatch dashboard & the contact metric
 
-Defined in `dashboard.tf`. The **`khaled-portfolio-analytics`** dashboard has three per-day widgets:
+Defined in `dashboard.tf`. The **`khaled-portfolio-analytics`** dashboard leads with a **markdown
+header** ("requests ≠ visitors" + where each real number lives) so the traffic tile can't be misread,
+then three per-day widgets:
 
-- **Contact submissions/day** — the real "people who contacted me" count.
-- **CloudFront requests/day** — total traffic (the free `AWS/CloudFront` `Requests` metric; it is
-  global, published to **us-east-1**, so that widget pins `region: us-east-1`).
+- **Contact submissions/day** — the real "people who contacted me" count (the only exact conversion).
+- **CloudFront requests/day** — relabelled **"ALL hits incl. assets + bots (NOT visitors; see
+  Athena)"**. The free `AWS/CloudFront` `Requests` metric counts every request (HTML + assets + bots),
+  so it is **not** a visitor count; it is global, published to **us-east-1**, so the widget pins
+  `region: us-east-1`. Real visitor/page numbers live in the Athena saved queries above.
 - **Contact Lambda invocations & errors/day** — health.
 
 **How the contact count works (honeypot-safe, no PII):** on a *successful* send only (honeypot
