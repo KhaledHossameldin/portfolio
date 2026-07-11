@@ -110,6 +110,11 @@
     "orReach": "Oder direkt erreichen",
     "within": "↵ innerhalb eines Tages"
   },
+  "cv": {
+    "label": "Lebenslauf",
+    "mobile": "Lebenslauf — Mobile",
+    "devops": "Lebenslauf — DevOps & Cloud"
+  },
   "footer": {
     "headline": "Immer noch da? Reden wir.",
     "links": [

@@ -366,3 +366,22 @@ a {
   unicode-bidi: isolate;
   direction: ltr;
 }
+
+/* CV download links (CvLinks) — real <a> anchors used in the hero + contact +
+   mobile menu. Quiet by default, accent on hover/focus. Colour transition only —
+   no movement — so nothing to gate under prefers-reduced-motion. Base colour is
+   overridable per placement via the --cv-color custom property (or an inline
+   colour, e.g. the contact direct-links list which sets --text to match its
+   neighbours). Layout uses logical gap → correct in RTL. */
+.kp-cv-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--cv-color, var(--text-muted));
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.kp-cv-link:hover,
+.kp-cv-link:focus-visible {
+  color: var(--accent);
+}

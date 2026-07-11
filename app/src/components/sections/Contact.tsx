@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Reveal } from "../motion/Reveal";
+import { CvLinks } from "../CvLinks";
 import { Button } from "../ui/Button";
 import { Input, Textarea } from "../ui/Input";
 import { StatusDot } from "../ui/StatusDot";
@@ -164,6 +165,8 @@ export function Contact() {
                 <Linkedin />
                 linkedin.com/in/khaled-hossameldin
               </a>
+              {/* Both CVs, in the highest-intent zone, styled to match the direct links. */}
+              <CvLinks itemStyle={directLink} />
             </div>
           </div>
         </div>
