@@ -71,6 +71,7 @@ locals {
     "project-views",
     "locale-split",
     "page-views-vs-cv-opens",
+    "traffic-quality",
   ]
 }
 

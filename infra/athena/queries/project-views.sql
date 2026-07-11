@@ -8,6 +8,8 @@ SELECT
 FROM khaled_portfolio_analytics.cloudfront_standard_logs
 WHERE cs_method = 'GET'
   AND sc_status < 400
+  AND NOT regexp_like(lower(url_decode(cs_user_agent)),
+        '(bot|crawl|spider|scan|curl|wget|python|headless)')
   AND cs_uri_stem LIKE '%/work/%'
   AND regexp_extract(cs_uri_stem, '/work/([^/]+)', 1) <> ''
 GROUP BY 1
